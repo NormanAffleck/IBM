@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Norman's World - Assignments</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #9b59b6;
+            padding: 30px 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 48px;
+            margin: 0;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .intro-text {
+            font-size: 18px;
+            margin: 20px 0 40px;
+            color: #cccccc;
+        }
+
+        .assignment-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            max-width: 1000px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+        }
+
+        .assignment-bar {
+            background-color: #1e1e1e;
+            border: 2px solid #9b59b6;
+            border-radius: 12px;
+            padding: 20px;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.2);
+        }
+
+        .assignment-bar:hover {
+            background-color: #9b59b6;
+            color: #ffffff;
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
+        }
+
+        footer {
+            padding: 20px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Norman's World</h1>
+    </header>
+
+    <p class="intro-text">Explore my assignments below – click to view each one!</p>
+
+    <div class="assignment-container">
+        <div class="assignment-bar" onclick="location.href='https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=sharing'">
+            Assignment 1
+        </div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 2</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 3</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 4</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 5</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 6</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 7</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 8</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 9</div>
+        <div class="assignment-bar" onclick="location.href='#'">Assignment 10</div>
+    </div>
+
+    <footer>
+        © 2025 Norman Affleck. All rights reserved.
+    </footer>
+</body>
+</html>
