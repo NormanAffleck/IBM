@@ -47,9 +47,16 @@
             border-radius: 12px;
             padding: 20px;
             font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             box-shadow: 0 4px 10px rgba(155, 89, 182, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .assignment-bar a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+            height: 100%;
         }
 
         .assignment-bar:hover {
@@ -74,20 +81,24 @@
     <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
     <div class="assignment-container">
-        <div class="assignment-bar" onclick="location.href='https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=sharing'">
-            Assignment 1
+        <div class="assignment-bar">
+            <a href="https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=sharing" target="_blank">
+                Assignment 1
+            </a>
         </div>
-        <div class="assignment-bar" onclick="location.href='https://normanaffleck.github.io/IBM'">
-            Assignment 2
+        <div class="assignment-bar">
+            <a href="https://normanaffleck.github.io/IBM" target="_blank">
+                Assignment 2
+            </a>
         </div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 3</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 4</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 5</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 6</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 7</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 8</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 9</div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 10</div>
+        <div class="assignment-bar"><a href="#">Assignment 3</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 4</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 5</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 6</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 7</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 8</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 9</a></div>
+        <div class="assignment-bar"><a href="#">Assignment 10</a></div>
     </div>
 
     <footer>
