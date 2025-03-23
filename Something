@@ -77,7 +77,9 @@
         <div class="assignment-bar" onclick="location.href='https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=sharing'">
             Assignment 1
         </div>
-        <div class="assignment-bar" onclick="location.href='#'">Assignment 2</div>
+        <div class="assignment-bar" onclick="location.href='https://normanaffleck.github.io/IBM'">
+            Assignment 2
+        </div>
         <div class="assignment-bar" onclick="location.href='#'">Assignment 3</div>
         <div class="assignment-bar" onclick="location.href='#'">Assignment 4</div>
         <div class="assignment-bar" onclick="location.href='#'">Assignment 5</div>
