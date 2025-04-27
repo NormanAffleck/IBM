@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Norman's World - Assignments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Orbitron', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #121212;
             color: #ffffff;
             margin: 0;
@@ -17,6 +18,7 @@
             background-color: #9b59b6;
             padding: 30px 20px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: relative;
         }
 
         header h1 {
@@ -24,6 +26,19 @@
             margin: 0;
             color: #ffffff;
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+        }
+
+        .grade-calculator {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            background-color: #1e1e1e;
+            border: 2px solid #00fff7;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 0 15px #00fff7;
+            font-size: 16px;
+            max-width: 220px;
         }
 
         .intro-text {
@@ -70,15 +85,23 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <h1>Welcome to Norman's World</h1>
+
+        <!-- Grade Calculator Added Here -->
+        <div class="grade-calculator" id="gradeCalc">
+            <strong>Current Grade</strong><br/>
+            <div id="currentGrade" style="margin-top: 10px;">Loading...</div>
+        </div>
     </header>
 
     <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
     <div class="assignment-container">
 
+        <!-- Your assignments (same as you sent) -->
         <!-- Assignment 1 -->
         <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
             <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 2: Identity Check</h3>
@@ -90,7 +113,7 @@
             <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
         </div>
 
-        <!-- Assignment 2 (Elite Purple Frame) -->
+        <!-- Assignment 2 -->
         <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
             <h3 style="margin: 0 0 10px 0; color: #8e44ad;">Week 3: Dungeon Crawl</h3>
             <a href="https://drive.google.com/drive/folders/1Egv9In-RTwNCVYGdx0qAF6vgZLLlrtBA?usp=drive_link"
@@ -101,41 +124,8 @@
             <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
         </div>
 
-        <!-- Assignment 3 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 4: Online Library</h3>
-            <a href="https://drive.google.com/drive/folders/1QI1YW1Fk1lxXr1JZ8fcAtCfyx2XhL9Ew?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 3
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
-        </div>
-
-        <!-- Assignment 4 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 6: Cryptography Project</h3>
-            <a href="https://drive.google.com/drive/folders/19u-bx1EzlKdgCkdBX8PBH5eWmLipXVid?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 4
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #e67e22;">Pending</span></p>
-        </div>
-
-
-        <!-- Assignment 5 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 7: App Script</h3>
-            <a href="https://drive.google.com/drive/folders/13zHP4Sv_2qFcdbbF6VTGUiVnD0G7Wyv-?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 5
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #e67e22;">Pending</span></p>
-        </div>
+        <!-- Keep your other assignments same... -->
     </div>
-
 
     <div style="margin-bottom: 40px;">
         <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
@@ -162,5 +152,51 @@
     <footer>
         © 2025 Norman Affleck. All rights reserved.
     </footer>
+
+    <script>
+    const gradesUrl = 'YOUR_WEB_APP_URL'; // <-- Replace with your deployed Web App URL here
+
+    fetch(gradesUrl)
+      .then(response => response.json())
+      .then(data => {
+        let totalAssignment = 0, assignmentCount = 0;
+        let totalQuiz = 0, quizCount = 0;
+        let totalAttendance = 0, attendanceCount = 0;
+        let totalProject = 0, projectCount = 0;
+
+        data.grades.forEach(entry => {
+          if (entry.assignment !== "" && entry.assignment !== null) {
+            totalAssignment += parseFloat(entry.assignment);
+            assignmentCount++;
+          }
+          if (entry.quiz !== "" && entry.quiz !== null) {
+            totalQuiz += parseFloat(entry.quiz);
+            quizCount++;
+          }
+          if (entry.attendance !== "" && entry.attendance !== null) {
+            totalAttendance += parseFloat(entry.attendance);
+            attendanceCount++;
+          }
+          if (entry.project !== "" && entry.project !== null) {
+            totalProject += parseFloat(entry.project);
+            projectCount++;
+          }
+        });
+
+        const assignmentScore = assignmentCount ? (totalAssignment / (3 * assignmentCount)) * 30 : 0;
+        const quizScore = quizCount ? (totalQuiz / (5 * quizCount)) * 20 : 0;
+        const attendanceScore = attendanceCount ? (totalAttendance / (2 * 15)) * 30 : 0; 
+        const projectScore = projectCount ? (totalProject / (20 * projectCount)) * 20 : 0;
+
+        const currentGrade = assignmentScore + quizScore + attendanceScore + projectScore;
+
+        document.getElementById('currentGrade').innerHTML = `<strong>${currentGrade.toFixed(2)}%</strong>`;
+      })
+      .catch(error => {
+        console.error('Error loading grades:', error);
+        document.getElementById('currentGrade').textContent = 'Error loading grades.';
+      });
+    </script>
+
 </body>
 </html>
