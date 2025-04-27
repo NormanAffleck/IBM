@@ -1,84 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Norman's World - Assignments</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            text-align: center;
-        }
-
-        header {
-            background-color: #9b59b6;
-            padding: 30px 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-size: 48px;
-            margin: 0;
-            color: #ffffff;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-        }
-
-        .intro-text {
-            font-size: 18px;
-            margin: 20px 0 40px;
-            color: #cccccc;
-        }
-
-        .assignment-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            max-width: 1000px;
-            margin: 0 auto 60px;
-            padding: 0 20px;
-        }
-
-        .assignment-bar {
-            background-color: #1e1e1e;
-            border: 2px solid #9b59b6;
-            border-radius: 12px;
-            padding: 20px;
-            font-size: 20px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(155, 89, 182, 0.2);
-            text-decoration: none;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .assignment-bar:hover {
-            background-color: #9b59b6;
-            color: #ffffff;
-            transform: scale(1.05);
-            box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
-        }
-
-        footer {
-            padding: 20px;
-            color: #888;
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Norman's World - Assignments</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background-color: #9b59b6;
+      padding: 30px 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    header h1 {
+      font-size: 48px;
+      margin: 0;
+      color: #ffffff;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+    .intro-text {
+      font-size: 18px;
+      margin: 20px 0 40px;
+      color: #cccccc;
+    }
+    .assignment-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .assignment-bar {
+      background-color: #1e1e1e;
+      border: 2px solid #9b59b6;
+      border-radius: 12px;
+      padding: 20px;
+      font-size: 20px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(155, 89, 182, 0.2);
+      text-decoration: none;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      text-align: left;
+    }
+    .assignment-bar:hover {
+      background-color: #9b59b6;
+      color: #ffffff;
+      transform: scale(1.05);
+      box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
+    }
+    .grade-calculator {
+      background-color: #1e1e1e;
+      border: 2px solid #9b59b6;
+      border-radius: 12px;
+      padding: 20px;
+      margin: 40px auto;
+      max-width: 600px;
+      box-shadow: 0 0 15px #9b59b6;
+    }
+    input {
+      padding: 8px;
+      margin: 8px;
+      width: 140px;
+      border-radius: 5px;
+      border: 1px solid #9b59b6;
+      background-color: #1e1e1e;
+      color: #ffffff;
+      text-align: center;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 15px;
+      background-color: #9b59b6;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #8e44ad;
+    }
+    .result {
+      margin-top: 15px;
+      font-size: 22px;
+      color: #2ecc71;
+    }
+    footer {
+      padding: 20px;
+      color: #888;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Welcome to Norman's World</h1>
-    </header>
 
-    <p class="intro-text">Explore my assignments below – click to view each one!</p>
+<header>
+  <h1>Welcome to Norman's World</h1>
+</header>
 
-    <div class="assignment-container">
+<p class="intro-text">Explore my assignments below – click to view each one!</p>
 
+<div class="assignment-container">
+  <!-- Assignment Bars Inserted Here -->
         <!-- Assignment 1 -->
         <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
             <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 2: Identity Check</h3>
@@ -136,8 +169,19 @@
         </div>
     </div>
 
+<!-- Grade Calculator Section at the bottom -->
+<div class="grade-calculator">
+  <h2>🎯 Enter Your Grades</h2>
+  <input type="number" id="assignments" placeholder="Total Assignment Points">
+  <input type="number" id="quizzes" placeholder="Total Quiz Points">
+  <input type="number" id="attendance" placeholder="Total Presences">
+  <input type="number" id="project" placeholder="Project Points">
+  <br>
+  <button onclick="calculateGrade()">Calculate Grade</button>
+  <div class="result" id="result"></div>
+</div>
 
-    <div style="margin-bottom: 40px;">
+ <div style="margin-bottom: 40px;">
         <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
            target="_blank" 
            style="
@@ -159,8 +203,27 @@
         </a>
     </div>
 
-    <footer>
-        © 2025 Norman Affleck. All rights reserved.
-    </footer>
+<footer>
+  © 2025 Norman Affleck. All rights reserved.
+</footer>
+
+<script>
+function calculateGrade() {
+  const assignments = parseFloat(document.getElementById('assignments').value) || 0;
+  const quizzes = parseFloat(document.getElementById('quizzes').value) || 0;
+  const attendance = parseFloat(document.getElementById('attendance').value) || 0;
+  const project = parseFloat(document.getElementById('project').value) || 0;
+
+  const assignmentScore = (assignments / (3 * 6)) * 30; // Assuming 6 assignments
+  const quizScore = (quizzes / (5 * 4)) * 20; // Assuming 4 quizzes
+  const attendanceScore = (attendance / (2 * 15)) * 30; // Assuming 15 weeks
+  const projectScore = (project / 20) * 20;
+
+  const currentGrade = assignmentScore + quizScore + attendanceScore + projectScore;
+
+  document.getElementById('result').innerHTML = `Current Grade: ${currentGrade.toFixed(2)}%`;
+}
+</script>
+
 </body>
 </html>
