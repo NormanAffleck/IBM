@@ -207,23 +207,5 @@
   © 2025 Norman Affleck. All rights reserved.
 </footer>
 
-<script>
-function calculateGrade() {
-  const assignments = parseFloat(document.getElementById('assignments').value) || 0;
-  const quizzes = parseFloat(document.getElementById('quizzes').value) || 0;
-  const attendance = parseFloat(document.getElementById('attendance').value) || 0;
-  const project = parseFloat(document.getElementById('project').value) || 0;
-
-  const assignmentScore = (assignments / (3 * 6)) * 30; // Assuming 6 assignments
-  const quizScore = (quizzes / (5 * 4)) * 20; // Assuming 4 quizzes
-  const attendanceScore = (attendance / (2 * 15)) * 30; // Assuming 15 weeks
-  const projectScore = (project / 20) * 20;
-
-  const currentGrade = assignmentScore + quizScore + attendanceScore + projectScore;
-
-  document.getElementById('result').innerHTML = `Current Grade: ${currentGrade.toFixed(2)}%`;
-}
-</script>
-
 </body>
 </html>
