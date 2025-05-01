@@ -100,9 +100,55 @@
       color: #888;
       font-size: 14px;
     }
+
+    #gradeCard {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background-color: #1c1c1c;
+  color: #ffffff;
+  border: 1.5px solid #b86eff;
+  box-shadow: 0 0 12px #b86eff99;
+  width: 200px;
+  text-align: center;
+  z-index: 1000;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#gradeCard h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+  color: #b86eff;
+  font-weight: 600;
+}
+
+#gradeCard h1 {
+  font-size: 26px;
+  margin: 0;
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(184, 110, 255, 0.4);
+}
+
+#gradeCard p {
+  font-size: 12px;
+  margin-top: 6px;
+  color: #aaaaaa;
+}
+
+      
   </style>
 </head>
 <body>
+
+  <div id="gradeCard">
+  <h3>Course Grade</h3>
+  <h1>Loading...</h1>
+  <p>( ... / ... )</p>
+</div>
+
 
 <header>
   <h1>Welcome to Norman's World</h1>
@@ -206,6 +252,19 @@
 <footer>
   © 2025 Norman Affleck. All rights reserved.
 </footer>
+
+  <script>
+fetch("https://script.google.com/macros/s/AKfycbyx3RgbCyC5X3uIsPKbCUTRX1sXwqs8gkskaek6cLsWayv4pARk8hUwa_KsCzTZ9ryn/exec")
+  .then(response => response.json())
+  .then(data => {
+    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+    document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+  })
+  .catch(error => {
+    document.getElementById('finalGrade').textContent = "Error!";
+    console.error(error);
+  });  
+  </script>
 
 </body>
 </html>
