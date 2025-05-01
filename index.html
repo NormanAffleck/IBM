@@ -143,12 +143,12 @@
 </head>
 <body>
 
+  <!--Calculated grade-->
   <div id="gradeCard">
-  <h3>Course Grade</h3>
-  <h1>Loading...</h1>
-  <p>( ... / ... )</p>
+  <h3>Calculated Grade</h3>
+  <h1 id="finalGrade">Loading...</h1>
+  <p id="pointsEarned">( ... / ... )</p>
 </div>
-
 
 <header>
   <h1>Welcome to Norman's World</h1>
@@ -215,17 +215,7 @@
         </div>
     </div>
 
-<!-- Grade Calculator Section at the bottom -->
-<div class="grade-calculator">
-  <h2>🎯 Enter Your Grades</h2>
-  <input type="number" id="assignments" placeholder="All Assignment Points">
-  <input type="number" id="quizzes" placeholder="Total Quiz Points">
-  <input type="number" id="attendance" placeholder="Total Presences">
-  <input type="number" id="project" placeholder="Project Points">
-  <br>
-  <button onclick="calculateGrade()">Calculate Grade</button>
-  <div class="result" id="result"></div>
-</div>
+
 
  <div style="margin-bottom: 40px;">
         <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
