@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +30,7 @@
       font-size: 18px;
       margin: 20px 0 40px;
       color: #cccccc;
-    }
+      }
     .assignment-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -51,13 +54,45 @@
       align-items: flex-start;
       justify-content: center;
       text-align: left;
+
     }
     .assignment-bar:hover {
       background-color: #9b59b6;
-      color: #ffffff;
       transform: scale(1.05);
       box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
     }
+    .assignment-bar h3 {
+      margin: 0 0 10px 0;
+      color: #9b59b6;
+    }
+    .assignment-bar:hover h3 {
+      color: #ffffff;
+    }
+    .assignment-button {
+      padding: 8px 16px;
+      background-color: #9b59b6;
+      color: white;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    .assignment-bar:hover .assignment-button {
+      background-color: white;
+      color: #9b59b6;
+    }
+    .assignment-bar p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #cccccc;
+    }
+    .assignment-bar span {
+      color: #e67e22;
+    }
+    .assignment-bar span.finished {
+      color: #2ecc71;
+    }
+
     .grade-calculator {
       background-color: #1e1e1e;
       border: 2px solid #9b59b6;
@@ -67,6 +102,7 @@
       max-width: 600px;
       box-shadow: 0 0 15px #9b59b6;
     }
+
     input {
       padding: 8px;
       margin: 8px;
@@ -77,6 +113,7 @@
       color: #ffffff;
       text-align: center;
     }
+
     button {
       padding: 10px 20px;
       margin-top: 15px;
@@ -87,14 +124,17 @@
       font-size: 16px;
       cursor: pointer;
     }
+
     button:hover {
       background-color: #8e44ad;
     }
+
     .result {
       margin-top: 15px;
       font-size: 22px;
       color: #2ecc71;
     }
+
     footer {
       padding: 20px;
       color: #888;
@@ -102,49 +142,46 @@
     }
 
     #gradeCard {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background-color: #1c1c1c;
-  color: #ffffff;
-  border: 1.5px solid #b86eff;
-  box-shadow: 0 0 12px #b86eff99;
-  width: 200px;
-  text-align: center;
-  z-index: 1000;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background-color: #1c1c1c;
+      color: #ffffff;
+      border: 1.5px solid #b86eff;
+      box-shadow: 0 0 12px #b86eff99;
+      width: 200px;
+      text-align: center;
+      z-index: 1000;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
-#gradeCard h3 {
-  font-size: 15px;
-  margin-bottom: 8px;
-  color: #b86eff;
-  font-weight: 600;
-}
+    #gradeCard h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      color: #b86eff;
+      font-weight: 600;
+    }
 
-#gradeCard h1 {
-  font-size: 26px;
-  margin: 0;
-  color: #ffffff;
-  font-weight: bold;
-  text-shadow: 1px 1px 3px rgba(184, 110, 255, 0.4);
-}
+    #gradeCard h1 {
+      font-size: 26px;
+      margin: 0;
+      color: #ffffff;
+      font-weight: bold;
+      text-shadow: 1px 1px 3px rgba(184, 110, 255, 0.4);
+    }
 
-#gradeCard p {
-  font-size: 12px;
-  margin-top: 6px;
-  color: #aaaaaa;
-}
-
-      
+    #gradeCard p {
+      font-size: 12px;
+      margin-top: 6px;
+      color: #aaaaaa;
+    }
   </style>
 </head>
 <body>
 
-  <!--Calculated grade-->
-  <div id="gradeCard">
+<div id="gradeCard">
   <h3>Calculated Grade</h3>
   <h1 id="finalGrade">Loading...</h1>
   <p id="pointsEarned">( ... / ... )</p>
@@ -157,104 +194,80 @@
 <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
 <div class="assignment-container">
-  <!-- Assignment Bars Inserted Here -->
-        <!-- Assignment 1 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 2: Identity Check</h3>
-            <a href="https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 1
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
-        </div>
+  <div class="assignment-bar">
+    <h3>Week 2: Identity Check</h3>
+    <a class="assignment-button" href="https://docs.google.com/document/d/1QCVgicJWzQ0IQbd2fhs07iWyz2UmrP3-G4T2yqa76zM/edit?usp=drive_link" target="_blank">Assignment 1</a>
+    <p>Status: <span class="finished">Finished</span></p>
+  </div>
 
-        <!-- Assignment 2 (Elite Purple Frame) -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 3: Dungeon Crawl</h3>
-            <a href="https://drive.google.com/drive/folders/1Egv9In-RTwNCVYGdx0qAF6vgZLLlrtBA?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 2
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
-        </div>
+  <div class="assignment-bar">
+    <h3>Week 3: Dungeon Crawl</h3>
+    <a class="assignment-button" href="https://drive.google.com/drive/folders/1Egv9In-RTwNCVYGdx0qAF6vgZLLlrtBA?usp=drive_link" target="_blank">Assignment 2</a>
+    <p>Status: <span class="finished">Finished</span></p>
+  </div>
 
-        <!-- Assignment 3 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 4: Online Library</h3>
-            <a href="https://drive.google.com/drive/folders/1QI1YW1Fk1lxXr1JZ8fcAtCfyx2XhL9Ew?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 3
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #2ecc71;">Finished</span></p>
-        </div>
+  <div class="assignment-bar">
+    <h3>Week 4: Online Library</h3>
+    <a class="assignment-button" href="https://drive.google.com/drive/folders/1QI1YW1Fk1lxXr1JZ8fcAtCfyx2XhL9Ew?usp=drive_link" target="_blank">Assignment 3</a>
+    <p>Status: <span class="finished">Finished</span></p>
+  </div>
 
-        <!-- Assignment 4 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 6: Cryptography Project</h3>
-            <a href="https://drive.google.com/drive/folders/19u-bx1EzlKdgCkdBX8PBH5eWmLipXVid?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 4
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #e67e22;">Pending</span></p>
-        </div>
+<!-- Assignment 4 -->
+<div class="assignment-bar">
+  <h3>Week 6: Cryptography Project</h3>
+  <div style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <a class="assignment-button" href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Documentation</a>
+    <a class="assignment-button" href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank" style="margin-top: 10px;">Project</a>
+  </div>
+  <p>Status: <span>Pending</span></p>
+</div>
 
 
-        <!-- Assignment 5 -->
-        <div class="assignment-bar" style="flex-direction: column; align-items: flex-start; text-align: left;">
-            <h3 style="margin: 0 0 10px 0; color: #9b59b6;">Week 7: App Script</h3>
-            <a href="https://drive.google.com/drive/folders/13zHP4Sv_2qFcdbbF6VTGUiVnD0G7Wyv-?usp=drive_link"
-               target="_blank"
-               style="padding: 8px 16px; background-color: #9b59b6; color: white; border-radius: 6px; text-decoration: none; font-weight: bold;">
-                Assignment 5
-            </a>
-            <p style="margin-top: 10px; font-size: 14px; color: #cccccc;">Status: <span style="color: #e67e22;">Pending</span></p>
-        </div>
-    </div>
+  <div class="assignment-bar">
+    <h3>Week 7: App Script</h3>
+    <a class="assignment-button" href="https://drive.google.com/drive/folders/13zHP4Sv_2qFcdbbF6VTGUiVnD0G7Wyv-?usp=drive_link" target="_blank">Assignment 5</a>
+    <p>Status: <span>Pending</span></p>
+  </div>
+</div>
 
-
-
- <div style="margin-bottom: 40px;">
-        <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
-           target="_blank" 
-           style="
-               display: inline-block;
-               padding: 10px 20px;
-               font-size: 16px;
-               background-color: #6c5ce7;
-               color: white;
-               text-decoration: none;
-               border-radius: 8px;
-               transition: background-color 0.3s ease;
-               border: 1px solid #9b59b6;
-               margin-top: 20px;
-           "
-           onmouseover="this.style.backgroundColor='#9b59b6';"
-           onmouseout="this.style.backgroundColor='#6c5ce7';"
-        >
-            📄 Necessary Links
-        </a>
-    </div>
+<div style="margin-bottom: 40px;">
+  <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
+     target="_blank" 
+     style="
+       display: inline-block;
+       padding: 10px 20px;
+       font-size: 16px;
+       background-color: #6c5ce7;
+       color: white;
+       text-decoration: none;
+       border-radius: 8px;
+       transition: background-color 0.3s ease;
+       border: 1px solid #9b59b6;
+       margin-top: 20px;
+     "
+     onmouseover="this.style.backgroundColor='#9b59b6';"
+     onmouseout="this.style.backgroundColor='#6c5ce7';"
+  >
+    📄 Necessary Links
+  </a>
+</div>
 
 <footer>
   © 2025 Norman Affleck. All rights reserved.
 </footer>
 
-  <script>
-fetch("https://script.google.com/macros/s/AKfycbyx3RgbCyC5X3uIsPKbCUTRX1sXwqs8gkskaek6cLsWayv4pARk8hUwa_KsCzTZ9ryn/exec")
-  .then(response => response.json())
-  .then(data => {
-    document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-    document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
-  })
-  .catch(error => {
-    document.getElementById('finalGrade').textContent = "Error!";
-    console.error(error);
-  });  
-  </script>
+<script>
+  fetch("https://script.google.com/macros/s/AKfycbyx3RgbCyC5X3uIsPKbCUTRX1sXwqs8gkskaek6cLsWayv4pARk8hUwa_KsCzTZ9ryn/exec")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+      document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+    })
+    .catch(error => {
+      document.getElementById('finalGrade').textContent = "Error!";
+      console.error(error);
+    });
+</script>
 
 </body>
 </html>
