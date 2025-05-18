@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Week 10 – Reconnaissance Cohort One</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #111;
+      color: #eee;
+      line-height: 1.6;
+      padding: 2rem;
+      max-width: 800px;
+      margin: auto;
+    }
+    h1, h2 {
+      color: #8de4ff;
+    }
+    code {
+      background: #222;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #9fe99a;
+    }
+    a {
+      color: #84caff;
+    }
+    .image {
+      margin: 1rem 0;
+    }
+    .letter {
+      background-color: #1c1c1c;
+      border-left: 4px solid #555;
+      padding: 1rem;
+      margin-top: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Week 10 – Reconnaissance Cohort One</h1>
+  <p><strong>Cadet Name:</strong> Cadet Norman</p>
+  <p><strong>Bot Guide:</strong> HIF-Lumen</p>
+
+  <h2>Mission Setup</h2>
+  <p>I began the mission by configuring HIF-Lumen to act more like a mentor: serious, minimal humor, and focused on helping me think critically.</p>
+
+  <h2>1. The JSON file </h2>
+  <p>I attempted to open the <code>.json</code> file for over 30 minutes, using online validators, browser tools, nothing worked. Instead of stopping, I turned my attention to <code>letter.txt</code>.</p>
+
+  <h2>2. Cipher Solving and Hidden Narrative</h2>
+  <p>With guidance from HIF-Lumen, I decoded <code>letter.txt</code> using a Caesar Cipher tool from <a href="https://rumkin.com" target="_blank">Rumkin.com</a>. The correct shift was <strong>15 (N15)</strong>. That opened the letter from “Cadet Caesar” warning about death incidents and future waypoints.</p>
+
+  <div class="letter">
+Cadet,
+
+If this message has reached your eyes, you successfully traced the trail from our small laboratory misunderstanding—Varo’s sleepless accusation—and decoded the shifted letters. Well done.
+
+A word of caution as you continue your Reconnaissance Cohort One training:
+
+1. Even aboard Unity Beyond Stars, with its mind‑backups and regrown bodies, carelessness still carries a cost.  Restoration is possible, yes, but time, resources, and emotional toll make death a thoroughly inconvenient outcome.
+
+2. To reinforce this point, locate the only record in the interpersonal archive classified as a deadly incident.  Ask HIF‑Lumen if you need guidance filtering the log.
+
+3. Once you identify that entry, note the report ID; it will steer you to the next waypoint on your orientation quest.
+
+Remain vigilant.  The worlds we’ll enter beyond these bulkheads will not forgive forgetfulness and neither will vacuum, toxin, or unshielded fusion plasma.  Treat your future missions, and your crewmates, with deliberate care.
+
+Cadet Caesar
+  </div>
+
+  <h2>3. Data Discovery and AI Collaboration</h2>
+  <p>I asked HIF-Lumen how to find the “deadly incident.” He replied: <code>"Scan the interpersonal_reports.csv for that deadly incident "</code> I searched the file and found something interesting in row 71:</p>
+  <p><code>teacherssite/hif/nova.html</code></p>
+  <p>I added that to the site path: <a href="https://josuedean.github.io/ibm/hif/nova.html" target="_blank">https://josuedean.github.io/ibm/hif/nova.html</a></p>
+
+  <h2>4. Vectorfall Code and Logged Message</h2>
+  <p>Upon visiting the page, I asked HIF-Lumen for assistance again and was given the keyword:</p>
+  <p><strong><code>vectorfall</code></strong></p>
+
+  <p>Then I saw this message, confirming progress:</p>
+  <div class="image">
+    <img src="de578912-b3e9-425c-88c8-e57f6649e0a1.png" alt="Logged message with instructions" width="100%" />
+  </div>
+
+  <p><strong>Instruction:</strong> “Now copy your entire chat with HIF-Lumen and publish it on your portfolio site under Week 10.”</p>
+
+  <h2>Conclusion</h2>
+  <p>This task wasn’t just technical—it was an exploration in problem-solving, narrative logic, and how to ask for help effectively. I explored multiple paths, persisted through failure, and used tools creatively. Rather than following obvious steps, I treated the assignment as a simulation that demanded both precision and critical exploration.</p>
+</body>
+</html>
