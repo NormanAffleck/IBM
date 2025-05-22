@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hospitality Industry Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0e1a0e;
+      color: #eaffea;
+    }
+
+    header {
+      background-color: #16FF00;
+      padding: 2rem;
+      text-align: center;
+      color: #000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .cards {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #132d13;
+      border: 1px solid #16FF0080;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(22, 255, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(22, 255, 0, 0.5);
+    }
+
+    .card h3 {
+      color: #88ff77;
+      margin-bottom: 1rem;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #e3ffe3;
+      font-weight: bold;
+    }
+
+    .grade-box {
+      flex: 1;
+      background: #1a301a;
+      border-left: 5px solid #16FF00;
+      border-radius: 16px;
+      padding: 1.5rem;
+      height: fit-content;
+      box-shadow: 0 0 20px rgba(22, 255, 0, 0.3);
+      color: #f0fff0;
+    }
+
+    .grade-box h2 {
+      color: #16FF00;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grade-box p {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Hospitality Industry Portfolio</h1>
+  </header>
+
+  <div class="main-container">
+    <div class="cards">
+      <div class="card"><h3>Week 1</h3><a href="#">Intro to Hospitality</a></div>
+      <div class="card"><h3>Week 2</h3><a href="#">Hotels & Resorts</a></div>
+      <div class="card"><h3>Week 3</h3><a href="#">Food & Beverage</a></div>
+      <div class="card"><h3>Week 4</h3><a href="#">Travel & Tourism</a></div>
+      <div class="card"><h3>Week 5</h3><a href="#">Customer Service</a></div>
+      <div class="card"><h3>Week 6</h3><a href="#">Revenue & HR</a></div>
+      <div class="card"><h3>Week 7</h3><a href="#">Hospitality Marketing</a></div>
+      <div class="card"><h3>Week 8</h3><a href="#">Franchising Models</a></div>
+      <div class="card"><h3>Week 9</h3><a href="#">Sustainability</a></div>
+    </div>
+
+    <div class="grade-box">
+      <h2>📋 Hospitality Grade</h2>
+      <div id="gradeDisplay">Loading grade...</div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchGrade() {
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbwy2s5DGa9UMeRZ9CAkOTx1_M-4TrYIovSvy_p-8pjW8yjGMrRhik2Ymm2-tmPI5r5G_g/exec");
+        const data = await response.json();
+        document.getElementById("gradeDisplay").innerHTML = `
+          <strong>${data.currentPercentage}%</strong><br>
+          <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
+        `;
+      } catch (err) {
+        document.getElementById("gradeDisplay").innerText = "Could not load grade.";
+      }
+    }
+    fetchGrade();
+  </script>
+</body>
+</html>
