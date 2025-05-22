@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Infinity Gauntlet | Portfolio Portal</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      padding: 3rem 1rem;
+    }
+
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 2rem;
+      color: #ffcc00;
+    }
+
+    .stones {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .stone {
+      background: #111;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      transition: transform 0.3s;
+    }
+
+    .stone:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 0 20px rgba(255,255,255,0.4);
+    }
+
+    .stone img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .stone a {
+      color: #00f7ff;
+      text-decoration: none;
+      display: block;
+      font-size: 1.1rem;
+      font-weight: bold;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 1rem;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧤 Infinity Gauntlet Portfolio</h1>
+  <div class="stones">
+    <div class="stone">
+      <img src="stones/power.png" alt="Power Stone">
+      <div>Managing Daily Info</div>
+      <a href="DailyInfo.html">Power Stone</a>
+    </div>
+    <div class="stone">
+      <img src="stones/space.png" alt="Space Stone">
+      <div>Field Trip</div>
+      <a href="FT.html">Space Stone</a>
+    </div>
+    <div class="stone">
+      <img src="stones/reality.png" alt="Reality Stone">
+      <div>Managing Info Systems</div>
+      <a href="MIS.html">Reality Stone</a>
+    </div>
+    <div class="stone">
+      <img src="stones/soul.png" alt="Soul Stone">
+      <div>Organizational Behaviours</div>
+      <a href="OB.html">Soul Stone</a>
+    </div>
+    <div class="stone">
+      <img src="stones/time.png" alt="Time Stone">
+      <div>Hospitality Industry</div>
+      <a href="HI.html">Time Stone</a>
+    </div>
+    <div class="stone">
+      <img src="stones/mind.png" alt="Mind Stone">
+      <div>Marketing</div>
+      <a href="Marketing.html">Mind Stone</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>✨ Congratulations, You have collected all 6 stones!<br>
+    Thanks for your attention. I hope you enjoyed this project! ✨</p>
+  </footer>
+</body>
+</html>
