@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Organizational Behaviour Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1a0f00;
+      color: #fff0e5;
+    }
+
+    header {
+      background-color: #f38d00;
+      padding: 2rem;
+      text-align: center;
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .cards {
+      flex: 3;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: #2e1a00;
+      border: 1px solid #f38d0080;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(243, 141, 0, 0.3);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+    }
+
+    .card h3 {
+      color: #ffbe57;
+      margin-bottom: 1rem;
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #ffe4c2;
+      font-weight: bold;
+    }
+
+    .grade-box {
+      flex: 1;
+      background: #3b1d00;
+      border-left: 5px solid #f38d00;
+      border-radius: 16px;
+      padding: 1.5rem;
+      height: fit-content;
+      box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
+      color: #fff3e0;
+    }
+
+    .grade-box h2 {
+      color: #ffae42;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grade-box p {
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Organizational Behaviour Portfolio</h1>
+  </header>
+
+  <div class="main-container">
+    <div class="cards">
+      <div class="card"><h3>Week 1</h3><a href="#">Organizational Introduction</a></div>
+      <div class="card"><h3>Week 2</h3><a href="#">Perception & Decision Making</a></div>
+      <div class="card"><h3>Week 3</h3><a href="#">Motivation Theories</a></div>
+      <div class="card"><h3>Week 4</h3><a href="#">Group & Team Dynamics</a></div>
+      <div class="card"><h3>Week 5</h3><a href="#">Leadership & Power</a></div>
+      <div class="card"><h3>Week 6</h3><a href="#">Organizational Culture</a></div>
+      <div class="card"><h3>Week 7</h3><a href="#">Conflict & Negotiation</a></div>
+      <div class="card"><h3>Week 8</h3><a href="#">Organizational Change</a></div>
+      <div class="card"><h3>Week 9</h3><a href="#">OB Review & Practice</a></div>
+    </div>
+
+    <div class="grade-box">
+      <h2>📊 OB Grade Summary</h2>
+      <div id="gradeDisplay">Loading grade...</div>
+    </div>
+  </div>
+
+  <script>
+    async function fetchGrade() {
+      try {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbyp8EJWeQUfz7CXGIvZ9T566WFFAoK4CzcAbDaTLnU0hCaCaPdPLbd9VKBB3hHLrlKB/exec");
+        const data = await response.json();
+        document.getElementById("gradeDisplay").innerHTML = `
+          <strong>${data.currentPercentage}%</strong><br>
+          <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
+        `;
+      } catch (err) {
+        document.getElementById("gradeDisplay").innerText = "Could not load grade.";
+      }
+    }
+    fetchGrade();
+  </script>
+</body>
+</html>
