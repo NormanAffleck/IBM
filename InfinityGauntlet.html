@@ -6,95 +6,111 @@
   <title>Infinity Gauntlet | Portfolio Portal</title>
   <style>
     body {
-      background-color: #000;
-      color: #fff;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      text-align: center;
+      margin: 0;
       padding: 3rem 1rem;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('ThemeIG.jpg') no-repeat center top fixed;
+      background-size: cover;
+      color: #ffffff;
+      text-align: center;
     }
 
     h1 {
-      font-size: 2.8rem;
-      margin-bottom: 2rem;
-      color: #ffcc00;
+      font-size: 3rem;
+      margin-bottom: 3rem;
+      color: #00bfff;
+      text-shadow: 0 0 10px #00f, 0 0 20px #00f;
     }
 
-    .stones {
+    .gauntlet-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-areas:
+        "stone1 stone2 stone3"
+        "stone4 gauntlet stone5"
+        ". stone6 .";
       gap: 2rem;
+      justify-content: center;
+      align-items: center;
       max-width: 1000px;
       margin: auto;
     }
 
     .stone {
-      background: #111;
-      border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 0 10px rgba(255,255,255,0.2);
-      transition: transform 0.3s;
+      background: rgba(0, 0, 64, 0.6);
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
     }
 
     .stone:hover {
       transform: translateY(-8px);
-      box-shadow: 0 0 20px rgba(255,255,255,0.4);
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
     }
 
     .stone img {
       width: 80px;
       height: 80px;
       object-fit: contain;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     .stone a {
       color: #00f7ff;
       text-decoration: none;
-      display: block;
-      font-size: 1.1rem;
       font-weight: bold;
-      margin-top: 0.5rem;
+      display: block;
     }
+
+    .gauntlet {
+      grid-area: gauntlet;
+    }
+
+    .stone1 { grid-area: stone1; }
+    .stone2 { grid-area: stone2; }
+    .stone3 { grid-area: stone3; }
+    .stone4 { grid-area: stone4; }
+    .stone5 { grid-area: stone5; }
+    .stone6 { grid-area: stone6; }
 
     footer {
       margin-top: 4rem;
       font-size: 1rem;
-      color: #aaa;
+      color: #a0eaff;
+      text-shadow: 0 0 5px #0088cc;
     }
   </style>
 </head>
 <body>
   <h1>🧤 Infinity Gauntlet Portfolio</h1>
-  <div class="stones">
-    <div class="stone">
-      <img src="stones/power.png" alt="Power Stone">
-      <div>Managing Daily Info</div>
-      <a href="DailyInfo.html">Power Stone</a>
+
+  <div class="gauntlet-container">
+    <div class="stone stone1">
+      <img src="Power.jpg" alt="Power Stone">
+      <a href="DailyInfo.html">Managing Daily Info</a>
     </div>
-    <div class="stone">
-      <img src="stones/space.png" alt="Space Stone">
-      <div>Field Trip</div>
-      <a href="FT.html">Space Stone</a>
+    <div class="stone stone2">
+      <img src="Reality.jpg" alt="Reality Stone">
+      <a href="MIS.html">Managing Info Systems</a>
     </div>
-    <div class="stone">
-      <img src="stones/reality.png" alt="Reality Stone">
-      <div>Managing Info Systems</div>
-      <a href="MIS.html">Reality Stone</a>
+    <div class="stone stone3">
+      <img src="Mind.jpg" alt="Mind Stone">
+      <a href="Marketing.html">Marketing</a>
     </div>
-    <div class="stone">
-      <img src="stones/soul.png" alt="Soul Stone">
-      <div>Organizational Behaviours</div>
-      <a href="OB.html">Soul Stone</a>
+    <div class="stone stone4">
+      <img src="Time.jpg" alt="Time Stone">
+      <a href="HI.html">Hospitality Industry</a>
     </div>
-    <div class="stone">
-      <img src="stones/time.png" alt="Time Stone">
-      <div>Hospitality Industry</div>
-      <a href="HI.html">Time Stone</a>
+    <div class="stone gauntlet">
+      <img src="Gauntlet.jpg" alt="Infinity Gauntlet" style="width: 120px;">
     </div>
-    <div class="stone">
-      <img src="stones/mind.png" alt="Mind Stone">
-      <div>Marketing</div>
-      <a href="Marketing.html">Mind Stone</a>
+    <div class="stone stone5">
+      <img src="Soul.jpg" alt="Soul Stone">
+      <a href="OB.html">Organizational Behaviours</a>
+    </div>
+    <div class="stone stone6">
+      <img src="Space.jpg" alt="Space Stone">
+      <a href="FT.html">Field Trip</a>
     </div>
   </div>
 
