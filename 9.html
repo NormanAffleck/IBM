@@ -121,6 +121,7 @@
   async function fetchGrade() {
     try {
       const response = await fetch("AKfycbysMLssU86LpvdhXhEl25UM59QDCG1EDNGe4qIL8LnNlY99y38hB0ynBd2NvYiXSgh5Aw");
+	    			    
       const data = await response.json();
 
       document.getElementById("gradeDisplay").innerHTML = `
