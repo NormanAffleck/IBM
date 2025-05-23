@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +11,14 @@
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0e1a0e;
+      background: radial-gradient(ellipse at center, #003300 0%, #001a00 100%);
       color: #eaffea;
+      animation: pulseStar 20s infinite linear;
+    }
+
+    @keyframes pulseStar {
+      0% { background-position: center; }
+      100% { background-position: 150% 150%; }
     }
 
     header {
@@ -42,7 +50,7 @@
     }
 
     .card {
-      background: #132d13;
+      background: rgba(0, 50, 0, 0.6);
       border: 1px solid #16FF0080;
       border-radius: 12px;
       padding: 1.5rem;
@@ -56,13 +64,13 @@
     }
 
     .card h3 {
-      color: #88ff77;
+      color: #16FF00;
       margin-bottom: 1rem;
     }
 
     .card a {
       text-decoration: none;
-      color: #e3ffe3;
+      color: #eaffea;
       font-weight: bold;
     }
 
@@ -95,15 +103,16 @@
 
   <div class="main-container">
     <div class="cards">
-      <div class="card"><h3>Week 1</h3><a href="#">Intro to Hospitality</a></div>
-      <div class="card"><h3>Week 2</h3><a href="#">Hotels & Resorts</a></div>
-      <div class="card"><h3>Week 3</h3><a href="#">Food & Beverage</a></div>
-      <div class="card"><h3>Week 4</h3><a href="#">Travel & Tourism</a></div>
-      <div class="card"><h3>Week 5</h3><a href="#">Customer Service</a></div>
-      <div class="card"><h3>Week 6</h3><a href="#">Revenue & HR</a></div>
-      <div class="card"><h3>Week 7</h3><a href="#">Hospitality Marketing</a></div>
-      <div class="card"><h3>Week 8</h3><a href="#">Franchising Models</a></div>
-      <div class="card"><h3>Week 9</h3><a href="#">Sustainability</a></div>
+      <div class="card"><h3>Chapter 1</h3><a href="IntroHosp.html">Introduction to Hospitality</a></div>
+      <div class="card"><h3>Chapter 2</h3><a href="Ch1.html">Hotel Overview</a></div>
+      <div class="card"><h3>Chapter 3</h3><a href="Ch2.html">Hospitality Service</a></div>
+      <div class="card"><h3>Chapter 4</h3><a href="Ch3.html">Hotel Classification</a></div>
+      <div class="card"><h3>Chapter 5</h3><a href="Ch4.html">Hotel Products</a></div>
+      <div class="card"><h3>Chapter 6</h3><a href="Ch5.html">Front Desk</a></div>
+      <div class="card"><h3>Chapter 7</h3><a href="Ch6.html">Other Front Office</a></div>
+      <div class="card"><h3>Chapter 8</h3><a href="Ch7.html">Housekeeping</a></div>
+      <div class="card"><h3>Chapter 9</h3><a href="Ch8.html">Sales & Marketing</a></div>
+      <div class="card"><h3>Chapter 10</h3><a href="Ch9.html">Restaurant Industry</a></div>
     </div>
 
     <div class="grade-box">
