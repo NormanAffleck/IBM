@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Field Trip – Space Stone</title>
   <style>
     body {
@@ -15,15 +17,37 @@
 
     header {
       background-color: #007fff;
-      padding: 2rem;
+      padding: 2rem 2rem 1rem;
       text-align: center;
       color: #fff;
       box-shadow: 0 4px 10px rgba(0, 0, 255, 0.3);
+      position: relative;
     }
 
     header h1 {
       margin: 0;
       font-size: 2.5rem;
+    }
+
+    .top-button {
+      margin-top: 1rem;
+    }
+
+    .top-button a {
+      display: inline-block;
+      text-decoration: none;
+      color: #e0f7ff;
+      background-color: #003366;
+      padding: 0.8rem 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 127, 255, 0.4);
+      font-size: 1rem;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .top-button a:hover {
+      background-color: #005cb3;
+      transform: scale(1.05);
     }
 
     .container {
@@ -45,13 +69,39 @@
     }
 
     .decks {
-      margin-top: 2rem;
-    }
+  text-align: center;
+  margin-top: 3rem;
+}
 
-    .decks h2 {
-      color: #4fc3f7;
-      margin-bottom: 1rem;
-    }
+.decks h2 {
+  font-size: 1.8rem;
+  color: #4fc3f7;
+  margin-bottom: 1.2rem;
+  text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+}
+
+.button-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.button-wrapper a {
+  text-decoration: none;
+  background-color: #004080;
+  color: #e0f7ff;
+  padding: 0.9rem 2rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  box-shadow: 0 0 12px rgba(0, 127, 255, 0.4);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-wrapper a:hover {
+  background-color: #005cb3;
+  transform: scale(1.05);
+}
+
 
     .decks a {
       display: block;
@@ -74,19 +124,22 @@
   <header>
     <h1>Field Trip Report</h1>
   </header>
+<div class="decks">
+  <h2>📂 Documents</h2>
+  <div class="button-wrapper">
+    <a href="space.html">📄 Assignment Deck</a>
+  </div>
+</div>
+
+
+
   <div class="container">
     <div class="gallery">
-      <img src="Field1.jpg" alt="Field Trip 1">
-      <img src="Field3.JPG" alt="Field Trip 2">
-      <img src="Field2.jpg" alt="Field Trip 3">
-      <img src="Field4.DNG" alt="Field Trip 4">
-    </div>
-
-    <div class="decks">
-      <h2>📂 Documents</h2>
-      <a href="documents/assignment_deck.pdf" target="_blank">📄 Assignment Deck</a>
-      <a href="documents/evaluation_deck.pdf" target="_blank">📊 Evaluation Deck</a>
-    </div>
+      <img src="Field4.DNG" alt="Field Trip 1">
+      <img src="Field2.jpg" alt="Field Trip 2">
+      <img src="Field3.JPG" alt="Field Trip 3">
+      <img src="Field1.jpg" alt="Field Trip 4">
+    </div> 
   </div>
 </body>
 </html>
