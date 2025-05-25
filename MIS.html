@@ -66,13 +66,18 @@
       font-weight: bold;
     }
 
-    .grade-box {
+    .grade-column {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .grade-box, .quiz-card, .presentation-card {
       background: #2d0101;
       border-left: 5px solid #ff3333;
       border-radius: 16px;
       padding: 1.5rem;
-      height: fit-content;
       box-shadow: 0 0 20px rgba(198, 4, 4, 0.4);
       color: #fff2f2;
     }
@@ -86,6 +91,35 @@
     .grade-box p {
       font-size: 1.2rem;
     }
+
+    .quiz-card h3, .presentation-card h3 {
+      margin: 0 0 0.5rem;
+      color: #ff4d4d;
+    }
+
+    .presentation-section {
+      max-width: 1300px;
+      margin: 1rem auto 3rem;
+      padding: 1.5rem;
+    }
+
+    .download-button {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.2rem;
+      background-color: #660000;
+      color: #fff2f2;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .download-button:hover {
+      background-color: #a10000;
+    }
   </style>
 </head>
 <body>
@@ -94,6 +128,7 @@
   </header>
 
   <div class="main-container">
+    <!-- Left side: Weekly cards -->
     <div class="cards">
       <div class="card"><h3>Week 1</h3><a href="w1.html">Introduction to MIS</a></div>
       <div class="card"><h3>Week 2</h3><a href="w2.html">Business Principles</a></div>
@@ -106,9 +141,36 @@
       <div class="card"><h3>Week 10</h3><a href="w10.html">ERP Systems</a></div>
     </div>
 
-    <div class="grade-box">
-      <h2>📈 My Current Grade</h2>
-      <div id="gradeDisplay">Loading grade...</div>
+    <!-- Right side: Grade & Kahoots -->
+    <div class="grade-column">
+      <div class="grade-box">
+        <h2>📈 My Current Grade</h2>
+        <div id="gradeDisplay">Loading grade...</div>
+      </div>
+
+      <div class="quiz-card">
+        <h3>Kahoot! 24.03.2025</h3>
+        <p>Quiz ranking: <strong>5th Place</strong></p>
+      </div>
+
+      <div class="quiz-card">
+        <h3>Kahoot! 09.04.2025</h3>
+        <p>Quiz ranking: <strong>2nd Place</strong></p>
+      </div>
+
+      <div class="quiz-card">
+        <h3>Kahoot! 21.05.2025</h3>
+        <p>Quiz ranking: <strong>1st Place 🥇</strong></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Presentation Download Section -->
+  <div class="presentation-section">
+    <div class="presentation-card">
+      <h3>📤 Presentation</h3>
+      <p>Click below to download your MIS presentation:</p>
+      <a href="MIS.pptx" download class="download-button">Download MIS.pptx</a>
     </div>
   </div>
 
