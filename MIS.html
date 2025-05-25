@@ -15,15 +15,53 @@
 
     header {
       background-color: #C60404;
-      padding: 2rem;
-      text-align: center;
+      padding: 1.5rem 2rem;
       color: #fff;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
+.header-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 1300px;
+  margin: auto;
+  height: 100px;
+}
+.header-container h1 {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+
+    .profile-box {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: #2a0d0d;
+      border: 1px solid #aa2c2c;
+      border-radius: 12px;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 0 6px rgba(255, 0, 0, 0.2);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      background: url('https://via.placeholder.com/50') center/cover no-repeat;
+      background-color: #330000;
+      border-radius: 50%;
+      border: 2px solid #ff4d4d;
+    }
+
+    .profile-info p {
+      margin: 2px 0;
+      font-size: 0.85rem;
+      color: #f2dcdc;
     }
 
     .main-container {
@@ -123,12 +161,23 @@
   </style>
 </head>
 <body>
+
   <header>
-    <h1>MIS Portfolio</h1>
+    <div class="header-container">
+      <div class="profile-box">
+        <div class="profile-pic"></div>
+        <div class="profile-info">
+          <p><strong>Name:</strong> Majidov Nusratulloh</p>
+          <p><strong>ID:</strong> 2417563</p>
+          <p><strong>Faculty:</strong> IBM</p>
+          <p><strong>Subject:</strong> MIS</p>
+        </div>
+      </div>
+      <h1>MIS Portfolio</h1>
+    </div>
   </header>
 
   <div class="main-container">
-    <!-- Left side: Weekly cards -->
     <div class="cards">
       <div class="card"><h3>Week 1</h3><a href="w1.html">Introduction to MIS</a></div>
       <div class="card"><h3>Week 2</h3><a href="w2.html">Business Principles</a></div>
@@ -141,7 +190,6 @@
       <div class="card"><h3>Week 10</h3><a href="w10.html">ERP Systems</a></div>
     </div>
 
-    <!-- Right side: Grade & Kahoots -->
     <div class="grade-column">
       <div class="grade-box">
         <h2>📈 My Current Grade</h2>
@@ -165,7 +213,6 @@
     </div>
   </div>
 
-  <!-- Presentation Download Section -->
   <div class="presentation-section">
     <div class="presentation-card">
       <h3>📤 Presentation</h3>
