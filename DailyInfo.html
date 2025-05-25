@@ -5,8 +5,68 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Norman's World - Assignments</title>
+  <title>Managing Daily Information</title>
   <style>
+    /* HEADER STRUCTURE */
+    header {
+      background-color: #9b59b6;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1300px;
+      margin: auto;
+    }
+
+    .header-row h1 {
+      transfer: translateX(-5%);
+      font-size: 48px;
+      margin: 0;
+      color: #ffffff;
+      text-align: center;
+      flex: 1;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);  
+      margin-left: -200px;
+    }
+
+    /* PROFILE BOX */
+    .profile-box {
+      display: flex;
+      align-items: center;
+      background-color: #1e1e1e;
+      border: 1px solid #9b59b6;
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 0 8px rgba(155, 89, 182, 0.4);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      margin-right: 30px;
+    }
+
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      background: url('https://via.placeholder.com/50') center/cover no-repeat;
+      background-color: #333;
+      border-radius: 50%;
+      border: 2px solid #9b59b6;
+      margin-right: 12px;
+    }
+
+    .profile-info {
+      text-align: left;
+    }
+
+    .profile-info p {
+      margin: 2px 0;
+      font-size: 13px;
+      color: #ddd;
+    }
+
+    /* MAIN STYLES */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #121212;
@@ -15,22 +75,13 @@
       padding: 0;
       text-align: center;
     }
-    header {
-      background-color: #9b59b6;
-      padding: 30px 20px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    }
-    header h1 {
-      font-size: 48px;
-      margin: 0;
-      color: #ffffff;
-      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    }
+
     .intro-text {
       font-size: 18px;
       margin: 20px 0 40px;
       color: #cccccc;
     }
+
     .assignment-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -39,6 +90,7 @@
       margin: 0 auto 60px;
       padding: 0 20px;
     }
+
     .assignment-bar {
       background-color: #1e1e1e;
       border: 2px solid #9b59b6;
@@ -57,19 +109,23 @@
       min-height: 180px;
       max-height: 220px;
     }
+
     .assignment-bar:hover {
       background-color: #9b59b6;
       transform: scale(1.05);
       box-shadow: 0 6px 14px rgba(155, 89, 182, 0.4);
     }
+
     .assignment-bar h3 {
       margin: 0 0 10px 0;
       color: #9b59b6;
       width: 100%;
     }
+
     .assignment-bar:hover h3 {
       color: #ffffff;
     }
+
     .assignment-button {
       padding: 8px 16px;
       background-color: #9b59b6;
@@ -82,30 +138,34 @@
       width: 70%;
       font-size: 14px;
     }
+
     .assignment-bar:hover .assignment-button {
       background-color: white;
       color: #9b59b6;
     }
+
     .assignment-bar p {
       margin-top: 10px;
       font-size: 14px;
       color: #cccccc;
       width: 100%;
     }
+
     .assignment-bar span {
       color: #e67e22;
     }
+
     .assignment-bar span.finished {
       color: #2ecc71;
     }
-    
+
     .links-container {
       margin: 40px auto;
       width: 100%;
       display: flex;
       justify-content: center;
     }
-    
+
     .necessary-links-button {
       display: inline-block;
       padding: 10px 20px;
@@ -117,7 +177,7 @@
       transition: background-color 0.3s ease;
       border: 1px solid #9b59b6;
     }
-    
+
     .necessary-links-button:hover {
       background-color: #9b59b6;
     }
@@ -135,7 +195,6 @@
       width: 200px;
       text-align: center;
       z-index: 1000;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     }
 
     #gradeCard h3 {
@@ -153,24 +212,24 @@
       text-shadow: 1px 1px 3px rgba(184, 110, 255, 0.4);
     }
 
-        #gradeCard p {
+    #gradeCard p {
       font-size: 12px;
       margin-top: 6px;
       color: #aaaaaa;
     }
-    
+
     @media (max-width: 768px) {
       .assignment-container {
         grid-template-columns: repeat(2, 1fr);
       }
     }
-    
+
     @media (max-width: 480px) {
       .assignment-container {
         grid-template-columns: 1fr;
       }
     }
-    
+
     footer {
       padding: 20px;
       background-color: #0d1117;
@@ -182,22 +241,41 @@
 </head>
 <body>
 
+<!-- Grade Box -->
 <div id="gradeCard">
   <h3>Calculated Grade</h3>
   <h1 id="finalGrade">Loading...</h1>
   <p id="pointsEarned">( ... / ... )</p>
 </div>
 
+<!-- Header with Profile + Title -->
 <header>
-  <h1>Welcome to Norman's World</h1>
+  <div class="header-row">
+    <div class="profile-box">
+      <div class="profile-pic"></div>
+      <div class="profile-info">
+        <p><strong>Name:</strong> Majidov Nusratulloh</p>
+        <p><strong>ID:</strong> 2417563</p>
+        <p><strong>Faculty:</strong> IBM</p>
+        <p><strong>Subject:</strong> MIS</p>
+      </div>
+    </div>
+    <h1>
+  Managing Daily<br>
+  Information
+</h1>
+
+  </div>
 </header>
 
+<!-- Intro Text -->
 <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
+<!-- Assignments Grid -->
 <div class="assignment-container">
   <div class="assignment-bar">
     <h3>Week 2: Identity Check</h3>
-    <a class="assignment-button" href="Week2.html" target="_blank"> Assignment 1</a>
+    <a class="assignment-button" href="Week2.html" target="_blank">Assignment 1</a>
     <p>Status: <span class="finished">Finished</span></p>
   </div>
 
@@ -226,14 +304,15 @@
     <p>Status: <span>Pending</span></p>
   </div>
 
- <div class="assignment-bar">
-   <h3>Week 10: HIF - Lumen</h3>
-   <a class="assignment-button" href="Documentation.html" target="_blank">📄 Documentation</a>
-   <a class="assignment-button" href="Chat-Lumin.html" target="_blank">💬 Chat with HIF - Lumen</a>
-   <p>Status: <span>Pending</span></p>
- </div>
+  <div class="assignment-bar">
+    <h3>Week 10: HIF - Lumen</h3>
+    <a class="assignment-button" href="Documentation.html" target="_blank">📄 Documentation</a>
+    <a class="assignment-button" href="Chat-Lumin.html" target="_blank">💬 Chat with HIF - Lumen</a>
+    <p>Status: <span>Pending</span></p>
+  </div>
 </div>
 
+<!-- Useful Link -->
 <div class="links-container">
   <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
      target="_blank" 
@@ -242,10 +321,12 @@
   </a>
 </div>
 
+<!-- Footer -->
 <footer>
   © 2025 Norman Affleck. All rights reserved.
 </footer>
 
+<!-- Grade Script -->
 <script>
   fetch("https://script.google.com/macros/s/AKfycbyCpHjXkaLlCQyqwQ69b1CfeNA2OLOuI-2hCP-J5yFnGPj-yA1BgPoLn1NTDjCMoSuW/exec")
     .then(response => response.json())
