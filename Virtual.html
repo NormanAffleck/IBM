@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Virtual Library - Assignment 4</title>
+  <style>
+    body {
+      line-height: 1.8;
+      font-size: 17px;
+      letter-spacing: 0.4px;
+    }
+    .section p, .section ul {
+      margin-bottom: 20px;
+    }
+    .section {
+      padding: 30px;
+      font-size: 17px;
+    }
+    h3 {
+      font-size: 22px;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #9b59b6;
+      padding: 30px 40px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    header h1 {
+      font-size: 42px;
+      color: white;
+      margin: 0;
+      text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    }
+
+    .button-bar {
+      will-change: transform;
+
+      margin: 30px auto;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .download-button {
+      background: linear-gradient(135deg, #8e44ad, #3498db);
+      border: 2px solid #ffffff33;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      transition: transform 0.3s ease, background-color 0.3s ease;
+
+      padding: 12px 24px;
+      background-color: #9b59b6;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: 0.3s ease;
+    }
+
+    .download-button:hover {
+      transform: scale(1.1);
+      background: linear-gradient(135deg, #ffffff, #9b59b6);
+      color: #121212;
+      border: 2px solid #9b59b6;
+
+      background-color: white;
+      color: #9b59b6;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #1e1e1e;
+      border: 1px solid #9b59b6;
+      border-radius: 10px;
+      text-align: left;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      border: 1px solid #9b59b6;
+      border-radius: 8px;
+    }
+
+    a.validation-link {
+      color: #6c5ce7;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin: 20px auto;
+    }
+
+    a.validation-link:hover {
+      color: #ffffff;
+    }
+
+    footer {
+      padding: 20px;
+      background-color: #0d1117;
+      color: #c9d1d9;
+      text-align: center;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Assignment 4: Virtual Library</h1>
+</header>
+
+<div class="button-bar">
+  <a class="download-button" href="Online_Library.csv" download>Online_Library.csv</a>
+  <a class="download-button" href="Author_Info_Table.csv" download>Author_Info_Table.csv</a>
+  <a class="download-button" href="Book_Table.csv" download>Book_Table.csv</a>
+</div>
+
+<a class="validation-link" href="https://josuedean.github.io/ibm/dbv/index.html" target="_blank">✅ Validate CSV Format Here</a>
+
+<div class="section">
+  <h2>📋 Final Report of Findings</h2>
+  <p><strong>Subject:</strong> Information managing in Daily life<br>
+     <strong>Name:</strong> Nusratullah aka Norman</p>
+
+  <p>So, I will start. How I made the table. Firstly, I stayed in class without knowing what to do. After a while, I started my conversation with ChatGPT. He helped me some.</p>
+
+  <p>I asked him to make a 50-book table. So he did.</p>
+
+  <h3>Initial Issues:</h3>
+  <ul>
+    <li>B.C. and A.D. years were mixed. B.C. years used a minus sign (e.g., 500 B.C. = -500).</li>
+    <li>The validation website marked errors due to:
+      <ul>
+        <li>Publication Date column using integers (only years) which I didn't know must be formatted.</li>
+        <li>Available column only accepting Boolean values.</li>
+      </ul>
+    </li>
+    <li>❌ Yes, ❌ No, ❌ 1/0 → ✅ True / False only</li>
+  </ul>
+<h3>Additional Issues Faced During the Task:</h3>
+<ul>
+  <li>Validation took significant time and effort. Multiple revisions were required.</li>
+  <li>At times, the data structure didn’t correspond to the required format at all.</li>
+  <li>The Author table was comparatively easier to structure, and I managed to optimize it well with solid ideas.</li>
+  <li>Book Standings came as a last-minute idea. I’m proud that I finished it just in time.</li>
+</ul>
+<h3>Final Technical Insight:</h3>
+<p>Initially, coming up with a second foreign key was challenging. After some analysis, I decided to use <strong>Book_Standing</strong> as the second reference. At first, it seemed logical that many books could share the same standing. However, upon inspecting the validation and visualization website, it was clear that each standing contained only one book. This realization validated my final decision, confirming it was worth the wait and aligned with the required structure.</p>
+<p>After all corrections, I validated my <strong>Online_Library.csv</strong> file successfully.</p>
+
+  <p>Validation website used: <a class="validation-link" href="https://josuedean.github.io/ibm/dbv/index.html" target="_blank">https://josuedean.github.io/ibm/dbv/index.html</a></p>
+
+  <h3>✅ Validation Screenshot:</h3>
+  <img src="ValidationPic.JPG" alt="Validation Screenshot (Make sure file is uploaded alongside this HTML)">
+</div>
+
+<footer>
+  © 2025 Norman Affleck. All rights reserved.
+</footer>
+
+</body>
+</html>
