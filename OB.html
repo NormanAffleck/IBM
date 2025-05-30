@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Organizational Behaviour Portfolio</title>
+  <title>Organizational Behaviour</title>
   <style>
     body {
       margin: 0;
@@ -16,63 +17,108 @@
     header {
       background-color: #f38d00;
       padding: 2rem;
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       color: #fff;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
     header h1 {
-      margin: 0;
+      margin: 0 auto;
       font-size: 2.5rem;
+      text-align: center;
+    }
+
+    .profile-box {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: #3b1d00;
+      border-left: 4px solid #f38d00;
+      border-radius: 10px;
+      padding: 0.6rem 1rem;
+      box-shadow: 0 0 10px rgba(255, 153, 0, 0.3);
+    }
+
+    .profile-pic {
+      width: 40px;
+      height: 40px;
+      background: url('https://via.placeholder.com/50') center/cover no-repeat;
+      background-color: #330000;
+      border-radius: 50%;
+      border: 2px solid #ffbe57;
+    }
+
+    .profile-info p {
+      margin: 0;
+      font-size: 0.75rem;
+      color: #ffe4c2;
     }
 
     .main-container {
       display: flex;
-      gap: 2rem;
+      justify-content: space-between;
       padding: 2rem;
       max-width: 1300px;
       margin: auto;
+      gap: 2rem;
     }
 
-    .cards {
-      flex: 3;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    .left-column {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
       gap: 1.5rem;
     }
 
-    .card {
-      background: #2e1a00;
-      border: 1px solid #f38d0080;
+    .chapter-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+
+    .chapter-card {
+      background: linear-gradient(135deg, #2e1a00, #3b1d00);
+      border: 1px solid #f38d0040;
       border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 0 10px rgba(243, 141, 0, 0.3);
-      transition: transform 0.3s;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(243, 141, 0, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(255, 165, 0, 0.5);
+    .chapter-card:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 0 25px rgba(255, 174, 66, 0.6);
+      background: linear-gradient(135deg, #3b1d00, #4d2600);
     }
 
-    .card h3 {
+    .chapter-card h3 {
+      margin: 0;
       color: #ffbe57;
-      margin-bottom: 1rem;
+      font-size: 1.4rem;
     }
 
-    .card a {
-      text-decoration: none;
+    .chapter-card p {
       color: #ffe4c2;
       font-weight: bold;
+      margin-top: 0.8rem;
     }
 
-    .grade-box {
+    .right-column {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .grade-box, .quiz-card {
       background: #3b1d00;
       border-left: 5px solid #f38d00;
       border-radius: 16px;
       padding: 1.5rem;
-      height: fit-content;
       box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
       color: #fff3e0;
     }
@@ -83,32 +129,69 @@
       margin-bottom: 1rem;
     }
 
-    .grade-box p {
-      font-size: 1.2rem;
+    .quiz-card h3 {
+      margin: 0 0 0.5rem;
+      color: #ffbe57;
+    }
+
+    .quiz-card p {
+      margin: 0.2rem 0;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Organizational Behaviour Portfolio</h1>
+    <div class="profile-box">
+      <div class="profile-pic"></div>
+      <div class="profile-info">
+        <p><strong>Name:</strong> Majidov Nusratulloh</p>
+        <p><strong>ID:</strong> 2417563</p>
+        <p><strong>Faculty:</strong> IBM</p>
+        <p><strong>Subject:</strong> OB</p>
+      </div>
+    </div>
+    <h1>Organizational Behaviour</h1>
   </header>
 
   <div class="main-container">
-    <div class="cards">
-      <div class="card"><h3>Week 1</h3><a href="#">Organizational Introduction</a></div>
-      <div class="card"><h3>Week 2</h3><a href="#">Perception & Decision Making</a></div>
-      <div class="card"><h3>Week 3</h3><a href="#">Motivation Theories</a></div>
-      <div class="card"><h3>Week 4</h3><a href="#">Group & Team Dynamics</a></div>
-      <div class="card"><h3>Week 5</h3><a href="#">Leadership & Power</a></div>
-      <div class="card"><h3>Week 6</h3><a href="#">Organizational Culture</a></div>
-      <div class="card"><h3>Week 7</h3><a href="#">Conflict & Negotiation</a></div>
-      <div class="card"><h3>Week 8</h3><a href="#">Organizational Change</a></div>
-      <div class="card"><h3>Week 9</h3><a href="#">OB Review & Practice</a></div>
+    <div class="left-column">
+      <div class="chapter-grid">
+        <div class="chapter-card" onclick="location.href='C1.html'"><h3>Chapter 1</h3><p>Organizational Introduction</p></div>
+        <div class="chapter-card" onclick="location.href='C2.html'"><h3>Chapter 2</h3><p>Perception & Decision Making</p></div>
+        <div class="chapter-card" onclick="location.href='C3.html'"><h3>Chapter 3</h3><p>Job Attitudes</p></div>
+        <div class="chapter-card" onclick="location.href='C4.html'"><h3>Chapter 4</h3><p>Emotions & Moods</p></div>
+        <div class="chapter-card" onclick="location.href='C5.html'"><h3>Chapter 5</h3><p>Personality & Differences</p></div>
+        <div class="chapter-card" onclick="location.href='C6.html'"><h3>Chapter 6</h3><p>Decision Making</p></div>
+        <div class="chapter-card" onclick="location.href='C7.html'"><h3>Chapter 7</h3><p>Motivation Applications</p></div>
+        <div class="chapter-card" onclick="location.href='C8.html'"><h3>Chapter 8</h3><p>Group Behavior</p></div>
+        <div class="chapter-card" onclick="location.href='C9.html'"><h3>Chapter 9</h3><p>Power & Politics</p></div>
+      </div>
     </div>
 
-    <div class="grade-box">
-      <h2>📊 OB Grade Summary</h2>
-      <div id="gradeDisplay">Loading grade...</div>
+    <div class="right-column">
+      <div class="grade-box">
+        <h2>📊 Grade Summary</h2>
+        <div id="gradeDisplay">Loading grade...</div>
+      </div>
+
+      <div class="quiz-card">
+        <h3>📄 Assignment #1</h3>
+        <p>Questions: 10</p>
+        <p>Correct: 10</p>
+      </div>
+
+      <div class="quiz-card">
+        <h3>📄 Assignment #2</h3>
+        <p>Questions: 10</p>
+        <p>Correct: 7</p>
+      </div>
+
+      <div class="quiz-card">
+        <h3>📄 Assignment #3</h3>
+        <p>Questions: 12</p>
+        <p>Correct: 12</p>
+      </div>
     </div>
   </div>
 
