@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Marketing Portfolio</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0a1a;
-      color: #f4f0ff;
+      background-color: #ffffff;
+      color: #111111;
     }
 
     header {
@@ -23,109 +23,208 @@
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
 
-    .main-container {
+    .page-layout {
       display: flex;
       gap: 2rem;
-      padding: 2rem;
-      max-width: 1300px;
-      margin: auto;
+      max-width: 1500px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* Left Sidebar - Profile */
+    .profile-box {
+      width: 260px;
+      background-color: #f9f9f9;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+      height: fit-content;
+    }
+
+    .profile-pic {
+      width: 80px;
+      height: 80px;
+      background: url('https://via.placeholder.com/80') center/cover no-repeat;
+      background-color: #ccc;
+      border-radius: 50%;
+      border: 2px solid #ffd700;
+      margin-bottom: 1rem;
+    }
+
+    .profile-info p {
+      font-size: 14px;
+      margin: 6px 0;
+    }
+
+    /* Main Area */
+    .main-content {
+      flex: 1;
     }
 
     .cards {
-      flex: 3;
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
     }
 
     .card {
-      background: #1b1533;
-      border: 1px solid #ffd70080;
+      background: #fffdf0;
+      border: 2px solid #ffd70090;
       border-radius: 12px;
-      padding: 1.5rem;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
-      transition: transform 0.3s;
+      padding: 2rem;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
     }
 
     .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+      transform: scale(1.02);
     }
 
     .card h3 {
-      color: #ffff99;
-      margin-bottom: 1rem;
+      margin-top: 0;
+      color: #b48c00;
+      font-size: 1.8rem;
     }
 
     .card a {
+      font-size: 1.2rem;
       text-decoration: none;
-      color: #fff7cc;
       font-weight: bold;
+      color: #000;
     }
 
+    /* Grade box */
     .grade-box {
-      flex: 1;
-      background: #221a36;
-      border-left: 5px solid #ffd700;
-      border-radius: 16px;
-      padding: 1.5rem;
-      height: fit-content;
-      box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
-      color: #fefae0;
+      margin-top: 2rem;
+      background: #fffef4;
+      border: 1.5px solid #ffd700;
+      border-radius: 12px;
+      padding: 1rem 1.5rem;
+      width: 250px;
+      text-align: center;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.3);
     }
 
     .grade-box h2 {
-      color: #ffd700;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #b48c00;
     }
 
-    .grade-box p {
-      font-size: 1.2rem;
+    .download-section {
+      margin-top: 3rem;
+      text-align: center;
+    }
+
+    .assignment-bar {
+      background-color: #fef9dc;
+      border: 2px solid #ffd700;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 10px rgba(255, 215, 0, 0.2);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .assignment-bar p {
+      font-size: 1rem;
+      margin: 0 0 1rem 0;
+    }
+
+    .assignment-button {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 20px;
+      background-color: #ffd700;
+      color: #111;
+      font-weight: bold;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    .assignment-button:hover {
+      background-color: #fff7cc;
+    }
+
+    @media (max-width: 768px) {
+      .page-layout {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .profile-box,
+      .grade-box {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Marketing Portfolio</h1>
-  </header>
 
-  <div class="main-container">
-    <div class="cards">
-      <div class="card"><h3>Week 1</h3><a href="#">Introduction to Marketing</a></div>
-      <div class="card"><h3>Week 2</h3><a href="#">Market Segmentation</a></div>
-      <div class="card"><h3>Week 3</h3><a href="#">Consumer Behavior</a></div>
-      <div class="card"><h3>Week 4</h3><a href="#">Product Strategy</a></div>
-      <div class="card"><h3>Week 5</h3><a href="#">Pricing & Promotion</a></div>
-      <div class="card"><h3>Week 6</h3><a href="#">Place & Distribution</a></div>
-      <div class="card"><h3>Week 7</h3><a href="#">Digital Marketing</a></div>
-      <div class="card"><h3>Week 8</h3><a href="#">Marketing Ethics</a></div>
-      <div class="card"><h3>Week 9</h3><a href="#">Global Strategies</a></div>
+<header>
+  <h1>Marketing</h1>
+</header>
+
+<div class="page-layout">
+
+  <!-- Left Sidebar: Profile -->
+  <div class="profile-box">
+    <div class="profile-pic"></div>
+    <div class="profile-info">
+      <p><strong>Name:</strong> Majidov Nusratulloh</p>
+      <p><strong>ID:</strong> 2417563</p>
+      <p><strong>Faculty:</strong> IBM</p>
+      <p><strong>Subject:</strong> Marketing</p>
     </div>
 
     <div class="grade-box">
-      <h2>🧠 Marketing Grade</h2>
+      <h2>🧠 Grade</h2>
       <div id="gradeDisplay">Loading grade...</div>
     </div>
   </div>
 
-  <script>
-    async function fetchGrade() {
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwvAc8eIhlM6hVKx3gRBBx64EEC5FBnG4GarLMCxX7rG1U6P2r8uTsNEWWk6C-rv46f/exec");
-        const data = await response.json();
-        document.getElementById("gradeDisplay").innerHTML = `
-          <strong>${data.currentPercentage}%</strong><br>
-          <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
-        `;
-      } catch (err) {
-        document.getElementById("gradeDisplay").innerText = "Could not load grade.";
-      }
+  <!-- Main Content -->
+  <div class="main-content">
+    <div class="cards">
+      <div class="card"><h3>Week 1</h3><a href="Week1.html">Introduction to Marketing</a></div>
+      <div class="card"><h3>Week 2</h3><a href="Week2_Chapter1_Conclusion.html">Market Segmentation</a></div>
+      <div class="card"><h3>Week 6</h3><a href="Week6.html">Company & Strategy</a></div>
+      <div class="card"><h3>Week 13</h3><a href="Week13.html">Southwest Airlines Case</a></div>
+    </div>
+
+    <!-- Download Area -->
+    <div class="download-section">
+      <div class="assignment-bar">
+        <p><strong>📄 Final Case Assignment:</strong><br>Download and review the marketing case file below.</p>
+        <a class="assignment-button" href="MarketingCase.html" target="_blank">Download Assignment</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  async function fetchGrade() {
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwvAc8eIhlM6hVKx3gRBBx64EEC5FBnG4GarLMCxX7rG1U6P2r8uTsNEWWk6C-rv46f/exec");
+      const data = await response.json();
+      document.getElementById("gradeDisplay").innerHTML = `
+        <strong>${data.currentPercentage}%</strong><br>
+        <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
+      `;
+    } catch (err) {
+      document.getElementById("gradeDisplay").innerText = "Could not load grade.";
     }
-    fetchGrade();
-  </script>
+  }
+  fetchGrade();
+</script>
+
 </body>
 </html>
