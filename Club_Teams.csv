@@ -1,0 +1,51 @@
+Club_ID,Club_Name,Cap_In_Club,Quality_In_Club
+BAR10000,Barcelona,True,True
+BAR10042,Barcelona,False,True
+BAR10041,Barcelona,False,True
+BAR10005,Barcelona,False,True
+BAR10006,Barcelona,True,True
+BAR10018,Barcelona,False,True
+BAR10017,Barcelona,False,True
+BAR10015,Barcelona,False,True
+RMA10032,Real Madrid,False,True
+RMA10048,Real Madrid,False,True
+RMA10020,Real Madrid,False,True
+RMA10019,Real Madrid,False,True
+RMA10049,Real Madrid,False,True
+RMA10003,Real Madrid,True,True
+RMA10004,Real Madrid,False,True
+MUT10034,Manchester United,False,True
+MUT10035,Manchester United,False,True
+MUT10023,Manchester United,True,True
+MUT10037,Manchester United,True,True
+MUT10024,Manchester United,True,True
+MUT10009,Manchester United,False,True
+BAY10007,Bayern Munich,True,True
+BAY10033,Bayern Munich,False,True
+BAY10040,Bayern Munich,False,True
+BAY10044,Bayern Munich,False,True
+MIL10036,AC Milan,False,True
+MIL10025,AC Milan,True,True
+MIL10011,AC Milan,False,True
+MIL10014,AC Milan,False,True
+MIL10021,AC Milan,False,True
+JUV10031,Juventus,True,True
+JUV10010,Juventus,False,True
+JUV10026,Juventus,False,True
+JUV10008,Juventus,False,True
+CHE10022,Chelsea,False,True
+CHE10038,Chelsea,False,True
+LIV10047,Liverpool,False,True
+LIV10039,Liverpool,True,True
+MCT10046,Manchester City,False,True
+MCT10045,Manchester City,False,True
+MCT10000,Manchester City,False,True
+NAP10002,Napoli,False,True
+DYN10012,Dynamo Moscow,False,True
+BOT10013,Botafogo,False,True
+DEP10027,Deportivo Cali,False,True
+ATA10029,Atalanta,False,True
+ARS10016,Arsenal,False,True
+PSG10043,Paris Saint-Germain,False,True
+INT10028,Unknown,False,True
+INT10001,Unknown,False,True
