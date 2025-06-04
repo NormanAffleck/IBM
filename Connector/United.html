@@ -3,120 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinity Gauntlet | Portfolio Portal</title>
+  <title>Infinity Stone Portfolio</title>
   <style>
     body {
-      margin: 0;
-      padding: 3rem 1rem;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: url('ThemeIG.jpg') no-repeat center top fixed;
-      background-size: cover;
-      color: #ffffff;
+      background-color: #0d0d0d;
+      color: #fff;
       text-align: center;
+      padding: 40px;
     }
-
     h1 {
       font-size: 3rem;
-      margin-bottom: 3rem;
-      color: #00bfff;
-      text-shadow: 0 0 10px #00f, 0 0 20px #00f;
+      margin-bottom: 40px;
+      color: #ffcc00;
+      text-shadow: 2px 2px 8px #ff9900;
     }
-
-    .gauntlet-container {
-      display: grid;
-      grid-template-areas:
-        "stone1 stone2 stone3"
-        "stone4 gauntlet stone5"
-        ". stone6 .";
-      gap: 2rem;
+    .row {
+      display: flex;
+      flex-wrap: wrap;
       justify-content: center;
-      align-items: center;
-      max-width: 1000px;
-      margin: auto;
+      gap: 30px;
+      margin-bottom: 40px;
     }
-
-    .stone {
-      background: rgba(0, 0, 64, 0.6);
-      border-radius: 14px;
-      padding: 1rem;
-      box-shadow: 0 0 15px rgba(0, 204, 255, 0.3);
-      transition: transform 0.3s, box-shadow 0.3s;
+    .stone-card {
+      border-radius: 15px;
+      padding: 25px;
+      color: white;
+      width: 280px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+      background-color: black;
     }
-
-    .stone:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    .stone-card:hover {
+      transform: scale(1.05);
     }
-
-    .stone img {
-      width: 80px;
-      height: 80px;
-      object-fit: contain;
-      margin-bottom: 0.5rem;
-    }
-
-    .stone a {
-      color: #00f7ff;
-      text-decoration: none;
+    .stone-title {
+      font-size: 1.8rem;
+      margin-bottom: 15px;
       font-weight: bold;
-      display: block;
+    }
+    .stone-button {
+      display: inline-block;
+      background: white;
+      color: black;
+      text-decoration: none;
+      padding: 10px 25px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .power {
+      border: 4px solid purple;
+    }
+    .space {
+      border: 4px solid #4da6ff;
+    }
+    .reality {
+      border: 4px solid red;
+    }
+    .soul {
+      border: 4px solid orange;
+    }
+    .time {
+      border: 4px solid green;
+    }
+    .mind {
+      border: 4px solid yellow;
+      color: black;
     }
 
-    .gauntlet {
-      grid-area: gauntlet;
+    .snap-section {
+      margin-top: 60px;
     }
-
-    .stone1 { grid-area: stone1; }
-    .stone2 { grid-area: stone2; }
-    .stone3 { grid-area: stone3; }
-    .stone4 { grid-area: stone4; }
-    .stone5 { grid-area: stone5; }
-    .stone6 { grid-area: stone6; }
-
-    footer {
-      margin-top: 4rem;
-      font-size: 1rem;
-      color: #a0eaff;
-      text-shadow: 0 0 5px #0088cc;
+    .snap-section img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+    #snap {
+      background-color: #7f00ff;
+      color: white;
+      padding: 15px 40px;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      animation: pulse 1.5s infinite;
+      transition: background 0.3s;
+    }
+    #snap:hover {
+      background-color: #9b30ff;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(127, 0, 255, 0.7); }
+      70% { box-shadow: 0 0 0 15px rgba(127, 0, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(127, 0, 255, 0); }
     }
   </style>
 </head>
 <body>
-  <h1>🧤 Infinity Gauntlet Portfolio</h1>
+  <h1>💠 Infinity Stone Portfolio 💠</h1>
 
-  <div class="gauntlet-container">
-    <div class="stone stone1">
-      <img src="Power.jpg" alt="Power Stone">
-      <a href="DailyInfo.html">Managing Daily Info</a>
+  <div class="row">
+    <div class="stone-card power">
+      <div class="stone-title">Power Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/DI/DailyInfo" class="stone-button">Go to Project</a>
     </div>
-    <div class="stone stone2">
-      <img src="Reality.jpg" alt="Reality Stone">
-      <a href="MIS.html">Managing Info Systems</a>
+    <div class="stone-card space">
+      <div class="stone-title">Space Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/FT/FT" class="stone-button">Go to Project</a>
     </div>
-    <div class="stone stone3">
-      <img src="Mind.jpg" alt="Mind Stone">
-      <a href="Marketing.html">Marketing</a>
-    </div>
-    <div class="stone stone4">
-      <img src="Time.jpg" alt="Time Stone">
-      <a href="HI.html">Hospitality Industry</a>
-    </div>
-    <div class="stone gauntlet">
-      <img src="Gauntlet.jpg" alt="Infinity Gauntlet" style="width: 120px;">
-    </div>
-    <div class="stone stone5">
-      <img src="Soul.jpg" alt="Soul Stone">
-      <a href="OB.html">Organizational Behaviours</a>
-    </div>
-    <div class="stone stone6">
-      <img src="Space.jpg" alt="Space Stone">
-      <a href="FT.html">Field Trip</a>
+    <div class="stone-card reality">
+      <div class="stone-title">Reality Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/MIS/MIS" class="stone-button">Go to Project</a>
     </div>
   </div>
 
-  <footer>
-    <p>✨ Congratulations, You have collected all 6 stones!<br>
-    Thanks for your attention. I hope you enjoyed this project! ✨</p>
-  </footer>
+  <div class="row">
+    <div class="stone-card soul">
+      <div class="stone-title">Soul Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/OB/OB" class="stone-button">Go to Project</a>
+    </div>
+    <div class="stone-card time">
+      <div class="stone-title">Time Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/HI/HI" class="stone-button">Go to Project</a>
+    </div>
+    <div class="stone-card mind">
+      <div class="stone-title">Mind Stone</div>
+      <a href="https://normanaffleck.github.io/IBM/MA/Marketing" class="stone-button">Go to Project</a>
+    </div>
+  </div>
+
+  <div class="snap-section">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Infinity_Gauntlet_Icon.png" alt="Infinity Gauntlet">
+    <br>
+    <button id="snap" onclick="performSnap()">💥 Snap</button>
+  </div>
+
+  <script>
+    function performSnap() {
+      const audio = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
+      audio.play();
+      setTimeout(() => {
+        window.location.href = 'https://normanaffleck.github.io/IBM/InfinityChamber';
+      }, 2000);
+    }
+  </script>
 </body>
 </html>
