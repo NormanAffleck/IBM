@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,16 +16,59 @@
 
     header {
       background-color: #007fff;
-      padding: 2rem 2rem 1rem;
-      text-align: center;
+      padding: 2rem 2rem 3rem;
       color: #fff;
       box-shadow: 0 4px 10px rgba(0, 0, 255, 0.3);
       position: relative;
     }
 
+    .header-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .profile-box {
+      position: absolute;
+      left: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      align-items: center;
+      background-color: #1e1e1e;
+      border: 1px solid #007fff;
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 0 8px rgba(0, 127, 255, 0.4);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .profile-pic {
+      width: 50px;
+      height: 50px;
+      background: url('https://via.placeholder.com/50') center/cover no-repeat;
+      background-color: #333;
+      border-radius: 50%;
+      border: 2px solid #007fff;
+      margin-right: 12px;
+    }
+
+    .profile-info {
+      text-align: left;
+    }
+
+    .profile-info p {
+      margin: 2px 0;
+      font-size: 13px;
+      color: #ddd;
+    }
+
     header h1 {
       margin: 0;
       font-size: 2.5rem;
+      text-align: center;
+      width: 100%;
     }
 
     .top-button {
@@ -69,39 +111,38 @@
     }
 
     .decks {
-  text-align: center;
-  margin-top: 3rem;
-}
+      text-align: center;
+      margin-top: 3rem;
+    }
 
-.decks h2 {
-  font-size: 1.8rem;
-  color: #4fc3f7;
-  margin-bottom: 1.2rem;
-  text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
-}
+    .decks h2 {
+      font-size: 1.8rem;
+      color: #4fc3f7;
+      margin-bottom: 1.2rem;
+      text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+    }
 
-.button-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 1rem;
-}
+    .button-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+    }
 
-.button-wrapper a {
-  text-decoration: none;
-  background-color: #004080;
-  color: #e0f7ff;
-  padding: 0.9rem 2rem;
-  border-radius: 10px;
-  font-size: 1rem;
-  box-shadow: 0 0 12px rgba(0, 127, 255, 0.4);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
+    .button-wrapper a {
+      text-decoration: none;
+      background-color: #004080;
+      color: #e0f7ff;
+      padding: 0.9rem 2rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      box-shadow: 0 0 12px rgba(0, 127, 255, 0.4);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-.button-wrapper a:hover {
-  background-color: #005cb3;
-  transform: scale(1.05);
-}
-
+    .button-wrapper a:hover {
+      background-color: #005cb3;
+      transform: scale(1.05);
+    }
 
     .decks a {
       display: block;
@@ -122,16 +163,26 @@
 </head>
 <body>
   <header>
-    <h1>Field Trip</h1>
+    <div class="header-container">
+      <div class="profile-box">
+        <div class="profile-pic"></div>
+        <div class="profile-info">
+          <p><strong>Name:</strong> Majidov Nusratulloh</p>
+          <p><strong>ID:</strong> 2417563</p>
+          <p><strong>Faculty:</strong> IBM</p>
+          <p><strong>Subject:</strong> Field Trip</p>
+        </div>
+      </div>
+      <h1>Field Trip</h1>
+    </div>
   </header>
-<div class="decks">
-  <h2>📂 Documents</h2>
-  <div class="button-wrapper">
-    <a href="Space.html">📄 Assignment</a>
+
+  <div class="decks">
+    <h2>📂 Documents</h2>
+    <div class="button-wrapper">
+      <a href="Space.html">📄 Assignment</a>
+    </div>
   </div>
-</div>
-
-
 
   <div class="container">
     <div class="gallery">
