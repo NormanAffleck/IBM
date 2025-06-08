@@ -1,114 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spreadsheet as HTML Table</title>
-    <style>
-        table {
-            width: 80%;
-            margin: 20px auto;
-            border-collapse: collapse;
-        }
-        th, td {
-            padding: 10px;
-            text-align: center;
-            border: 1px solid #ddd;
-            vertical-align: top;
-        }
-        th {
-            background-color: #9b59b6;
-            color: white;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        h2 {
-            text-align: center;
-            color: #9b59b6;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Spreadsheet as HTML Table</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      color: #9b59b6;
+      padding-top: 30px;
+    }
+
+    .description {
+  max-width: 900px;
+  margin: 30px auto 40px;
+  font-family: "Georgia", serif;
+  font-size: 18px;
+  line-height: 1.8;
+  color: #333;
+  background-color: #ffffff;
+  border: 2px solid #9b59b6;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+    table {
+      width: 95%;
+      margin: 0 auto 50px;
+      border-collapse: collapse;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+      background-color: white;
+    }
+
+    th, td {
+      padding: 12px 10px;
+      text-align: left;
+      border: 1px solid #ddd;
+      vertical-align: top;
+      font-size: 14px;
+    }
+
+    th {
+      background-color: #9b59b6;
+      color: white;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    td:first-child {
+      font-weight: bold;
+      color: #9b59b6;
+      text-align: center;
+    }
+
+    td:nth-child(2) {
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    td {
+      max-height: 200px;
+      overflow-y: auto;
+    }
+
+    td::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    td::-webkit-scrollbar-thumb {
+      background-color: #bbb;
+      border-radius: 10px;
+    }
+
+    @media screen and (max-width: 768px) {
+      table, thead, tbody, th, td, tr {
+        display: block;
+      }
+
+      th {
+        text-align: left;
+      }
+
+      td {
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+      }
+
+      td::before {
+        position: absolute;
+        top: 12px;
+        left: 10px;
+        width: 45%;
+        white-space: nowrap;
+        font-weight: bold;
+        color: #9b59b6;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <h2>Spreadsheet as HTML Table</h2>
+  <h2>Assignment Progress Table</h2>
 
-    <table>
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Deliverable</th>
-                <th>Creative or CT addition #1 (+.25)</th>
-                <th>Creative or CT addition #2 (+.25)</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1</td>
-                <td>AI as My Tutor</td>
-                <td>Objective: Learn a topic with AI-guided Socratic tutoring.<br>
-                    Instructions:<br>
-                    1. Read this prompt and replace TOPIC with your topic of interest for learning:<br>
-                    "You are an expert tutor. Please help me learn {TOPIC} by asking Socratic-style questions—guiding me to reason out each answer myself. After each of my replies, ask a follow-up question that builds on my understanding. Do not simply lecture; keep the focus on questioning and reflection. When I signal “summary,” give me a concise recap of the key points we covered."<br>
-                    2. Then start a conversation with an AI using that updated prompt.<br>
-                    3. Hold a conversation with the AI for at least 20 turns, answering its questions thoughtfully.<br>
-                    4. When ready, ask the AI for a summary to receive the AI’s recap.<br>
-                    5. Review the recap and note any remaining gaps in your understanding.</td>
-                <td>1. AI chat history link<br>2. Reflection on the learning process.</td>
-                <td>For my first "AI as My Tutor" task on Google Drive, I explored file management and its uses. After each answer, I asked the AI to mark my response, helping me assess my understanding and identify areas for improvement. This approach ensured active engagement and deeper learning of the topic.</td>
-                <td>I used the feedback from the AI to refine my answers and asked for further clarification on areas I wasn’t confident in, deepening my understanding and critical thinking.</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>Hack the Class (Ethically!)</td>
-                <td>Objective: Identify common “rookie” security flaws on a mock Google Site and propose fixes.<br>
-                    Instructions:<br>
-                    1. Explore the site and list five weak points (e.g., guessable passwords, spoof links).<br>
-                    2. For each flaw, write a one-sentence exploit scenario.<br>
-                    3. Suggest a practical, low-cost remedy.</td>
-                <td>1. 1-page vulnerability & fix report (link on portfolio).</td>
-                <td>You identify five security flaws on the mock Google Site, outline an exploit scenario for each, and suggest low-cost fixes like multi-factor authentication for weak passwords. This shows your deep understanding and practical approach to web security.</td>
-                <td>You also explore real-world exploit scenarios for each flaw and offer cost-effective solutions, demonstrating a deeper, more practical understanding of web security.</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>Design Your Own AI BFF</td>
-                <td>Objective: Draft and prototype the personality, boundaries, and other rules with a customization AI like GPTs.<br>
-                    Instructions:<br>
-                    1. Outline the AI’s persona (tone, goals, do’s/don’ts, etc.) as markdown file.<br>
-                    2. Conduct a conversation with your new BFF.</td>
-                <td>1. Persona MD file.<br>2. Share link to conversation.</td>
-                <td>You define the AI’s persona and conduct a conversation to test how well it follows your design, showcasing creativity in prototyping a functional AI.</td>
-                <td>You refine the AI’s responses during the conversation, testing its adaptability and improving its interactions, demonstrating deeper critical thinking.</td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>Family Free-Time Finder</td>
-                <td>Objective: Use Google Apps Script to scan multiple calendars and surface overlapping free hours.<br>
-                    Instructions:<br>
-                    1. Write an Apps Script that reads two or more Google Calendars.<br>
-                    2. Output a weekly list of ≥3 common 1-hour slots.<br>
-                    3. Embed the list on your landing page.</td>
-                <td>1. Script link (view-only)<br>2. Embedded list on your site.</td>
-                <td>You create a Google Apps Script to find overlapping free time from multiple calendars and output a list of 1-hour slots, embedding it on your landing page.</td>
-                <td>You enhance the script by adding features such as color-coding or highlighting overlapping time slots based on urgency, making the output more user-friendly. This shows extra effort in improving the usability and impact of the solution.</td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>Cyber Defense Quest</td>
-                <td>Objective: Build a short “Choose Your Own Adventure” game that teaches cybersecurity choices.<br>
-                    Instructions:<br>
-                    1. Draft a 3-path storyline covering phishing, weak passwords, social engineering.<br>
-                    2. Implement in Twine or as statically linked HTML pages.<br>
-                    3. Add an end-slide that summarises the threats encountered.</td>
-                <td>1. Playable game link<br>2. Threat summary slide/image of your playthrough.</td>
-                <td>You design a 3-path storyline addressing phishing, weak passwords, and social engineering. You implement it in Twine or HTML, creating an interactive game that educates players about cybersecurity. You also add an end-slide summarizing the threats encountered, making the game both engaging and informative.</td>
-                <td>You enhance the game by incorporating decision-making scenarios that require players to choose the best security practices, providing feedback based on their choices. This adds educational value and depth to the game.</td>
-            </tr>
-        </tbody>
-    </table>
+<div class="description">
+  This document presents a structured overview of my assignments, summarizing each task along with its main objectives and required deliverables. For every entry, I clearly outlined how I aimed to earn full credit (1 point) and additional credit (+0.25) by applying creativity or critical thinking, in accordance with the official class rubric.
+</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Deliverable</th>
+        <th>Creative or CT addition #1 (+0.25)</th>
+        <th>Creative or CT addition #2 (+0.25)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>AI as My Tutor</td>
+        <td>Objective: Learn a topic with AI-guided Socratic tutoring.<br>
+          Instructions:<br>
+          1. Replace TOPIC with your topic.<br>
+          2. Have 20+ turn conversation with AI.<br>
+          3. Ask for recap & identify gaps.</td>
+        <td>1. AI chat history link<br>2. Reflection</td>
+        <td>Used Google Drive topic and asked AI to mark each answer for better understanding.</td>
+        <td>Requested clarification and improved answers based on AI feedback, deepening CT.</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Hack the Class (Ethically!)</td>
+        <td>Objective: Spot rookie security flaws on a mock site.<br>
+          Instructions:<br>
+          1. Find 5 flaws<br>
+          2. Write exploit scenario<br>
+          3. Suggest fixes</td>
+        <td>1. 1-page report<br>2. Link on portfolio</td>
+        <td>Identified flaws, wrote 5 scenarios, gave practical fixes like 2FA and stronger passwords.</td>
+        <td>Connected flaws to real-world scenarios and made improvement suggestions.</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Design Your Own AI BFF</td>
+        <td>Objective: Build an AI persona and test it.<br>
+          Instructions:<br>
+          1. Define personality (tone, rules)<br>
+          2. Chat and see if it follows your rules</td>
+        <td>1. Persona Markdown<br>2. Chat log link</td>
+        <td>Tested AI with defined rules and confirmed it followed expected behavior.</td>
+        <td>Refined BFF persona and adapted tone mid-chat based on test results.</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Family Free-Time Finder</td>
+        <td>Objective: Find overlapping free hours using Google Apps Script.<br>
+          Instructions:<br>
+          1. Scan ≥2 calendars<br>
+          2. List ≥3 common 1-hour slots<br>
+          3. Show on website</td>
+        <td>1. Script link<br>2. List on site</td>
+        <td>Generated free hour list from calendars and displayed them correctly.</td>
+        <td>Added highlight/color feature for urgency level and better visualization.</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Cyber Defense Quest</td>
+        <td>Objective: Make a game that teaches security.<br>
+          Instructions:<br>
+          1. Create 3-path story<br>
+          2. Use Twine or HTML<br>
+          3. Add summary screen</td>
+        <td>1. Game link<br>2. Summary screenshot</td>
+        <td>Built game with choices on phishing, social engineering, and passwords.</td>
+        <td>Added feedback for each choice and described threats in summary screen.</td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>
