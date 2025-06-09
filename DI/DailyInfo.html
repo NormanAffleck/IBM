@@ -1,9 +1,121 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Managing Daily Information</title>
   <style>
+    /* PASSWORD OVERLAY STYLES */
+    #passwordOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #121212 0%, #1e1e1e 50%, #2a1a3a 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+    }
+
+    .password-container {
+      background-color: #1e1e1e;
+      border: 2px solid #9b59b6;
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: 0 8px 32px rgba(155, 89, 182, 0.3);
+      text-align: center;
+      max-width: 400px;  
+      width: 90%;
+    }
+
+    .password-container h2 {
+      color: #9b59b6;
+      font-size: 28px;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 8px rgba(155, 89, 182, 0.4);
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .password-container p {
+      color: #cccccc;
+      font-size: 16px;
+      margin-bottom: 30px;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .password-input-group {
+      margin-bottom: 25px;
+    }
+
+    .password-input {
+      width: 100%;
+      padding: 15px;
+      background-color: #121212;
+      border: 2px solid #9b59b6;
+      border-radius: 8px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      outline: none;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .password-input:focus {
+      border-color: #b86eff;
+      box-shadow: 0 0 12px rgba(184, 110, 255, 0.4);
+    }
+
+    .password-submit {
+      width: 100%;
+      padding: 15px;
+      background-color: #9b59b6;
+      color: #ffffff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .password-submit:hover {
+      background-color: #b86eff;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(155, 89, 182, 0.4);
+    }
+
+    .password-submit:active {
+      transform: translateY(0);
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 14px;
+      margin-top: 15px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .error-message.show {
+      opacity: 1;
+    }
+
+    .loading {
+      opacity: 0.7;
+      pointer-events: none;
+    }
+
+    /* MAIN WEBSITE STYLES (HIDDEN INITIALLY) */
+    #mainContent {
+      display: none;
+    }
+
     /* HEADER STRUCTURE */
     header {
       background-color: #9b59b6;
@@ -30,7 +142,13 @@
       margin-left: -200px;
     }
 
-    /* PROFILE BOX */
+    /* PROFILE BOX - Updated for clickability */
+    .profile-link {
+      text-decoration: none;
+      color: inherit;
+      margin-right: 30px;
+    }
+
     .profile-box {
       display: flex;
       align-items: center;
@@ -40,7 +158,15 @@
       padding: 10px 14px;
       box-shadow: 0 0 8px rgba(155, 89, 182, 0.4);
       font-family: 'Segoe UI', Tahoma, sans-serif;
-      margin-right: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-box:hover {
+      background-color: #2a2a2a;
+      border-color: #b86eff;
+      box-shadow: 0 0 12px rgba(184, 110, 255, 0.6);
+      transform: translateY(-2px);
     }
 
     .profile-pic {
@@ -51,6 +177,12 @@
       border-radius: 50%;
       border: 2px solid #9b59b6;
       margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-box:hover .profile-pic {
+      border-color: #b86eff;
+      box-shadow: 0 0 8px rgba(184, 110, 255, 0.4);
     }
 
     .profile-info {
@@ -61,6 +193,11 @@
       margin: 2px 0;
       font-size: 13px;
       color: #ddd;
+      transition: color 0.3s ease;
+    }
+
+    .profile-box:hover .profile-info p {
+      color: #ffffff;
     }
 
     /* MAIN STYLES */
@@ -238,120 +375,271 @@
 </head>
 <body>
 
-<!-- Grade Box -->
-<div id="gradeCard">
-  <h3>Calculated Grade</h3>
-  <h1 id="finalGrade">Loading...</h1>
-  <p id="pointsEarned">( ... / ... )</p>
-</div>
-
-<!-- Header with Profile + Title -->
-<header>
-  <div class="header-row">
-    <div class="profile-box">
-      <div class="profile-pic"></div>
-      <div class="profile-info">
-        <p><strong>Name:</strong> Majidov Nusratulloh</p>
-        <p><strong>ID:</strong> 2417563</p>
-        <p><strong>Faculty:</strong> IBM</p>
-        <p><strong>Subject:</strong> Managing Info</p>
+<!-- Password Overlay -->
+<div id="passwordOverlay">
+  <div class="password-container">
+    <h2>🔒 Access Required</h2>
+    <p>Please enter the password to access the website</p>
+    <form id="passwordForm">
+      <div class="password-input-group">
+        <input 
+          type="password" 
+          id="passwordInput" 
+          class="password-input" 
+          placeholder="Enter password..."
+          autocomplete="off"
+        >
       </div>
+      <button type="submit" class="password-submit" id="submitBtn">
+        Access Website
+      </button>
+      <div class="error-message" id="errorMessage">
+        Incorrect password. Please try again.
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Main Website Content (Hidden Initially) -->
+<div id="mainContent">
+  <!-- Grade Box -->
+  <div id="gradeCard">
+    <h3>Calculated Grade</h3>
+    <h1 id="finalGrade">Loading...</h1>
+    <p id="pointsEarned">( ... / ... )</p>
+  </div>
+
+  <!-- Header with Profile + Title -->
+  <header>
+    <div class="header-row">
+      <a href="https://normanaffleck.github.io/IBM/FT/FT" target="_blank" class="profile-link">
+        <div class="profile-box">
+          <div class="profile-pic"></div>
+          <div class="profile-info">
+            <p><strong>Name:</strong> Majidov Nusratulloh</p>
+            <p><strong>ID:</strong> 2417563</p>
+            <p><strong>Faculty:</strong> IBM</p>
+            <p><strong>Subject:</strong> Managing Info</p>
+          </div>
+        </div>
+      </a>
+      <h1>
+        Managing Daily<br>
+        Information
+      </h1>
     </div>
-    <h1>
-  Managing Daily<br>
-  Information
-</h1>
-  </div>
-</header>
+  </header>
 
-<!-- Intro Text -->
-<p class="intro-text">Explore my assignments below – click to view each one!</p>
+  <!-- Intro Text -->
+  <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
-<!-- Assignments Grid -->
-<div class="assignment-container">
-  <div class="assignment-bar">
-    <h3>Week 2: Identity Check</h3>
-    <a class="assignment-button" href="Week2.html" target="_blank">Assignment 1</a>
-    <p>Status: <span class="finished">Finished</span></p>
+  <!-- Assignments Grid -->
+  <div class="assignment-container">
+    <div class="assignment-bar">
+      <h3>Week 2: Identity Check</h3>
+      <a class="assignment-button" href="Week2.html" target="_blank">Assignment 1</a>
+      <p>Status: <span class="finished">Finished</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 3: Dungeon Crawl</h3>
+      <a class="assignment-button" href="https://drive.google.com/drive/folders/1Egv9In-RTwNCVYGdx0qAF6vgZLLlrtBA?usp=drive_link" target="_blank">Assignment 2</a>
+      <p>Status: <span class="finished">Finished</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 4: Online Library</h3>
+      <a class="assignment-button" href="Virtual.html" target="_blank">Assignment 3</a>
+      <p>Status: <span class="finished">Finished</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 6: Cryptography Project</h3>
+      <a class="assignment-button" href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Documentation</a>
+      <a class="assignment-button" href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Project</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 7: App Script</h3>
+      <a class="assignment-button" href="https://drive.google.com/drive/folders/13zHP4Sv_2qFcdbbF6VTGUiVnD0G7Wyv-?usp=drive_link" target="_blank">Assignment 5</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 10: HIF - Lumen</h3>
+      <a class="assignment-button" href="Documentation.html" target="_blank">📄 Documentation</a>
+      <a class="assignment-button" href="Chat-Lumin.html" target="_blank">💬 Chat with HIF - Lumen</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
+    <!-- New Assignments -->
+    <div class="assignment-bar">
+      <h3>Week 13: AI Tutor</h3>
+      <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Week13/Tutor_AI.html" target="_blank">Documentation</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 13: Finding Creativity</h3>
+      <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Week13/Table_13.html" target="_blank">Documentation</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
+
+    <div class="assignment-bar">
+      <h3>Week 16: Take a Hike</h3>
+      <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Take_a_hike.html" target="_blank">Documentation</a>
+      <p>Status: <span>Pending</span></p>
+    </div>
   </div>
 
-  <div class="assignment-bar">
-    <h3>Week 3: Dungeon Crawl</h3>
-    <a class="assignment-button" href="https://drive.google.com/drive/folders/1Egv9In-RTwNCVYGdx0qAF6vgZLLlrtBA?usp=drive_link" target="_blank">Assignment 2</a>
-    <p>Status: <span class="finished">Finished</span></p>
+  <!-- Useful Link -->
+  <div class="links-container">
+    <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
+       target="_blank" 
+       class="necessary-links-button">
+      📄 Necessary Links
+    </a>
   </div>
 
-  <div class="assignment-bar">
-    <h3>Week 4: Online Library</h3>
-    <a class="assignment-button" href="Virtual.html" target="_blank">Assignment 3</a>
-    <p>Status: <span class="finished">Finished</span></p>
-  </div>
-
-  <div class="assignment-bar">
-    <h3>Week 6: Cryptography Project</h3>
-    <a class="assignment-button" href="https://abu-assignments.netlify.app/team101_documentation.html" target="_blank">Documentation</a>
-    <a class="assignment-button" href="https://abu-assignments.netlify.app/encryption_playground.html" target="_blank">Project</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
-
-  <div class="assignment-bar">
-    <h3>Week 7: App Script</h3>
-    <a class="assignment-button" href="https://drive.google.com/drive/folders/13zHP4Sv_2qFcdbbF6VTGUiVnD0G7Wyv-?usp=drive_link" target="_blank">Assignment 5</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
-
-  <div class="assignment-bar">
-    <h3>Week 10: HIF - Lumen</h3>
-    <a class="assignment-button" href="Documentation.html" target="_blank">📄 Documentation</a>
-    <a class="assignment-button" href="Chat-Lumin.html" target="_blank">💬 Chat with HIF - Lumen</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
-  <!-- New Assignments -->
-  <div class="assignment-bar">
-    <h3>Week 13: AI Tutor</h3>
-    <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Week13/Tutor_AI.html" target="_blank">Documentation</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
-
-  <div class="assignment-bar">
-    <h3>Week 13: Finding Creativity</h3>
-    <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Week13/Table_13.html" target="_blank">Documentation</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
-
-  <div class="assignment-bar">
-    <h3>Week 16: Take a Hike</h3>
-    <a class="assignment-button" href="https://normanaffleck.github.io/IBM/DI/Take_a_hike.html" target="_blank">Documentation</a>
-    <p>Status: <span>Pending</span></p>
-  </div>
+  <!-- Footer -->
+  <footer>
+    © 2025 Norman Affleck. All rights reserved.
+  </footer>
 </div>
 
-<!-- Useful Link -->
-<div class="links-container">
-  <a href="https://docs.google.com/document/d/10BQF0F8qbKeGXATrN9Tme_uWQLrjE1-gjn2EFA0ldkE/edit?usp=drive_link" 
-     target="_blank" 
-     class="necessary-links-button">
-    📄 Necessary Links
-  </a>
-</div>
-
-<!-- Footer -->
-<footer>
-  © 2025 Norman Affleck. All rights reserved.
-</footer>
-
-<!-- Grade Script -->
+<!-- Scripts -->
 <script>
-  fetch("https://script.google.com/macros/s/AKfycbyCpHjXkaLlCQyqwQ69b1CfeNA2OLOuI-2hCP-J5yFnGPj-yA1BgPoLn1NTDjCMoSuW/exec")
-    .then(response => response.json())
-    .then(data => {
-      document.getElementById('finalGrade').textContent = data.finalGrade + "%";
-      document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
-    })
-    .catch(error => {
-      document.getElementById('finalGrade').textContent = "Error!";
-      console.error(error);
-    });
+  // Password verification system
+  class PasswordManager {
+    constructor() {
+      this.scriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Replace with your actual script URL
+      this.init();
+    }
+
+    init() {
+      const form = document.getElementById('passwordForm');
+      const input = document.getElementById('passwordInput');
+      const submitBtn = document.getElementById('submitBtn');
+      const errorMsg = document.getElementById('errorMessage');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        this.verifyPassword(input.value, submitBtn, errorMsg);
+      });
+
+      input.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          this.verifyPassword(input.value, submitBtn, errorMsg);
+        }
+      });
+
+      // Focus input on load
+      input.focus();
+    }
+
+    async verifyPassword(password, submitBtn, errorMsg) {
+      if (!password.trim()) {
+        this.showError(errorMsg, 'Please enter a password');
+        return;
+      }
+
+      // Show loading state
+      submitBtn.textContent = 'Verifying...';
+      submitBtn.classList.add('loading');
+      errorMsg.classList.remove('show');
+
+      try {
+        // For demonstration, we'll use client-side verification
+        // In production, replace this with actual Google Apps Script call
+        const isValid = await this.checkPassword(password);
+        
+        if (isValid) {
+          this.grantAccess();
+        } else {
+          this.showError(errorMsg, 'Incorrect password. Please try again.');
+        }
+      } catch (error) {
+        console.error('Password verification error:', error);
+        this.showError(errorMsg, 'Verification failed. Please try again.');
+      } finally {
+        submitBtn.textContent = 'Access Website';
+        submitBtn.classList.remove('loading');
+      }
+    }
+
+    async checkPassword(password) {
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // For security, in production you should call your Google Apps Script:
+      // const response = await fetch(this.scriptUrl, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ password: password })
+      // });
+      // const result = await response.json();
+      // return result.valid;
+
+      // Temporary client-side check (replace with server-side)
+      return password === 'Vectorfall';
+    }
+
+    showError(errorElement, message) {
+      errorElement.textContent = message;
+      errorElement.classList.add('show');
+      
+      // Shake animation
+      const container = document.querySelector('.password-container');
+      container.style.animation = 'shake 0.5s ease-in-out';
+      setTimeout(() => {
+        container.style.animation = '';
+      }, 500);
+    }
+
+    grantAccess() {
+      const overlay = document.getElementById('passwordOverlay');
+      const mainContent = document.getElementById('mainContent');
+      
+      // Fade out overlay
+      overlay.style.opacity = '0';
+      setTimeout(() => {
+        overlay.style.display = 'none';
+        mainContent.style.display = 'block';
+        this.loadGrades();
+      }, 500);
+    }
+
+    loadGrades() {
+      // Load grades after successful authentication
+      fetch("https://script.google.com/macros/s/AKfycbyCpHjXkaLlCQyqwQ69b1CfeNA2OLOuI-2hCP-J5yFnGPj-yA1BgPoLn1NTDjCMoSuW/exec")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById('finalGrade').textContent = data.finalGrade + "%";
+          document.getElementById('pointsEarned').textContent = `${data.earnedPoints} / ${data.totalPoints}`;
+        })
+        .catch(error => {
+          document.getElementById('finalGrade').textContent = "Error!";
+          console.error(error);
+        });
+    }
+  }
+
+  // Add shake animation
+  const style = document.createElement('style');
+  style.textContent = `
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-10px); }
+      75% { transform: translateX(10px); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Initialize password manager
+  window.addEventListener('load', () => {
+    new PasswordManager();
+  });
 </script>
 
 </body>
