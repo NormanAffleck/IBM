@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Infinity: Access Terminal</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #00ff00;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+      padding: 20px;
+    }
+    .terminal {
+      width: 100%;
+      max-width: 800px;
+      background-color: #000;
+      border: 2px solid #0f0;
+      padding: 30px;
+      box-shadow: 0 0 30px #00ff00aa;
+      text-align: left;
+    }
+    .glitch {
+      animation: glitch 1.5s infinite alternate;
+    }
+    @keyframes glitch {
+      0% { text-shadow: 2px 2px 0 #00f, -2px -2px 0 #f0f; }
+      50% { text-shadow: -2px 2px 0 #0ff, 2px -2px 0 #f0f; }
+      100% { text-shadow: 2px -2px 0 #0f0, -2px 2px 0 #ff0; }
+    }
+    input[type="password"] {
+      background: #000;
+      color: #0f0;
+      border: none;
+      border-bottom: 1px solid #0f0;
+      font-family: inherit;
+      font-size: 1rem;
+      width: 300px;
+      margin-top: 10px;
+    }
+    button {
+      margin-left: 10px;
+      background-color: #000;
+      color: #0f0;
+      border: 1px solid #0f0;
+      padding: 4px 10px;
+      font-family: inherit;
+      cursor: pointer;
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+    }
+    #output {
+      white-space: pre-wrap;
+      margin-top: 20px;
+      display: none;
+    }
+    #continueBtn {
+      margin-top: 20px;
+      padding: 6px 15px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="terminal">
+    <div class="glitch">Cadet 10: In order to open this, you should know me. Who am I?</div>
+    <div>
+      > <input type="password" id="password" placeholder="Enter ID...">
+      <button onclick="validate()">Enter</button>
+    </div>
+    <div class="error" id="errorMsg"></div>
+    <div id="output"></div>
+    <button id="continueBtn" onclick="loadNextPage()">Continue to Power Stone</button>
+  </div>
+
+  <script>
+    function validate() {
+      const pass = document.getElementById("password").value;
+      document.getElementById("errorMsg").innerText = "";
+
+      fetch("https://script.google.com/macros/s/AKfycbyqb1swkDZLJHYFfmsvV3SCpMzM5zNKD6fb86kH9PC6TnHRjCy5SrVKTljERnnjsu5_/exec", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "password=" + encodeURIComponent(pass) // Send the password as form data
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          document.getElementById("output").style.display = "block";
+          document.getElementById("output").innerText =
+            `You are the last hope, virtual hero.\n` +
+            `The 6 Infinity Stones must be collected using different methods to restore those who have disappeared. These powerful stones hold the key to reshaping reality itself, and they can undo the damage done to the world.\n` +
+            `The Mad Titan Thanos used them to erase half of existence — and then destroyed them to prevent anyone from reversing his actions.\n` +
+            `But... they still exist in a virtual dimension, waiting to be unlocked.\n` +
+            `That's all I’m allowed to tell you.\n` +
+            `Look around. Search carefully for clickable objects that will guide you toward the stones. Every clue will bring you closer to your goal.\n` +
+            `The journey ahead will test your creativity, intelligence, and resourcefulness. You may face challenges, but with each step, you’ll be one step closer to restoring balance to the universe.\n` +
+            `Good luck, virtual hero. Trust in yourself, and remember, the first stone awaits.`;
+          document.getElementById("continueBtn").style.display = "inline-block";
+        } else {
+          document.getElementById("errorMsg").innerText = "ACCESS DENIED";
+        }
+      })
+      .catch(() => {
+        document.getElementById("errorMsg").innerText = "Connection failed.";
+      });
+    }
+
+    function loadNextPage() {
+      // Load the next page in the same window
+      window.location.href = "https://normanaffleck.github.io/IBM/DI/DailyInfo";  // URL of the next page
+    }
+</script>
+</body>
+</html>
