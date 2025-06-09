@@ -5,61 +5,372 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Project Infinity Gauntlet</title>
   <style>
-    body {
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&display=swap');
+    
+    * {
       margin: 0;
       padding: 0;
-      background: #000;
-      color: #00ffcc;
-      font-family: 'Courier New', Courier, monospace;
-      overflow-x: hidden;
+      box-sizing: border-box;
     }
+
+    body {
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 25%, #16213e 50%, #0f0f23 75%, #000000 100%);
+      color: #00ffcc;
+      font-family: 'Space Mono', 'Courier New', monospace;
+      overflow-x: hidden;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Enhanced animated starfield */
     body::before {
       content: '';
       position: fixed;
       top: 0;
       left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(white 1px, transparent 1px), radial-gradient(white 1px, transparent 1px);
-      background-size: 3px 3px;
-      background-position: 0 0, 1.5px 1.5px;
-      animation: moveStars 20s linear infinite;
-      z-index: -1;
-      opacity: 0.2;
+      width: 200%;
+      height: 200%;
+      background: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+        radial-gradient(2px 2px at 40px 70px, #00ffff, transparent),
+        radial-gradient(1px 1px at 90px 40px, #ff00ff, transparent),
+        radial-gradient(1px 1px at 130px 80px, #ffff00, transparent),
+        radial-gradient(2px 2px at 160px 30px, #ffffff, transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: sparkle 15s linear infinite;
+      z-index: -2;
+      opacity: 0.6;
     }
 
-    @keyframes moveStars {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(-100px, 100px); }
+    /* Additional particle effects */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 25% 25%, rgba(0, 255, 204, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 75% 75%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+      animation: pulse 4s ease-in-out infinite alternate;
+      z-index: -1;
+    }
+
+    @keyframes sparkle {
+      0% { transform: translateY(0px) rotate(0deg); }
+      100% { transform: translateY(-100px) rotate(180deg); }
+    }
+
+    @keyframes pulse {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.6; }
+    }
+
+    @keyframes glow {
+      0%, 100% { text-shadow: 0 0 5px currentColor, 0 0 10px currentColor, 0 0 15px currentColor; }
+      50% { text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor; }
+    }
+
+    @keyframes slideIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes stoneGlow {
+      0%, 100% { box-shadow: 0 0 20px var(--stone-color), inset 0 0 20px var(--stone-color); }
+      50% { box-shadow: 0 0 40px var(--stone-color), inset 0 0 30px var(--stone-color); }
     }
 
     .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 40px;
     }
-    h1, h2 {
+
+    h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: 3.5rem;
+      font-weight: 900;
       color: #00ffff;
-      border-bottom: 1px solid #00ffff;
-      padding-bottom: 10px;
+      text-align: center;
+      margin-bottom: 3rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      animation: glow 2s ease-in-out infinite alternate;
+      position: relative;
     }
-    pre {
-      background-color: #000;
-      padding: 10px;
-      border: 1px solid #00ffcc;
-      border-radius: 6px;
-      color: #0f0;
-      overflow-x: auto;
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 200px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, #00ffff, transparent);
+      animation: glow 2s ease-in-out infinite alternate;
     }
+
+    h2 {
+      font-family: 'Orbitron', monospace;
+      color: #00ffff;
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      border: 2px solid #00ffff;
+      border-radius: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    h2::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.3), transparent);
+      animation: shine 3s infinite;
+    }
+
+    @keyframes shine {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    .intro-section {
+      background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(0, 255, 255, 0.1));
+      border: 2px solid #00ffcc;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+      backdrop-filter: blur(10px);
+      animation: slideIn 1s ease-out;
+    }
+
+    .intro-section p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .intro-section strong {
+      color: #ffff00;
+      font-size: 1.2rem;
+    }
+
     .stone {
-      margin-top: 40px;
+      margin: 3rem 0;
+      padding: 2rem;
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      position: relative;
+      transition: all 0.5s ease;
+      animation: slideIn 1s ease-out;
+      animation-fill-mode: both;
     }
+
+    .stone:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    /* Individual stone colors */
+    .stone.power {
+      --stone-color: #9932cc;
+      background: linear-gradient(135deg, rgba(153, 50, 204, 0.2), rgba(75, 0, 130, 0.2));
+      border: 2px solid #9932cc;
+      animation-delay: 0.2s;
+    }
+
+    .stone.space {
+      --stone-color: #0080ff;
+      background: linear-gradient(135deg, rgba(0, 128, 255, 0.2), rgba(0, 0, 139, 0.2));
+      border: 2px solid #0080ff;
+      animation-delay: 0.4s;
+    }
+
+    .stone.reality {
+      --stone-color: #ff4500;
+      background: linear-gradient(135deg, rgba(255, 69, 0, 0.2), rgba(255, 0, 0, 0.2));
+      border: 2px solid #ff4500;
+      animation-delay: 0.6s;
+    }
+
+    .stone.soul {
+      --stone-color: #ffa500;
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.2), rgba(255, 215, 0, 0.2));
+      border: 2px solid #ffa500;
+      animation-delay: 0.8s;
+    }
+
+    .stone.time {
+      --stone-color: #00ff00;
+      background: linear-gradient(135deg, rgba(0, 255, 0, 0.2), rgba(0, 128, 0, 0.2));
+      border: 2px solid #00ff00;
+      animation-delay: 1s;
+    }
+
+    .stone.mind {
+      --stone-color: #00ffff;
+      background: linear-gradient(135deg, rgba(0, 255, 255, 0.2), rgba(0, 191, 255, 0.2));
+      border: 2px solid #00ffff;
+      animation-delay: 1.2s;
+    }
+
+    .stone.snap {
+      --stone-color: #gold;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3));
+      border: 2px solid gold;
+      animation-delay: 1.4s;
+    }
+
+    .stone.temple {
+      --stone-color: #ffffff;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(192, 192, 192, 0.2));
+      border: 2px solid #ffffff;
+      animation-delay: 1.6s;
+    }
+
+    .stone:hover {
+      animation: stoneGlow 1.5s ease-in-out infinite;
+    }
+
+    .stone h2 {
+      color: var(--stone-color);
+      border-color: var(--stone-color);
+      background: rgba(var(--stone-color-rgb), 0.1);
+    }
+
+    pre {
+      background: rgba(0, 20, 0, 0.8);
+      padding: 1.5rem;
+      border: 1px solid #00ff00;
+      border-radius: 10px;
+      color: #00ff00;
+      overflow-x: auto;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin: 1rem 0;
+      backdrop-filter: blur(5px);
+      position: relative;
+    }
+
+    pre::before {
+      content: '> ';
+      color: #00ffff;
+      font-weight: bold;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    li {
+      padding: 0.5rem 0;
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    li::before {
+      content: '▶';
+      position: absolute;
+      left: 0;
+      color: var(--stone-color, #00ffcc);
+      font-weight: bold;
+    }
+
     .highlight {
       color: #ffff00;
+      font-weight: bold;
+      text-shadow: 0 0 10px #ffff00;
+      animation: glow 1.5s ease-in-out infinite alternate;
     }
+
     .note {
       font-style: italic;
       color: #ccc;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+
+    code {
+      background: rgba(0, 255, 204, 0.2);
+      padding: 0.3rem 0.6rem;
+      border-radius: 5px;
+      border: 1px solid #00ffcc;
+      font-family: 'Space Mono', monospace;
+      color: #00ffcc;
+      font-weight: bold;
+    }
+
+    .author-note {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(128, 128, 128, 0.1));
+      border: 2px solid #ffffff;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-top: 2rem;
+      font-style: italic;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .author-note h3 {
+      color: #ffffff;
+      font-family: 'Orbitron', monospace;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+      
+      h1 {
+        font-size: 2.5rem;
+        letter-spacing: 2px;
+      }
+      
+      h2 {
+        font-size: 1.4rem;
+      }
+      
+      .stone {
+        padding: 1.5rem;
+        margin: 2rem 0;
+      }
+    }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: linear-gradient(45deg, #00ffcc, #00ffff);
+      border-radius: 6px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: linear-gradient(45deg, #00ffff, #00ffcc);
     }
   </style>
 </head>
@@ -67,15 +378,17 @@
   <div class="container">
     <h1>Project Infinity Gauntlet</h1>
 
-    <h2>INTRO: The Crumpled Message</h2>
-    <p>You find an old, digital note.<br>
-    <em>"Do you know who I am?"</em><br>
-    The screen flickers. Cadet 10's voice:<br>
-    <em>"If you are reading this, you're the last hope. I left clues across dimensions..."</em></p>
-    <p><strong>Password (ID): <code>2417563</code></strong><br>
-    Unlocks access to the first Infinity Stone: <strong>Power</strong></p>
+    <div class="intro-section">
+      <h2>INTRO: The Crumpled Message</h2>
+      <p>You find an old, digital note.<br>
+      <em>"Do you know who I am?"</em><br>
+      The screen flickers. Cadet 10's voice:<br>
+      <em>"If you are reading this, you're the last hope. I left clues across dimensions..."</em></p>
+      <p><strong>Password (ID): <code>2417563</code></strong><br>
+      Unlocks access to the first Infinity Stone: <strong>Power</strong></p>
+    </div>
 
-    <div class="stone">
+    <div class="stone power">
       <h2>POWER STONE – <em>Managing Daily Information</em></h2>
       <p><strong>Theme:</strong> CLI ASCII Maze (styled purple/black/white)</p>
       <ul>
@@ -84,12 +397,11 @@
       </ul>
     </div>
 
-    <div class="stone">
+    <div class="stone space">
       <h2>SPACE STONE – <em>Field Trip III</em></h2>
       <p><strong>Theme:</strong> CLI Quiz (styled black/navy)</p>
       <p>Objective: Match 6 Infinity Stones with 6 Subjects</p>
-      <pre>
-Power   — Managing Daily Information  
+      <pre>Power   — Managing Daily Information  
 Reality — Managing Information Systems  
 Soul    — Organizational Behavior  
 Time    — Hospitality Industry  
@@ -99,13 +411,13 @@ Space   — Field Trip III</pre>
       → Click profile to proceed to: <strong>Reality Stone</strong></p>
     </div>
 
-    <div class="stone">
+    <div class="stone reality">
       <h2>REALITY STONE – <em>Managing Information Systems</em></h2>
       <p><strong>Theme:</strong> CLI Riddle Unlock (styled red/orange)</p>
       <p>Solve encrypted riddle → unlocks MIS portfolio → opens: <strong>Soul Stone</strong></p>
     </div>
 
-    <div class="stone">
+    <div class="stone soul">
       <h2>SOUL STONE – <em>Organizational Behavior</em></h2>
       <p><strong>Theme:</strong> CLI Dialogue (styled gold/yellow)</p>
       <p><strong>Sacrifice required:</strong></p>
@@ -116,7 +428,7 @@ Space   — Field Trip III</pre>
       <p><em>Hint:</em> "Communication is the key." → Unlocks OB Portfolio → leads to: <strong>Time Stone</strong></p>
     </div>
 
-    <div class="stone">
+    <div class="stone time">
       <h2>TIME STONE – <em>Hospitality Industry</em></h2>
       <p><strong>Theme:</strong> Python-style CLI Terminal (styled green/gray)</p>
       <p>Objective: Solve Python logic puzzle</p>
@@ -124,14 +436,14 @@ Space   — Field Trip III</pre>
       <p>→ If correct, move to: <strong>Mind Stone</strong></p>
     </div>
 
-    <div class="stone">
+    <div class="stone mind">
       <h2>MIND STONE – <em>Marketing</em></h2>
       <p><strong>Theme:</strong> Final Boss Fight (styled bright cyan)</p>
       <p>Objective: Solve a visual, mental, or branding challenge</p>
-      <p><span class="highlight">"Marketing professor doesn’t have a mind... or brain."</span></p>
+      <p><span class="highlight">"Marketing professor doesn't have a mind... or brain."</span></p>
     </div>
 
-    <div class="stone">
+    <div class="stone snap">
       <h2>THE SNAP – <em>Ultimate Sacrifice</em></h2>
       <p><strong>Theme:</strong> One-button CLI screen</p>
       <p><em>"You've collected all the stones. But to finish... you must Snap."</em></p>
@@ -139,7 +451,7 @@ Space   — Field Trip III</pre>
       → Unlocks: <strong>Temple of Infinity</strong></p>
     </div>
 
-    <div class="stone">
+    <div class="stone temple">
       <h2>TEMPLE OF INFINITY – <em>Final Message</em></h2>
       <p><strong>Cadet 10 speaks:</strong></p>
       <ul>
@@ -151,14 +463,16 @@ Space   — Field Trip III</pre>
         <li>Space — Field Trip, our literal escape.</li>
       </ul>
 
-      <h3>Author's Note</h3>
-      <p>
-        I built this alone. No help. Not even an idea from anyone.<br>
-        Where? Library, PC Bang, my brother’s computer.<br>
-        When? Over 25–27 days. My own machine? Dead — motherboard fried.<br>
-        This is my legacy. Project Infinity.<br>
-        Thank you for your attention.
-      </p>
+      <div class="author-note">
+        <h3>Author's Note</h3>
+        <p>
+          I built this alone. No help. Not even an idea from anyone.<br>
+          Where? Library, PC Bang, my brother's computer.<br>
+          When? Over 25–27 days. My own machine? Dead — motherboard fried.<br>
+          This is my legacy. Project Infinity.<br>
+          <strong>Thank you for your attention.</strong>
+        </p>
+      </div>
     </div>
   </div>
 </body>
