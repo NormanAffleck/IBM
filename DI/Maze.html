@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASCII Maze Game</title>
+    <style>
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            font-family: 'Courier New', monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+        }
+        
+        h1 {
+            color: #ffffff;
+            text-shadow: 2px 2px 0px #000000;
+            margin-bottom: 30px;
+            font-size: 32px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        
+        #gameContainer {
+            background: #1a1a1a;
+            border: 3px solid #ffffff;
+            padding: 25px;
+            border-radius: 0px;
+            box-shadow: 0 0 0 3px #000000, 0 0 0 6px #ffffff;
+        }
+        
+        #maze {
+            font-size: 18px;
+            line-height: 1;
+            letter-spacing: 1px;
+            white-space: pre;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        #instructions {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        #status {
+            color: #ffffff;
+            text-align: center;
+            font-weight: bold;
+            min-height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            text-shadow: 1px 1px 0px #000000;
+        }
+        
+        .player {
+            color: #ff0000;
+            text-shadow: 2px 2px 0px #000000;
+            font-weight: bold;
+        }
+        
+        .exit {
+            color: #00ff00;
+            text-shadow: 2px 2px 0px #000000;
+            font-weight: bold;
+        }
+        
+        .wall {
+            color: #ffffff;
+            text-shadow: 1px 1px 0px #000000;
+        }
+        
+        .path {
+            color: #333333;
+        }
+        
+        #passwordReveal {
+            background: #1a1a1a;
+            border: 3px solid #00ff00;
+            padding: 30px;
+            border-radius: 0px;
+            margin-top: 30px;
+            text-align: center;
+            display: none;
+            box-shadow: 0 0 0 3px #000000, 0 0 0 6px #00ff00;
+        }
+        
+        #passwordReveal h2 {
+            color: #00ff00;
+            font-size: 28px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 0px #000000;
+        }
+        
+        #passwordReveal p {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: bold;
+            text-shadow: 1px 1px 0px #000000;
+        }
+        
+        #password {
+            color: #ff0000;
+            font-size: 32px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #000000;
+            letter-spacing: 4px;
+            margin-top: 20px;
+            padding: 15px;
+            background: #000000;
+            border: 2px solid #ff0000;
+        }
+        
+        .highlight {
+            color: #ff0000;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>▓▓▓ ASCII MAZE CHALLENGE ▓▓▓</h1>
+    
+    <div id="gameContainer">
+        <div id="instructions">
+            Use ARROW KEYS or WASD to move <span class="highlight">@</span> to exit <span style="color: #00ff00; font-weight: bold;">X</span>
+        </div>
+        
+        <div id="maze"></div>
+        
+        <div id="status">Navigate through the maze to unlock the password!</div>
+    </div>
+    
+    <div id="passwordReveal">
+        <h2>▓▓▓ ACCESS GRANTED ▓▓▓</h2>
+        <p>You have successfully completed the maze!</p>
+        <p>Your password is:</p>
+        <div id="password"></div>
+        <button onclick="window.location.href='https://normanaffleck.github.io/IBM/DI/DailyInfo'">
+    </button>
+</div>
+
+    <script>
+        // Security layer - obfuscated password storage
+        const _0x4a2b = ['charAt', 'fromCharCode', 'length', 'split', 'join'];
+        const _0x5c3d = function(_0x1a2b, _0x2c3d) {
+            _0x1a2b = _0x1a2b - 0x0;
+            let _0x4a2b01 = _0x4a2b[_0x1a2b];
+            return _0x4a2b01;
+        };
+        
+        const _app = {
+            _data: [86, 101, 99, 116, 111, 114, 102, 97, 108, 108],
+            _key: 0x2a,
+            _decode: function() {
+                let result = '';
+                for(let i = 0; i < this._data[_0x5c3d('0x2')]; i++) {
+                    result += String[_0x5c3d('0x1')](this._data[i]);
+                }
+                return result;
+            },
+            _verify: function() {
+                return this._decode();
+            }
+        };
+        
+        class MazeGame {
+            constructor() {
+                this.maze = [
+                    "████████████████████████████",
+                    "█  █     █         █       █",
+                    "█  █ ███ █ ███████ █ ████ ██",
+                    "█    █   █       █   █      █",
+                    "████ █ ███████ █████ █████ █",
+                    "█      █       █           █",
+                    "█ ████ ████████ ██████████ █",
+                    "█ █  █         █          ██",
+                    "█ █  ██████████ ██████████ █",
+                    "█              █           █",
+                    "████████████ ███ ██████████ █",
+                    "█          █   █ █         █",
+                    "█ ████████ ███ █ █ ███████ █",
+                    "█ █        █   █   █       █",
+                    "█ █ ████████ ███████ █████ █",
+                    "█   █                █     █",
+                    "███ ████████████████ ██████ █",
+                    "█                          █",
+                    "█ ████████████████████████ █",
+                    "█                         X█",
+                    "████████████████████████████"
+                ];
+                
+                this.playerPos = { x: 1, y: 1 };
+                this.exitPos = { x: 26, y: 19 };
+                this.gameWon = false;
+                
+                this.mazeElement = document.getElementById('maze');
+                this.statusElement = document.getElementById('status');
+                this.passwordElement = document.getElementById('passwordReveal');
+                
+                this.render();
+                this.bindEvents();
+            }
+            
+            render() {
+                let display = '';
+                
+                for (let y = 0; y < this.maze.length; y++) {
+                    let row = '';
+                    for (let x = 0; x < this.maze[y].length; x++) {
+                        if (x === this.playerPos.x && y === this.playerPos.y) {
+                            row += '<span class="player">@</span>';
+                        } else if (x === this.exitPos.x && y === this.exitPos.y) {
+                            row += '<span class="exit">X</span>';
+                        } else if (this.maze[y][x] === '█') {
+                            row += '<span class="wall">█</span>';
+                        } else {
+                            row += '<span class="path"> </span>';
+                        }
+                    }
+                    display += row + '\n';
+                }
+                
+                this.mazeElement.innerHTML = display;
+            }
+            
+            move(dx, dy) {
+                if (this.gameWon) return;
+                
+                const newX = this.playerPos.x + dx;
+                const newY = this.playerPos.y + dy;
+                
+                if (newY < 0 || newY >= this.maze.length || 
+                    newX < 0 || newX >= this.maze[newY].length) {
+                    return;
+                }
+                
+                if (this.maze[newY][newX] !== '█') {
+                    this.playerPos.x = newX;
+                    this.playerPos.y = newY;
+                    
+                    if (newX === this.exitPos.x && newY === this.exitPos.y) {
+                        this.win();
+                        return;
+                    }
+                    
+                    this.render();
+                    this.updateStatus();
+                }
+            }
+            
+            updateStatus() {
+                const distance = Math.abs(this.playerPos.x - this.exitPos.x) + 
+                               Math.abs(this.playerPos.y - this.exitPos.y);
+                
+                if (distance < 5) {
+                    this.statusElement.innerHTML = "▓ <strong>PROXIMITY ALERT: EXIT DETECTED</strong> ▓";
+                } else if (distance < 10) {
+                    this.statusElement.innerHTML = "▓ <strong>SCANNING... TARGET NEARBY</strong> ▓";
+                } else if (distance < 15) {
+                    this.statusElement.innerHTML = "▓ <strong>NAVIGATION ACTIVE</strong> ▓";
+                } else {
+                    this.statusElement.innerHTML = "▓ <strong>SYSTEM READY - FIND THE EXIT</strong> ▓";
+                }
+            }
+            
+            win() {
+                this.gameWon = true;
+                this.statusElement.innerHTML = "▓ <strong>MAZE COMPLETED - ACCESS GRANTED</strong> ▓";
+                this.passwordElement.style.display = 'block';
+                
+                // Reveal the password using the secure app script
+                setTimeout(() => {
+                    this.revealPassword();
+                }, 500);
+            }
+            
+            revealPassword() {
+                const securePassword = _app._verify();
+                document.getElementById('password').textContent = securePassword;
+                
+                // Security flash effect
+                let flashCount = 0;
+                const flashInterval = setInterval(() => {
+                    const passwordEl = document.getElementById('password');
+                    if (flashCount % 2 === 0) {
+                        passwordEl.style.color = '#ffffff';
+                        passwordEl.style.border = '2px solid #ffffff';
+                    } else {
+                        passwordEl.style.color = '#ff0000';
+                        passwordEl.style.border = '2px solid #ff0000';
+                    }
+                    flashCount++;
+                    
+                    if (flashCount >= 8) {
+                        clearInterval(flashInterval);
+                        passwordEl.style.color = '#ff0000';
+                        passwordEl.style.border = '2px solid #ff0000';
+                    }
+                }, 200);
+            }
+            
+            bindEvents() {
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key.toLowerCase()) {
+                        case 'arrowup':
+                        case 'w':
+                            e.preventDefault();
+                            this.move(0, -1);
+                            break;
+                        case 'arrowdown':
+                        case 's':
+                            e.preventDefault();
+                            this.move(0, 1);
+                            break;
+                        case 'arrowleft':
+                        case 'a':
+                            e.preventDefault();
+                            this.move(-1, 0);
+                            break;
+                        case 'arrowright':
+                        case 'd':
+                            e.preventDefault();
+                            this.move(1, 0);
+                            break;
+                    }
+                });
+            }
+        }
+        
+        window.addEventListener('load', () => {
+            new MazeGame();
+        });
+    </script>
+</body>
+</html>
