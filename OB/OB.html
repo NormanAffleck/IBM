@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +11,117 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #1a0f00;
       color: #fff0e5;
+    }
+
+    /* Password Screen Styles */
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #1a0f00;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+
+    .password-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .cli-container {
+      background: #0a0500;
+      border: 2px solid #f38d00;
+      border-radius: 12px;
+      padding: 2rem;
+      max-width: 500px;
+      width: 90%;
+      box-shadow: 0 0 30px rgba(243, 141, 0, 0.5);
+      font-family: 'Courier New', monospace;
+    }
+
+    .cli-header {
+      color: #f38d00;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      text-align: center;
+      border-bottom: 1px solid #f38d00;
+      padding-bottom: 0.5rem;
+    }
+
+    .cli-text {
+      color: #ffbe57;
+      font-size: 0.9rem;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+
+    .cli-prompt {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .cli-symbol {
+      color: #f38d00;
+      margin-right: 0.5rem;
+      font-weight: bold;
+    }
+
+    .password-input {
+      background: transparent;
+      border: none;
+      color: #fff0e5;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      outline: none;
+      flex: 1;
+      caret-color: #f38d00;
+    }
+
+    .password-input::placeholder {
+      color: #8a5a00;
+    }
+
+    .cli-message {
+      color: #ffbe57;
+      font-size: 0.85rem;
+      margin-top: 1rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    .error-message {
+      color: #ff6b6b;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .error-message.show {
+      opacity: 1;
+    }
+
+    .loading {
+      color: #f38d00;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* Main Website Styles */
+    .main-content {
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .main-content.visible {
+      opacity: 1;
     }
 
     header {
@@ -48,6 +158,13 @@
       background-color: #330000;
       border-radius: 50%;
       border: 2px solid #ffbe57;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .profile-pic:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(255, 190, 87, 0.8);
     }
 
     .profile-info p {
@@ -138,64 +255,206 @@
       margin: 0.2rem 0;
       font-size: 1rem;
     }
+
+    @media (max-width: 768px) {
+      .chapter-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .main-container {
+        flex-direction: column;
+      }
+      
+      .cli-container {
+        padding: 1.5rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <div class="profile-box">
-      <div class="profile-pic"></div>
-      <div class="profile-info">
-        <p><strong>Name:</strong> Majidov Nusratulloh</p>
-        <p><strong>ID:</strong> 2417563</p>
-        <p><strong>Faculty:</strong> IBM</p>
-        <p><strong>Subject:</strong> OB</p>
+  <!-- Password Protection Screen -->
+  <div class="password-overlay" id="passwordOverlay">
+    <div class="cli-container">
+      <div class="cli-header">
+        === ACCESS CONTROL SYSTEM ===
+      </div>
+      <div class="cli-text">
+        <div>System: Authentication required</div>
+        <div>Status: LOCKED</div>
+        <div>Message: <em>Soul demands a sacrifice!</em></div>
+        <div>Hint: <em>Communication is the key.</em></div>
+      </div>
+      <div class="cli-prompt">
+        <span class="cli-symbol">></span>
+        <input 
+          type="password" 
+          class="password-input" 
+          id="passwordInput" 
+          placeholder="Enter access code..."
+          autocomplete="off"
+        />
+      </div>
+      <div class="error-message" id="errorMessage">
+        Access denied. Invalid credentials.
+      </div>
+      <div class="cli-message">
+        Press ENTER to authenticate
+      </div>
+      <div class="loading" id="loadingMessage" style="display: none;">
+        Verifying credentials...
       </div>
     </div>
-    <h1>Organizational Behaviour</h1>
-  </header>
+  </div>
 
-  <div class="main-container">
-    <div class="left-column">
-      <div class="chapter-grid">
-        <div class="chapter-card" onclick="location.href='C1.html'"><h3>Chapter 1</h3><p>Organizational Introduction</p></div>
-        <div class="chapter-card" onclick="location.href='C2.html'"><h3>Chapter 2</h3><p>Perception & Decision Making</p></div>
-        <div class="chapter-card" onclick="location.href='C3.html'"><h3>Chapter 3</h3><p>Job Attitudes</p></div>
-        <div class="chapter-card" onclick="location.href='C4.html'"><h3>Chapter 4</h3><p>Emotions & Moods</p></div>
-        <div class="chapter-card" onclick="location.href='C5.html'"><h3>Chapter 5</h3><p>Personality & Differences</p></div>
-        <div class="chapter-card" onclick="location.href='C6.html'"><h3>Chapter 6</h3><p>Decision Making</p></div>
-        <div class="chapter-card" onclick="location.href='C7.html'"><h3>Chapter 7</h3><p>Motivation Applications</p></div>
-        <div class="chapter-card" onclick="location.href='C8.html'"><h3>Chapter 8</h3><p>Group Behavior</p></div>
-        <div class="chapter-card" onclick="location.href='C9.html'"><h3>Chapter 9</h3><p>Power & Politics</p></div>
+  <!-- Main Website Content -->
+  <div class="main-content" id="mainContent">
+    <header>
+      <div class="profile-box">
+        <div class="profile-pic" onclick="window.open('https://normanaffleck.github.io/IBM/HI/HI', '_blank')" title="Click to visit profile"></div>
+        <div class="profile-info">
+          <p><strong>Name:</strong> Majidov Nusratulloh</p>
+          <p><strong>ID:</strong> 2417563</p>
+          <p><strong>Faculty:</strong> IBM</p>
+          <p><strong>Subject:</strong> OB</p>
+        </div>
       </div>
-    </div>
+      <h1>Organizational Behaviour</h1>
+    </header>
 
-    <div class="right-column">
-      <div class="grade-box">
-        <h2>📊 Grade Summary</h2>
-        <div id="gradeDisplay">Loading grade...</div>
-      </div>
-
-      <div class="quiz-card">
-        <h3>📄 Assignment #1</h3>
-        <p>Questions: 10</p>
-        <p>Correct: 10</p>
-      </div>
-
-      <div class="quiz-card">
-        <h3>📄 Assignment #2</h3>
-        <p>Questions: 10</p>
-        <p>Correct: 7</p>
+    <div class="main-container">
+      <div class="left-column">
+        <div class="chapter-grid">
+          <div class="chapter-card" onclick="location.href='C1.html'"><h3>Chapter 1</h3><p>Organizational Introduction</p></div>
+          <div class="chapter-card" onclick="location.href='C2.html'"><h3>Chapter 2</h3><p>Perception & Decision Making</p></div>
+          <div class="chapter-card" onclick="location.href='C3.html'"><h3>Chapter 3</h3><p>Job Attitudes</p></div>
+          <div class="chapter-card" onclick="location.href='C4.html'"><h3>Chapter 4</h3><p>Emotions & Moods</p></div>
+          <div class="chapter-card" onclick="location.href='C5.html'"><h3>Chapter 5</h3><p>Personality & Differences</p></div>
+          <div class="chapter-card" onclick="location.href='C6.html'"><h3>Chapter 6</h3><p>Decision Making</p></div>
+          <div class="chapter-card" onclick="location.href='C7.html'"><h3>Chapter 7</h3><p>Motivation Applications</p></div>
+          <div class="chapter-card" onclick="location.href='C8.html'"><h3>Chapter 8</h3><p>Group Behavior</p></div>
+          <div class="chapter-card" onclick="location.href='C9.html'"><h3>Chapter 9</h3><p>Power & Politics</p></div>
+        </div>
       </div>
 
-      <div class="quiz-card">
-        <h3>📄 Assignment #3</h3>
-        <p>Questions: 12</p>
-        <p>Correct: 12</p>
+      <div class="right-column">
+        <div class="grade-box">
+          <h2>📊 Grade Summary</h2>
+          <div id="gradeDisplay">Loading grade...</div>
+        </div>
+
+        <div class="quiz-card">
+          <h3>📄 Assignment #1</h3>
+          <p>Questions: 10</p>
+          <p>Correct: 10</p>
+        </div>
+
+        <div class="quiz-card">
+          <h3>📄 Assignment #2</h3>
+          <p>Questions: 10</p>
+          <p>Correct: 7</p>
+        </div>
+
+        <div class="quiz-card">
+          <h3>📄 Assignment #3</h3>
+          <p>Questions: 12</p>
+          <p>Correct: 12</p>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
+    // Password protection functionality
+    const passwordOverlay = document.getElementById('passwordOverlay');
+    const mainContent = document.getElementById('mainContent');
+    const passwordInput = document.getElementById('passwordInput');
+    const errorMessage = document.getElementById('errorMessage');
+    const loadingMessage = document.getElementById('loadingMessage');
+
+    // Focus on password input when page loads
+    passwordInput.focus();
+
+    // Handle password input
+    passwordInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        verifyPassword();
+      }
+      // Hide error message when user starts typing again
+      if (errorMessage.classList.contains('show')) {
+        errorMessage.classList.remove('show');
+      }
+    });
+
+    async function verifyPassword() {
+      const password = passwordInput.value.trim();
+      
+      if (!password) {
+        showError('Please enter a password');
+        return;
+      }
+
+      // Show loading state
+      loadingMessage.style.display = 'block';
+      passwordInput.disabled = true;
+
+      try {
+        // You would replace this URL with your actual Google Apps Script URL
+        const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            password: password,
+            action: 'verify'
+          })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          // Password correct - hide overlay and show main content
+          passwordOverlay.classList.add('hidden');
+          setTimeout(() => {
+            mainContent.classList.add('visible');
+            fetchGrade(); // Load the grade after successful authentication
+          }, 500);
+        } else {
+          showError('Access denied. Invalid credentials.');
+        }
+      } catch (error) {
+        // For demo purposes, check password locally
+        // In production, remove this and use only the server verification above
+        if (password.toLowerCase() === 'organization') {
+          passwordOverlay.classList.add('hidden');
+          setTimeout(() => {
+            mainContent.classList.add('visible');
+            fetchGrade();
+          }, 500);
+        } else {
+          showError('Access denied. Invalid credentials.');
+        }
+      }
+
+      // Hide loading state
+      loadingMessage.style.display = 'none';
+      passwordInput.disabled = false;
+      passwordInput.focus();
+    }
+
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.classList.add('show');
+      passwordInput.value = '';
+      passwordInput.focus();
+      
+      // Auto-hide error after 3 seconds
+      setTimeout(() => {
+        errorMessage.classList.remove('show');
+      }, 3000);
+    }
+
+    // Grade fetching functionality
     async function fetchGrade() {
       try {
         const response = await fetch("https://script.google.com/macros/s/AKfycbyp8EJWeQUfz7CXGIvZ9T566WFFAoK4CzcAbDaTLnU0hCaCaPdPLbd9VKBB3hHLrlKB/exec");
@@ -208,7 +467,11 @@
         document.getElementById("gradeDisplay").innerText = "Could not load grade.";
       }
     }
-    fetchGrade();
+
+    // Prevent right-click context menu on password screen (optional security measure)
+    passwordOverlay.addEventListener('contextmenu', function(e) {
+      e.preventDefault();
+    });
   </script>
 </body>
 </html>
