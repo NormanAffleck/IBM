@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Code Riddle Challenge</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #00ff00;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ff00;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 30px;
+        }
+
+        .title {
+            font-size: 2.5em;
+            color: #00ff00;
+            text-shadow: 0 0 10px #00ff00;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #ffff00;
+            margin-bottom: 20px;
+        }
+
+        .riddle-section {
+            background: rgba(0, 50, 0, 0.5);
+            border: 1px solid #00aa00;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .code-block {
+            background: #000;
+            border: 1px solid #555;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            overflow-x: auto;
+        }
+
+        .python-keyword { color: #ff7700; }
+        .python-string { color: #00aaaa; }
+        .python-number { color: #ff0077; }
+        .python-comment { color: #888; }
+
+        .question {
+            font-size: 1.1em;
+            color: #ffff00;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .password-section {
+            margin: 30px 0;
+        }
+
+        .password-input {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff00;
+            color: #00ff00;
+            padding: 12px 20px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            width: 250px;
+            margin: 0 10px;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, #00aa00, #00ff00);
+            border: none;
+            color: #000;
+            padding: 12px 25px;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #00ff00;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .success-message {
+            background: rgba(0, 100, 0, 0.3);
+            border: 2px solid #00ff00;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            color: #00ff00;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .loading {
+            color: #ffff00;
+            margin-top: 15px;
+        }
+
+        .hint {
+            color: #aaaaaa;
+            font-size: 0.9em;
+            margin-top: 15px;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">🐍 PYTHON CODE RIDDLE 🐍</h1>
+            <p class="subtitle">Solve the riddle to unlock the secret message</p>
+        </div>
+
+        <div class="riddle-section">
+            <h3 style="color: #ffff00; margin-bottom: 15px;">🧩 Mathematical Python Challenge</h3>
+            
+            <div class="code-block">
+<span class="python-comment"># Mystery Function</span>
+<span class="python-keyword">def</span> mystery_function():
+    <span class="python-comment"># The center of thoughts and decisions</span>
+    neural_center = <span class="python-string">"What processes information?"</span>
+    
+    <span class="python-comment"># Mathematical sequence</span>
+    fibonacci = [<span class="python-number">1, 1, 2, 3, 5, 8, 13</span>]
+    prime_numbers = [<span class="python-number">2, 3, 5, 7, 11, 13, 17</span>]
+    
+    <span class="python-comment"># Logic puzzle</span>
+    <span class="python-keyword">if</span> <span class="python-number">13</span> <span class="python-keyword">in</span> fibonacci <span class="python-keyword">and</span> <span class="python-number">13</span> <span class="python-keyword">in</span> prime_numbers:
+        consciousness = <span class="python-string">"What thinks but isn't physical?"</span>
+        
+    <span class="python-comment"># Binary riddle: 01001101 01101001 01101110 01100100</span>
+    binary_message = <span class="python-string">"Decode the consciousness"</span>
+    
+    <span class="python-keyword">return</span> neural_center, consciousness, binary_message
+</div>
+
+            <div class="question">
+                <strong>🤔 RIDDLE:</strong><br>
+                I process information, store memories, and generate thoughts.<br>
+                I'm the control center of intelligence, both human and AI.<br>
+                In binary above (01001101 01101001 01101110 01100100), I am spelled.<br>
+                What am I?
+            </div>
+
+            <div class="hint">
+                💡 Hint: Convert the binary to ASCII, or think about what makes decisions in both humans and computers...
+            </div>
+        </div>
+
+        <div class="password-section">
+            <div>
+                <input type="password" id="passwordInput" class="password-input" placeholder="Enter your answer...">
+                <button onclick="checkPassword()" class="submit-btn">UNLOCK</button>
+            </div>
+            <div id="errorMessage" class="error-message"></div>
+            <div id="loadingMessage" class="loading"></div>
+        </div>
+
+        <div id="successMessage" class="success-message" style="display: none;">
+            <h3 style="color: #00ff00; margin-bottom: 15px;">🛸 TRANSMISSION RECEIVED 🛸</h3>
+            <p><strong>This is Cadet 10. Norman Affleck.</strong> I'm sending a message from Other terra galaxy, Garden. In front of Thanos. The stones destruction is confirmed. But we still have you. I got the info that you collected 5 infinity stones. You should protect them at all costs. Because, once you collected them all, you will need them to "RESTORE" the order in the galaxy. Good luck!</p>
+            <br>
+            <p style="color: #ffff00;"><strong>Redirecting to mission briefing in <span id="countdown">30</span> seconds...</strong></p>
+        </div>
+    </div>
+
+    <script>
+        let attempts = 0;
+        const maxAttempts = 3;
+
+        function checkPassword() {
+            const password = document.getElementById('passwordInput').value.trim();
+            const errorDiv = document.getElementById('errorMessage');
+            const loadingDiv = document.getElementById('loadingMessage');
+            const successDiv = document.getElementById('successMessage');
+            
+            // Clear previous messages
+            errorDiv.textContent = '';
+            loadingDiv.textContent = '';
+            
+            if (!password) {
+                errorDiv.textContent = 'Please enter an answer!';
+                return;
+            }
+            
+            // Show loading
+            loadingDiv.textContent = 'Verifying answer...';
+            
+            // Simulate Google Apps Script verification delay
+            setTimeout(() => {
+                loadingDiv.textContent = '';
+                
+                // Check password (exact match)
+                if (password === 'Mind') {
+                    // Success - show message and redirect
+                    document.querySelector('.riddle-section').style.display = 'none';
+                    document.querySelector('.password-section').style.display = 'none';
+                    successDiv.style.display = 'block';
+                    
+                    // Countdown and redirect
+                    let countdown = 30;
+                    const countdownElement = document.getElementById('countdown');
+                    
+                    const timer = setInterval(() => {
+                        countdown--;
+                        countdownElement.textContent = countdown;
+                        
+                        if (countdown <= 0) {
+                            clearInterval(timer);
+                            // Redirect in same window
+                            window.location.href = 'https://normanaffleck.github.io/IBM/MA/Marketing';
+                        }
+                    }, 1000);
+                    
+                } else {
+                    attempts++;
+                    if (attempts >= maxAttempts) {
+                        errorDiv.textContent = `❌ Access denied! Too many failed attempts. Think about what processes thoughts and information...`;
+                        document.getElementById('passwordInput').disabled = true;
+                        document.querySelector('.submit-btn').disabled = true;
+                    } else {
+                        errorDiv.textContent = `❌ Incorrect answer! (${attempts}/${maxAttempts} attempts) Think about the binary code and the riddle...`;
+                    }
+                    document.getElementById('passwordInput').value = '';
+                }
+            }, 1500);
+        }
+        
+        // Allow Enter key to submit
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            container.style.opacity = '0';
+            container.style.transform = 'translateY(50px)';
+            
+            setTimeout(() => {
+                container.style.transition = 'all 1s ease';
+                container.style.opacity = '1';
+                container.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
