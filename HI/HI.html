@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hospitality Industry Portfolio</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap');
+
     body {
       margin: 0;
       padding: 0;
@@ -17,6 +19,263 @@
     @keyframes pulseStar {
       0% { background-position: center; }
       100% { background-position: 150% 150%; }
+    }
+
+    /* CLI PUZZLE OVERLAY STYLES */
+    #puzzleOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #000000 100%);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.5s ease;
+      font-family: 'JetBrains Mono', 'Courier New', monospace;
+    }
+
+    .cli-container {
+      background: #0f0f0f;
+      border: 2px solid #16FF00;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 
+        0 0 20px rgba(22, 255, 0, 0.3),
+        inset 0 0 10px rgba(0, 0, 0, 0.8);
+      max-width: 1000px;
+      width: 90%;
+      max-height: 90vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    .cli-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30px;
+      background: linear-gradient(90deg, #16FF00 0%, #00DD00 100%);
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: center;
+    }
+
+    .cli-container::after {
+      content: '● ● ●';
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .cli-header {
+      margin-top: 20px;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .cli-title {
+      color: #16FF00;
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-shadow: 0 0 10px rgba(22, 255, 0, 0.5);
+    }
+
+    .cli-subtitle {
+      color: #00AAAA;
+      font-size: 0.9rem;
+      margin-bottom: 20px;
+    }
+
+    .terminal-prompt {
+      color: #16FF00;
+      font-size: 14px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .terminal-prompt::before {
+      content: '$ ';
+      color: #FFFF00;
+      font-weight: bold;
+    }
+
+    .puzzle-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 25px;
+    }
+
+    .cli-section {
+      background: rgba(22, 255, 0, 0.05);
+      border: 1px solid #16FF0040;
+      border-radius: 6px;
+      padding: 20px;
+      position: relative;
+    }
+
+    .section-header {
+      color: #16FF00;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-header::before {
+      content: '> ';
+      color: #FFFF00;
+    }
+
+    .cli-item {
+      display: block;
+      width: 100%;
+      margin: 6px 0;
+      padding: 10px 15px;
+      border: 1px solid #16FF0060;
+      border-radius: 4px;
+      background: rgba(0, 0, 0, 0.6);
+      color: #CCCCCC;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      text-align: left;
+      position: relative;
+    }
+
+    .cli-item::before {
+      content: '[ ] ';
+      color: #666666;
+      font-weight: bold;
+    }
+
+    .cli-item:hover {
+      background: rgba(22, 255, 0, 0.1);
+      border-color: #16FF00;
+      color: #FFFFFF;
+      transform: translateX(5px);
+    }
+
+    .cli-item.selected {
+      background: rgba(22, 255, 0, 0.2);
+      border-color: #16FF00;
+      color: #FFFFFF;
+      box-shadow: 0 0 10px rgba(22, 255, 0, 0.3);
+    }
+
+    .cli-item.selected::before {
+      content: '[●] ';
+      color: #16FF00;
+    }
+
+    .cli-item.matched {
+      background: rgba(0, 170, 0, 0.3);
+      border-color: #00AA00;
+      color: #FFFFFF;
+      pointer-events: none;
+    }
+
+    .cli-item.matched::before {
+      content: '[✓] ';
+      color: #00AA00;
+    }
+
+    .status-line {
+      background: #000000;
+      border: 1px solid #16FF0080;
+      border-radius: 4px;
+      padding: 12px 15px;
+      margin: 20px 0;
+      color: #16FF00;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .status-line::before {
+      content: 'status: ';
+      color: #FFFF00;
+      font-weight: bold;
+    }
+
+    .access-button {
+      background: linear-gradient(90deg, #16FF00 0%, #00DD00 100%);
+      color: #000000;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0.3;
+      pointer-events: none;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .access-button::before {
+      content: '$ ';
+    }
+
+    .access-button.active {
+      opacity: 1;
+      pointer-events: auto;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { box-shadow: 0 0 5px rgba(22, 255, 0, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(22, 255, 0, 0.8); }
+    }
+
+    .access-button.active:hover {
+      background: linear-gradient(90deg, #00FF00 0%, #16FF00 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(22, 255, 0, 0.4);
+    }
+
+    .progress-bar {
+      background: #000000;
+      border: 1px solid #16FF0060;
+      border-radius: 4px;
+      height: 20px;
+      margin: 15px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, #16FF00 0%, #00DD00 100%);
+      height: 100%;
+      width: 0%;
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000000;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: bold;
+    }
+
+    /* MAIN CONTENT STYLES */
+    #mainContent {
+      display: none;
     }
 
     header {
@@ -46,6 +305,17 @@
       border-radius: 10px;
       padding: 10px 14px;
       box-shadow: 0 0 8px rgba(22, 255, 0, 0.4);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .profile-box:hover {
+      background-color: #003300;
+      border-color: #00FF00;
+      box-shadow: 0 0 15px rgba(22, 255, 0, 0.6);
+      transform: translateY(-50%) scale(1.05);
     }
 
     .profile-pic {
@@ -56,12 +326,23 @@
       border-radius: 50%;
       border: 2px solid #16FF00;
       margin-right: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .profile-box:hover .profile-pic {
+      border-color: #00FF00;
+      box-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
     }
 
     .profile-info p {
       margin: 2px 0;
       font-size: 13px;
       color: #d4fcd4;
+      transition: color 0.3s ease;
+    }
+
+    .profile-box:hover .profile-info p {
+      color: #ffffff;
     }
 
     header h1 {
@@ -131,12 +412,166 @@
     .grade-box p {
       font-size: 1.2rem;
     }
+
+    /* WORLD CLOCK STYLES */
+    .world-clock-section {
+      background: rgba(0, 50, 0, 0.4);
+      border-top: 3px solid #16FF00;
+      padding: 20px 0;
+      margin-top: 30px;
+    }
+
+    .world-clock-container {
+      max-width: 1300px;
+      margin: auto;
+      padding: 0 2rem;
+    }
+
+    .world-clock-title {
+      color: #16FF00;
+      font-size: 1.5rem;
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .clocks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 15px;
+    }
+
+    .clock-item {
+      background: rgba(22, 255, 0, 0.1);
+      border: 1px solid #16FF0060;
+      border-radius: 12px;
+      padding: 15px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .clock-item:hover {
+      background: rgba(22, 255, 0, 0.2);
+      border-color: #16FF00;
+      transform: translateY(-2px);
+    }
+
+    .clock-location {
+      color: #16FF00;
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .clock-time {
+      color: #eaffea;
+      font-size: 18px;
+      font-family: 'Courier New', monospace;
+      font-weight: bold;
+    }
+
+    .clock-date {
+      color: #d4fcd4;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .puzzle-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .main-container {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .profile-box {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+        align-self: center;
+      }
+
+      .header-container {
+        flex-direction: column;
+      }
+
+      .clocks-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .cli-container {
+        padding: 20px;
+        margin: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .clocks-grid {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
+
+<!-- CLI-themed Infinity Stones Puzzle Overlay -->
+<div id="puzzleOverlay">
+  <div class="cli-container">
+    <div class="cli-header">
+      <div class="cli-title">∞ INFINITY STONES AUTHENTICATION ∞</div>
+      <div class="cli-subtitle">hospitality_portfolio.exe --secure-access</div>
+    </div>
+    
+    <div class="terminal-prompt">
+      Match each infinity stone to its corresponding academic subject to gain system access
+    </div>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill">0/6</div>
+    </div>
+
+    <div class="puzzle-grid">
+      <div class="cli-section">
+        <div class="section-header">Infinity Stones</div>
+        <button class="cli-item stone" data-stone="power">💜 Power Stone</button>
+        <button class="cli-item stone" data-stone="mind">💛 Mind Stone</button>
+        <button class="cli-item stone" data-stone="reality">❤️ Reality Stone</button>
+        <button class="cli-item stone" data-stone="time">💚 Time Stone</button>
+        <button class="cli-item stone" data-stone="soul">🧡 Soul Stone</button>
+        <button class="cli-item stone" data-stone="space">💙 Space Stone</button>
+      </div>
+
+      <div class="cli-section">
+        <div class="section-header">Academic Subjects</div>
+        <button class="cli-item subject" data-subject="reality">Managing Information Systems</button>
+        <button class="cli-item subject" data-subject="time">Hospitality Industry</button>
+        <button class="cli-item subject" data-subject="soul">Organizational Behaviors</button>
+        <button class="cli-item subject" data-subject="power">Managing Daily Information</button>
+        <button class="cli-item subject" data-subject="space">Field Trip</button>
+        <button class="cli-item subject" data-subject="mind">Marketing</button>
+      </div>
+    </div>
+
+    <div class="status-line" id="statusLine">
+      Awaiting user input... Select a stone to begin authentication
+    </div>
+    
+    <button class="access-button" id="accessButton">
+      Execute Portfolio Access
+    </button>
+  </div>
+</div>
+
+<!-- Main Website Content -->
+<div id="mainContent">
   <header>
     <div class="header-container">
-      <div class="profile-box">
+      <a href="https://normanaffleck.github.io/IBM/HI/HI" class="profile-box">
         <div class="profile-pic"></div>
         <div class="profile-info">
           <p><strong>Name:</strong> Majidov Nusratulloh</p>
@@ -144,7 +579,7 @@
           <p><strong>Faculty:</strong> IBM</p>
           <p><strong>Subject:</strong> Hospitality</p>
         </div>
-      </div>
+      </a>
       <h1>Hospitality Industry Portfolio</h1>
     </div>
   </header>
@@ -161,6 +596,8 @@
       <div class="card"><h3>Week 8</h3><a href="Ch7.html">Housekeeping</a></div>
       <div class="card"><h3>Week 9</h3><a href="Ch8.html">Sales & Marketing</a></div>
       <div class="card"><h3>Week 10</h3><a href="Ch9.html">Restaurant Industry</a></div>
+      <div class="card"><h3>Week 11</h3><a href="https://normanaffleck.github.io/IBM/HI/Ch10">Advanced Hospitality Operations</a></div>
+      <div class="card"><h3>Week 12</h3><a href="https://normanaffleck.github.io/IBM/HI/Ch11">Future of Hospitality</a></div>
     </div>
 
     <div class="grade-box">
@@ -169,20 +606,243 @@
     </div>
   </div>
 
-  <script>
-    async function fetchGrade() {
-      try {
-        const response = await fetch("https://script.google.com/macros/s/AKfycbwy2s5DGa9UMeRZ9CAkOTx1_M-4TrYIovSvy_p-8pjW8yjGMrRhik2Ymm2-tmPI5r5G_g/exec");
-        const data = await response.json();
-        document.getElementById("gradeDisplay").innerHTML = `
-          <strong>${data.currentPercentage}%</strong><br>
-          <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
-        `;
-      } catch (err) {
-        document.getElementById("gradeDisplay").innerText = "Could not load grade.";
+  <!-- World Clock Section -->
+  <div class="world-clock-section">
+    <div class="world-clock-container">
+      <div class="world-clock-title">🌍 World Clock</div>
+      <div class="clocks-grid">
+        <div class="clock-item">
+          <div class="clock-location">🇺🇸 New York, USA</div>
+          <div class="clock-time" id="nyTime">--:--:--</div>
+          <div class="clock-date" id="nyDate">--------</div>
+        </div>
+        <div class="clock-item">
+          <div class="clock-location">🇬🇧 London, UK</div>
+          <div class="clock-time" id="londonTime">--:--:--</div>
+          <div class="clock-date" id="londonDate">--------</div>
+        </div>
+        <div class="clock-item">
+          <div class="clock-location">🇺🇿 Tashkent, Uzbekistan</div>
+          <div class="clock-time" id="tashkentTime">--:--:--</div>
+          <div class="clock-date" id="tashkentDate">--------</div>
+        </div>
+        <div class="clock-item">
+          <div class="clock-location">🇰🇷 Seoul, South Korea</div>
+          <div class="clock-time" id="seoulTime">--:--:--</div>
+          <div class="clock-date" id="seoulDate">--------</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // CLI-themed Infinity Stones Puzzle
+  class CLIInfinityPuzzle {
+    constructor() {
+      // Correct matches as specified
+      this.matches = {
+        power: 'power',     // Managing Daily Information → Power Stone
+        space: 'space',     // Field Trip → Space Stone
+        reality: 'reality', // Managing Information Systems → Reality Stone
+        soul: 'soul',       // Organizational Behaviors → Soul Stone
+        mind: 'mind',       // Marketing → Mind Stone
+        time: 'time'        // Hospitality Industry → Time Stone
+      };
+      this.selectedStone = null;
+      this.matchedPairs = 0;
+      this.totalPairs = 6;
+      this.init();
+    }
+
+    init() {
+      const stones = document.querySelectorAll('.stone');
+      const subjects = document.querySelectorAll('.subject');
+      const accessButton = document.getElementById('accessButton');
+
+      stones.forEach(stone => {
+        stone.addEventListener('click', () => this.selectStone(stone));
+      });
+
+      subjects.forEach(subject => {
+        subject.addEventListener('click', () => this.selectSubject(subject));
+      });
+
+      accessButton.addEventListener('click', () => this.executeAccess());
+    }
+
+    selectStone(stone) {
+      if (stone.classList.contains('matched')) return;
+
+      // Clear previous selections
+      document.querySelectorAll('.cli-item.selected').forEach(item => {
+        item.classList.remove('selected');
+      });
+
+      stone.classList.add('selected');
+      this.selectedStone = stone.dataset.stone;
+      this.updateStatus(`Stone selected: ${stone.textContent.trim()}. Choose matching subject to authenticate.`);
+    }
+
+    selectSubject(subject) {
+      if (subject.classList.contains('matched') || !this.selectedStone) return;
+
+      subject.classList.add('selected');
+
+      // Check if match is correct
+      if (this.matches[this.selectedStone] === subject.dataset.subject) {
+        this.processMatch();
+      } else {
+        this.updateStatus('ERROR: Authentication failed. Incorrect match detected.');
+        setTimeout(() => {
+          this.clearSelections();
+          this.updateStatus('Authentication reset. Select a stone to retry.');
+        }, 2000);
       }
     }
-    fetchGrade();
-  </script>
+
+    processMatch() {
+      const selectedStone = document.querySelector('.stone.selected');
+      const selectedSubject = document.querySelector('.subject.selected');
+
+      selectedStone.classList.remove('selected');
+      selectedSubject.classList.remove('selected');
+      selectedStone.classList.add('matched');
+      selectedSubject.classList.add('matched');
+
+      this.matchedPairs++;
+      this.selectedStone = null;
+
+      this.updateProgress();
+
+      if (this.matchedPairs === this.totalPairs) {
+        this.updateStatus('SUCCESS: All stones authenticated. System access granted.');
+        document.getElementById('accessButton').classList.add('active');
+      } else {
+        this.updateStatus(`Match confirmed. Progress: ${this.matchedPairs}/${this.totalPairs}. Continue authentication.`);
+      }
+    }
+
+    updateProgress() {
+      const progressFill = document.getElementById('progressFill');
+      const percentage = (this.matchedPairs / this.totalPairs) * 100;
+      progressFill.style.width = `${percentage}%`;
+      progressFill.textContent = `${this.matchedPairs}/${this.totalPairs}`;
+    }
+
+    clearSelections() {
+      document.querySelectorAll('.cli-item.selected').forEach(item => {
+        item.classList.remove('selected');
+      });
+      this.selectedStone = null;
+    }
+
+    updateStatus(message) {
+      document.getElementById('statusLine').textContent = message;
+    }
+
+    executeAccess() {
+      if (this.matchedPairs === this.totalPairs) {
+        this.updateStatus('Initializing portfolio access...');
+        
+        const overlay = document.getElementById('puzzleOverlay');
+        const mainContent = document.getElementById('mainContent');
+        
+        setTimeout(() => {
+          overlay.style.opacity = '0';
+          setTimeout(() => {
+            overlay.style.display = 'none';
+            mainContent.style.display = 'block';
+          }, 500);
+        }, 1000);
+      }
+    }
+  }
+
+  // World Clock System
+  class WorldClock {
+    constructor() {
+      this.timezones = {
+        ny: 'America/New_York',
+        london: 'Europe/London', 
+        tashkent: 'Asia/Tashkent',
+        seoul: 'Asia/Seoul'
+      };
+      this.updateClocks();
+      setInterval(() => this.updateClocks(), 1000);
+    }
+
+    updateClocks() {
+      const now = new Date();
+
+      // New York
+      this.updateClock('ny', now, this.timezones.ny);
+      
+      // London
+      this.updateClock('london', now, this.timezones.london);
+      
+      // Tashkent
+      this.updateClock('tashkent', now, this.timezones.tashkent);
+      
+      // Seoul
+      this.updateClock('seoul', now, this.timezones.seoul);
+    }
+
+    updateClock(city, date, timezone) {
+      try {
+        const timeStr = date.toLocaleTimeString('en-US', {
+          timeZone: timezone,
+          hour12: true,
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit'
+        });
+
+        const dateStr = date.toLocaleDateString('en-US', {
+          timeZone: timezone,
+          weekday: 'short',
+          month: 'short',
+          day: 'numeric'
+        });
+
+        const timeElement = document.getElementById(`${city}Time`);
+        const dateElement = document.getElementById(`${city}Date`);
+        
+        if (timeElement) timeElement.textContent = timeStr;
+        if (dateElement) dateElement.textContent = dateStr;
+      } catch (error) {
+        console.error(`Error updating ${city} clock:`, error);
+      }
+    }
+  }
+
+  // Grade Fetching System
+  async function fetchGrade() {
+    try {
+      const response = await fetch("https://script.google.com/macros/s/AKfycbwy2s5DGa9UMeRZ9CAkOTx1_M-4TrYIovSvy_p-8pjW8yjGMrRhik2Ymm2-tmPI5r5G_g/exec");
+      const data = await response.json();
+      document.getElementById("gradeDisplay").innerHTML = `
+        <strong>${data.currentPercentage}%</strong><br>
+        <small>(${data.earnedPoints} / ${data.totalPossiblePoints} points)</small>
+      `;
+    } catch (err) {
+      document.getElementById("gradeDisplay").innerText = "Could not load grade.";
+    }
+  }
+
+  // Initialize everything when page loads
+  window.addEventListener('load', () => {
+    new CLIInfinityPuzzle();
+    new WorldClock();
+    
+    // Only fetch grade after puzzle is solved and main content is shown
+    setTimeout(() => {
+      if (document.getElementById('mainContent').style.display !== 'none') {
+        fetchGrade();
+      }
+    }, 1000);
+  });
+</script>
+
 </body>
 </html>
