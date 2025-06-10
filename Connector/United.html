@@ -3,150 +3,568 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Infinity Stone Portfolio</title>
+  <title>Infinity Stone Terminal</title>
   <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      color: #fff;
-      text-align: center;
-      padding: 40px;
-    }
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 40px;
-      color: #ffcc00;
-      text-shadow: 2px 2px 8px #ff9900;
-    }
-    .row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 30px;
-      margin-bottom: 40px;
-    }
-    .stone-card {
-      border-radius: 15px;
-      padding: 25px;
-      color: white;
-      width: 280px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      transition: transform 0.3s ease;
-      background-color: black;
-    }
-    .stone-card:hover {
-      transform: scale(1.05);
-    }
-    .stone-title {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-      font-weight: bold;
-    }
-    .stone-button {
-      display: inline-block;
-      background: white;
-      color: black;
-      text-decoration: none;
-      padding: 10px 25px;
-      border-radius: 8px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-    .power {
-      border: 4px solid purple;
-    }
-    .space {
-      border: 4px solid #4da6ff;
-    }
-    .reality {
-      border: 4px solid red;
-    }
-    .soul {
-      border: 4px solid orange;
-    }
-    .time {
-      border: 4px solid green;
-    }
-    .mind {
-      border: 4px solid yellow;
-      color: black;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    .snap-section {
-      margin-top: 60px;
+    body {
+      font-family: 'Courier New', 'Lucida Console', monospace;
+      background: #000000;
+      color: #00ff00;
+      overflow-x: hidden;
+      line-height: 1.4;
     }
-    .snap-section img {
-      width: 120px;
+
+    .terminal {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    .header {
+      border: 1px solid #00ff00;
+      padding: 15px;
+      margin-bottom: 20px;
+      background: rgba(0, 255, 0, 0.05);
+    }
+
+    .header h1 {
+      color: #00ff00;
+      font-size: 1.5rem;
+      text-align: center;
+      letter-spacing: 2px;
+    }
+
+    .system-info {
+      margin-bottom: 30px;
+      padding: 10px;
+      border-left: 3px solid #00ff00;
+      background: rgba(0, 255, 0, 0.02);
+    }
+
+    .prompt-line {
+      margin: 8px 0;
+    }
+
+    .prompt-symbol {
+      color: #00ff00;
+      font-weight: bold;
+    }
+
+    .stone-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stone-terminal {
+      border: 1px solid #333;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 15px;
+      position: relative;
+    }
+
+    .stone-header {
+      color: #00ff00;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
+    }
+
+    .stone-content {
+      color: #fff;
+      font-size: 0.8rem;
+      margin-bottom: 15px;
+    }
+
+    .stone-command {
+      display: block;
+      background: transparent;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 8px 15px;
+      text-decoration: none;
+      font-family: 'Courier New', monospace;
+      font-size: 0.8rem;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .stone-command:hover {
+      background: rgba(0, 255, 0, 0.1);
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+    }
+
+    .stone-command:before {
+      content: '$ ';
+      color: #00ff00;
+    }
+
+    /* Stone-specific colors */
+    .power { border-color: #8a2be2; }
+    .power .stone-header { color: #8a2be2; }
+    .power .stone-command { border-color: #8a2be2; color: #8a2be2; }
+    .power .stone-command:hover { background: rgba(138, 43, 226, 0.1); box-shadow: 0 0 10px rgba(138, 43, 226, 0.3); }
+
+    .space { border-color: #4da6ff; }
+    .space .stone-header { color: #4da6ff; }
+    .space .stone-command { border-color: #4da6ff; color: #4da6ff; }
+    .space .stone-command:hover { background: rgba(77, 166, 255, 0.1); box-shadow: 0 0 10px rgba(77, 166, 255, 0.3); }
+
+    .reality { border-color: #ff0000; }
+    .reality .stone-header { color: #ff0000; }
+    .reality .stone-command { border-color: #ff0000; color: #ff0000; }
+    .reality .stone-command:hover { background: rgba(255, 0, 0, 0.1); box-shadow: 0 0 10px rgba(255, 0, 0, 0.3); }
+
+    .soul { border-color: #ff8c00; }
+    .soul .stone-header { color: #ff8c00; }
+    .soul .stone-command { border-color: #ff8c00; color: #ff8c00; }
+    .soul .stone-command:hover { background: rgba(255, 140, 0, 0.1); box-shadow: 0 0 10px rgba(255, 140, 0, 0.3); }
+
+    .time { border-color: #32cd32; }
+    .time .stone-header { color: #32cd32; }
+    .time .stone-command { border-color: #32cd32; color: #32cd32; }
+    .time .stone-command:hover { background: rgba(50, 205, 50, 0.1); box-shadow: 0 0 10px rgba(50, 205, 50, 0.3); }
+
+    .mind { border-color: #ffff00; }
+    .mind .stone-header { color: #ffff00; }
+    .mind .stone-command { border-color: #ffff00; color: #ffff00; }
+    .mind .stone-command:hover { background: rgba(255, 255, 0, 0.1); box-shadow: 0 0 10px rgba(255, 255, 0, 0.3); }
+
+    .gauntlet-section {
+      text-align: center;
+      margin: 40px 0;
+      padding: 20px;
+      border: 1px solid #666;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .gauntlet-ascii {
+      color: #ffff00;
+      font-size: 0.7rem;
+      white-space: pre;
       margin-bottom: 20px;
     }
-    #snap {
-      background-color: #7f00ff;
-      color: white;
-      padding: 15px 40px;
-      font-size: 1.5rem;
-      border: none;
-      border-radius: 10px;
+
+    .snap-button {
+      background: transparent;
+      border: 2px solid #ff00ff;
+      color: #ff00ff;
+      padding: 12px 30px;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
       cursor: pointer;
-      animation: pulse 1.5s infinite;
-      transition: background 0.3s;
+      transition: all 0.3s;
+      animation: pulse-border 2s infinite;
     }
-    #snap:hover {
-      background-color: #9b30ff;
+
+    .snap-button:hover {
+      background: rgba(255, 0, 255, 0.1);
+      box-shadow: 0 0 20px rgba(255, 0, 255, 0.5);
     }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(127, 0, 255, 0.7); }
-      70% { box-shadow: 0 0 0 15px rgba(127, 0, 255, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(127, 0, 255, 0); }
+
+    @keyframes pulse-border {
+      0%, 100% { border-color: #ff00ff; }
+      50% { border-color: #ffff00; }
+    }
+
+    /* Password Overlay */
+    .password-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.95);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .password-terminal {
+      border: 2px solid #00ff00;
+      background: #000;
+      padding: 30px;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    .password-header {
+      color: #ffff00;
+      font-size: 1.1rem;
+      margin-bottom: 20px;
+      text-align: center;
+      border-bottom: 1px solid #ffff00;
+      padding-bottom: 10px;
+    }
+
+    .password-message {
+      color: #00ff00;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .password-input-line {
+      display: flex;
+      align-items: center;
+      margin: 20px 0;
+    }
+
+    .password-prompt {
+      color: #00ff00;
+      margin-right: 10px;
+    }
+
+    .password-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #00ff00;
+      color: #00ff00;
+      font-family: 'Courier New', monospace;
+      font-size: 1rem;
+      flex: 1;
+      padding: 5px 0;
+      outline: none;
+    }
+
+    .password-buttons {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .password-btn {
+      background: transparent;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 8px 20px;
+      margin: 0 10px;
+      font-family: 'Courier New', monospace;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .password-btn:hover {
+      background: rgba(0, 255, 0, 0.1);
+    }
+
+    .error-message {
+      color: #ff0000;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    /* Post-Snap Styles */
+    .post-snap {
+      display: none;
+      background: #ffffff;
+      color: #333;
+      min-height: 100vh;
+      padding: 40px;
+      text-align: center;
+    }
+
+    .chamber-header {
+      color: #666;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      letter-spacing: 3px;
+    }
+
+    .thank-you-message {
+      color: #555;
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      line-height: 1.8;
+    }
+
+    .final-commands {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .final-cmd {
+      background: transparent;
+      border: 2px solid #333;
+      color: #333;
+      padding: 15px 30px;
+      font-family: 'Courier New', monospace;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .final-cmd:hover {
+      background: #333;
+      color: #fff;
+    }
+
+    .final-cmd:before {
+      content: '> ';
+    }
+
+    .cursor {
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .stone-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .final-commands {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .terminal {
+        padding: 10px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>💠 Infinity Stone Portfolio 💠</h1>
 
-  <div class="row">
-    <div class="stone-card power">
-      <div class="stone-title">Power Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/DI/DailyInfo" class="stone-button">Go to Project</a>
+<!-- Main Terminal Interface -->
+<div class="terminal" id="mainTerminal">
+  <div class="header">
+    <h1>═══ INFINITY STONE COLLECTION TERMINAL ═══</h1>
+  </div>
+
+  <div class="system-info">
+    <div class="prompt-line"><span class="prompt-symbol">root@infinity:~$</span> system_status --check</div>
+    <div class="prompt-line">STATUS: 6/6 Infinity Stones Located</div>
+    <div class="prompt-line">GAUNTLET: Ready for Assembly</div>
+    <div class="prompt-line">UNIVERSE: Awaiting Restoration</div>
+  </div>
+
+  <div class="stone-grid">
+    <div class="stone-terminal power">
+      <div class="stone-header">╔═══ POWER STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Morag<br>
+        Power Level: MAXIMUM<br>
+        Function: Energy Manipulation
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/DI/DailyInfo" class="stone-command">access_project</a>
     </div>
-    <div class="stone-card space">
-      <div class="stone-title">Space Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/FT/FT" class="stone-button">Go to Project</a>
+
+    <div class="stone-terminal space">
+      <div class="stone-header">╔═══ SPACE STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Tesseract<br>
+        Power Level: MAXIMUM<br>
+        Function: Spatial Control
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/FT/FT" class="stone-command">access_project</a>
     </div>
-    <div class="stone-card reality">
-      <div class="stone-title">Reality Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/MIS/MIS" class="stone-button">Go to Project</a>
+
+    <div class="stone-terminal reality">
+      <div class="stone-header">╔═══ REALITY STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Aether<br>
+        Power Level: MAXIMUM<br>
+        Function: Reality Warping
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/MIS/MIS" class="stone-command">access_project</a>
+    </div>
+
+    <div class="stone-terminal soul">
+      <div class="stone-header">╔═══ SOUL STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Vormir<br>
+        Power Level: MAXIMUM<br>
+        Function: Soul Manipulation
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/OB/OB" class="stone-command">access_project</a>
+    </div>
+
+    <div class="stone-terminal time">
+      <div class="stone-header">╔═══ TIME STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Eye of Agamotto<br>
+        Power Level: MAXIMUM<br>
+        Function: Time Control
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/HI/HI" class="stone-command">access_project</a>
+    </div>
+
+    <div class="stone-terminal mind">
+      <div class="stone-header">╔═══ MIND STONE ═══╗</div>
+      <div class="stone-content">
+        Status: ACQUIRED<br>
+        Location: Vision's Forehead<br>
+        Power Level: MAXIMUM<br>
+        Function: Mind Control
+      </div>
+      <a href="https://normanaffleck.github.io/IBM/MA/Marketing" class="stone-command">access_project</a>
     </div>
   </div>
 
-  <div class="row">
-    <div class="stone-card soul">
-      <div class="stone-title">Soul Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/OB/OB" class="stone-button">Go to Project</a>
+  <div class="gauntlet-section">
+    <div class="gauntlet-ascii">
+    ╔═══════════════════════════════════╗
+    ║     INFINITY GAUNTLET READY       ║
+    ║                                   ║
+    ║        ⬢ ⬢ ⬢                     ║
+    ║       ⬢ ⬡ ⬢                      ║
+    ║        ⬢                         ║
+    ║                                   ║
+    ║   All stones collected and        ║
+    ║   properly calibrated for         ║
+    ║   universal restoration.          ║
+    ╚═══════════════════════════════════╝
     </div>
-    <div class="stone-card time">
-      <div class="stone-title">Time Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/HI/HI" class="stone-button">Go to Project</a>
-    </div>
-    <div class="stone-card mind">
-      <div class="stone-title">Mind Stone</div>
-      <a href="https://normanaffleck.github.io/IBM/MA/Marketing" class="stone-button">Go to Project</a>
-    </div>
+    <button class="snap-button" onclick="initiateSnap()">EXECUTE SNAP PROTOCOL</button>
   </div>
+</div>
 
-  <div class="snap-section">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Infinity_Gauntlet_Icon.png" alt="Infinity Gauntlet">
-    <br>
-    <button id="snap" onclick="performSnap()">💥 Snap</button>
+<!-- Password Protection Screen -->
+<div class="password-overlay" id="passwordOverlay">
+  <div class="password-terminal">
+    <div class="password-header">╔═══ FINAL AUTHORIZATION REQUIRED ═══╗</div>
+    <div class="password-message">
+      <div class="prompt-line"><span class="prompt-symbol">></span> You have collected all the Infinity Stones.</div>
+      <div class="prompt-line"><span class="prompt-symbol">></span> You are ready to snap and bring those lives back.</div>
+      <div class="prompt-line"><span class="prompt-symbol">></span> But there is one more password left...</div>
+      <div class="prompt-line" style="margin-top: 15px;"><span class="prompt-symbol">></span> Enter final authorization code:</div>
+    </div>
+    
+    <div class="password-input-line">
+      <span class="password-prompt">root@gauntlet:~$</span>
+      <input type="password" class="password-input" id="finalPassword" placeholder="authorization_code" autocomplete="off">
+      <span class="cursor">_</span>
+    </div>
+    
+    <div class="password-buttons">
+      <button class="password-btn" onclick="verifyFinalPassword()">EXECUTE</button>
+      <button class="password-btn" onclick="clearFinalPassword()">CLEAR</button>
+    </div>
+    
+    <div class="error-message" id="passwordError"></div>
   </div>
+</div>
 
-  <script>
-    function performSnap() {
-      const audio = new Audio('https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg');
-      audio.play();
-      setTimeout(() => {
-        window.location.href = 'https://normanaffleck.github.io/IBM/Connector/InfinityChamber';
-      }, 2000);
+<!-- Post-Snap Chamber -->
+<div class="post-snap" id="postSnap">
+  <div class="chamber-header">CHAMBER OF INFINITY</div>
+  
+  <div class="thank-you-message">
+    <p>Thank you, Virtual Hero.</p>
+    <p>With your help, everyone is back to their normal lives.</p>
+    <p>The universe is in debt to your service.</p>
+  </div>
+  
+  <div class="final-commands">
+    <a href="https://normanaffleck.github.io/IBM/DI/Lore.html" class="final-cmd">lore<span class="cursor">_</span></a>
+    <a href="https://normanaffleck.github.io/IBM/DI/FinalDoc.html" class="final-cmd">documentation<span class="cursor">_</span></a>
+  </div>
+</div>
+
+<script>
+  function initiateSnap() {
+    // Show password overlay
+    document.getElementById('passwordOverlay').style.display = 'flex';
+    setTimeout(() => {
+      document.getElementById('finalPassword').focus();
+    }, 100);
+  }
+
+  function verifyFinalPassword() {
+    const password = document.getElementById('finalPassword').value;
+    const errorDiv = document.getElementById('passwordError');
+    
+    if (!password) {
+      errorDiv.textContent = '> ERROR: Password field cannot be empty';
+      return;
     }
-  </script>
+
+    // Here you would integrate with Google Apps Script
+    // For demonstration, using a placeholder password
+    // Replace this with your Google Apps Script call
+    
+    // Simulating server verification
+    setTimeout(() => {
+      if (password === 'RESTORE') { // Replace with your actual password
+        executeSnap();
+      } else {
+        errorDiv.textContent = '> ERROR: Invalid authorization code. Access denied.';
+        document.getElementById('finalPassword').value = '';
+        document.getElementById('finalPassword').focus();
+      }
+    }, 1000);
+  }
+
+  function clearFinalPassword() {
+    document.getElementById('finalPassword').value = '';
+    document.getElementById('passwordError').textContent = '';
+    document.getElementById('finalPassword').focus();
+  }
+
+  function executeSnap() {
+    // Hide password overlay
+    document.getElementById('passwordOverlay').style.display = 'none';
+    
+    // Transition effect
+    document.body.style.transition = 'all 2s ease';
+    document.body.style.backgroundColor = '#ffffff';
+    
+    setTimeout(() => {
+      document.getElementById('mainTerminal').style.display = 'none';
+      document.getElementById('postSnap').style.display = 'block';
+    }, 2000);
+  }
+
+  // Enter key support for password input
+  document.getElementById('finalPassword').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+      verifyFinalPassword();
+    }
+  });
+
+  // Focus management
+  document.addEventListener('DOMContentLoaded', function() {
+    // Auto-focus on any input that becomes visible
+    const observer = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          const target = mutation.target;
+          if (target.style.display === 'flex' && target.classList.contains('password-overlay')) {
+            setTimeout(() => {
+              const input = target.querySelector('input');
+              if (input) input.focus();
+            }, 100);
+          }
+        }
+      });
+    });
+    
+    observer.observe(document.getElementById('passwordOverlay'), {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+  });
+</script>
+
 </body>
 </html>
