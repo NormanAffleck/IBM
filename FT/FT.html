@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +45,17 @@
       font-size: 16px;
       margin-bottom: 30px;
       font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+
+    .password-hint {
+      color: #4fc3f7;
+      font-size: 14px;
+      font-style: italic;
+      margin-bottom: 20px;
+      padding: 8px 12px;
+      background-color: rgba(79, 195, 247, 0.1);
+      border-radius: 6px;
+      border-left: 3px solid #4fc3f7;
     }
 
     .password-input-group {
@@ -207,48 +219,15 @@
       width: 100%;
     }
 
-    .top-button {
-      margin-top: 1rem;
-    }
-
-    .top-button a {
-      display: inline-block;
-      text-decoration: none;
-      color: #e0f7ff;
-      background-color: #003366;
-      padding: 0.8rem 1.5rem;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 127, 255, 0.4);
-      font-size: 1rem;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-
-    .top-button a:hover {
-      background-color: #005cb3;
-      transform: scale(1.05);
-    }
-
     .container {
-      max-width: 1100px;
+      max-width: 1200px;
       margin: auto;
       padding: 2rem;
     }
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .gallery img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0, 127, 255, 0.3);
-    }
-
     .decks {
       text-align: center;
-      margin-top: 3rem;
+      margin-bottom: 3rem;
     }
 
     .decks h2 {
@@ -261,7 +240,7 @@
     .button-wrapper {
       display: flex;
       justify-content: center;
-      margin-top: 1rem;
+      margin-bottom: 2rem;
     }
 
     .button-wrapper a {
@@ -280,20 +259,124 @@
       transform: scale(1.05);
     }
 
-    .decks a {
-      display: block;
-      margin: 0.5rem 0;
-      text-decoration: none;
-      color: #d0ecff;
-      background-color: #003366;
-      padding: 0.8rem 1.2rem;
-      border-radius: 8px;
-      box-shadow: 0 0 8px rgba(0, 127, 255, 0.2);
-      transition: background-color 0.3s;
+    /* GALLERY STYLES */
+    .gallery-section {
+      margin-top: 2rem;
     }
 
-    .decks a:hover {
-      background-color: #005cb3;
+    .gallery-section h2 {
+      font-size: 1.8rem;
+      color: #4fc3f7;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      text-shadow: 0 0 10px rgba(79, 195, 247, 0.5);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 127, 255, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      background-color: #1e1e1e;
+    }
+
+    .gallery-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 30px rgba(0, 127, 255, 0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+
+    .gallery-item .image-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+      color: white;
+      padding: 1rem;
+      transform: translateY(100%);
+      transition: transform 0.3s ease;
+    }
+
+    .gallery-item:hover .image-overlay {
+      transform: translateY(0);
+    }
+
+    .image-overlay h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #4fc3f7;
+    }
+
+    .image-overlay p {
+      margin: 0;
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* RESPONSIVE DESIGN */
+    @media (max-width: 768px) {
+      .profile-link {
+        position: static;
+        transform: none;
+        margin-bottom: 1rem;
+        display: flex;
+        justify-content: center;
+      }
+
+      .header-container {
+        flex-direction: column;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .gallery-item img {
+        height: 200px;
+      }
+
+      header {
+        padding: 1.5rem 1rem 2rem;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .gallery {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-item {
+        min-width: unset;
+      }
+
+      .password-container {
+        padding: 30px 20px;
+      }
     }
   </style>
 </head>
@@ -303,7 +386,9 @@
 <div id="passwordOverlay">
   <div class="password-container">
     <h2>🚀 Access Required</h2>
-    <p>Please enter the password to access the Field Trip website</p>
+    <div class="password-hint">
+      💡 Hint: Your first class with us
+    </div>
     <form id="passwordForm">
       <div class="password-input-group">
         <input 
@@ -328,7 +413,7 @@
 <div id="mainContent">
   <header>
     <div class="header-container">
-      <a href="https://normanaffleck.github.io/IBM/MIS/Encripted_file.html" target="_blank" class="profile-link">
+      <a href="https://normanaffleck.github.io/IBM/MIS/Encripted_file.html" class="profile-link">
         <div class="profile-box">
           <div class="profile-pic"></div>
           <div class="profile-info">
@@ -343,20 +428,61 @@
     </div>
   </header>
 
-  <div class="decks">
-    <h2>📂 Documents</h2>
-    <div class="button-wrapper">
-      <a href="Space.html">📄 Assignment</a>
-    </div>
-  </div>
-
   <div class="container">
-    <div class="gallery">
-      <img src="Field4.DNG" alt="Field Trip 1">
-      <img src="Field2.jpg" alt="Field Trip 2">
-      <img src="Field3.JPG" alt="Field Trip 3">
-      <img src="Field1.jpg" alt="Field Trip 4">
-    </div> 
+    <div class="decks">
+      <h2>📂 Documents</h2>
+      <div class="button-wrapper">
+        <a href="Space.html">📄 Assignment</a>
+      </div>
+    </div>
+
+    <div class="gallery-section">
+      <h2>📸 Field Trip Gallery</h2>
+      <div class="gallery">
+        <div class="gallery-item">
+          <img src="Field1.jpg" alt="Field Trip Photo 1">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 1</h3>
+            <p>Capturing moments from our educational journey</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="Field2.jpg" alt="Field Trip Photo 2">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 2</h3>
+            <p>Exploring new horizons and learning opportunities</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="Field3.JPG" alt="Field Trip Photo 3">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 3</h3>
+            <p>Documenting our educational adventure</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="Field4.DNG" alt="Field Trip Photo 4">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 4</h3>
+            <p>Memorable moments from the field experience</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="Field5.DNG" alt="Field Trip Photo 5">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 5</h3>
+            <p>Continuing our journey of discovery</p>
+          </div>
+        </div>
+        <div class="gallery-item">
+          <img src="Field6.DNG" alt="Field Trip Photo 6">
+          <div class="image-overlay">
+            <h3>Field Trip Experience 6</h3>
+            <p>Final captures from our field trip adventure</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
