@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hospitality Industry Portfolio</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap');
 
     * {
       margin: 0;
@@ -14,75 +14,84 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       color: #ffffff;
       line-height: 1.6;
       min-height: 100vh;
+      font-weight: 400;
     }
 
     /* World Clock Section */
     .world-clock {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 1rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1.5rem;
     }
 
     .clock-title {
+      font-family: 'Montserrat', sans-serif;
       text-align: center;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: #ffffff;
+      letter-spacing: 0.5px;
     }
 
     .clocks-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 0.8rem;
-      max-width: 600px;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      max-width: 720px;
       margin: 0 auto;
     }
 
     .clock-card {
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 12px;
-      padding: 0.8rem;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 16px;
+      padding: 1.2rem;
       text-align: center;
-      backdrop-filter: blur(5px);
+      backdrop-filter: blur(10px);
       border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: transform 0.2s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     }
 
     .clock-card:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.16);
     }
 
     .clock-flag {
-      font-size: 1.2rem;
-      margin-bottom: 0.3rem;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
     }
 
     .clock-city {
-      font-size: 0.75rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.8rem;
       font-weight: 500;
-      opacity: 0.9;
-      margin-bottom: 0.3rem;
+      color: #e0e0e0;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.3px;
     }
 
     .clock-time {
-      font-size: 0.9rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1rem;
       font-weight: 600;
-      font-family: 'Monaco', monospace;
+      color: #ffffff;
     }
 
     /* Header */
     .header {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 1.5rem 1rem;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      padding: 2rem 1.5rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .header-content {
@@ -97,42 +106,54 @@
     .profile-section {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 1rem;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .profile-avatar {
-      width: 60px;
-      height: 60px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
       color: white;
-      border: 3px solid rgba(255, 255, 255, 0.3);
+      border: 3px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
     }
 
     .profile-info h2 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.2rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+      color: #ffffff;
+      letter-spacing: 0.3px;
     }
 
     .profile-info p {
-      font-size: 0.85rem;
-      opacity: 0.9;
-      margin-bottom: 0.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.9rem;
+      color: #b8c5d6;
+      font-weight: 400;
+      margin-bottom: 0.3rem;
+      letter-spacing: 0.2px;
     }
 
     .main-title {
-      font-size: 1.8rem;
-      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
       text-align: center;
       width: 100%;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
+      color: #ffffff;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
     }
 
     /* Main Content */
@@ -148,19 +169,20 @@
     /* Assignment Cards */
     .assignments-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
     }
 
     .assignment-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      transition: all 0.4s ease;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     .assignment-card::before {
@@ -169,94 +191,124 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, #667eea, #764ba2);
+      height: 4px;
+      background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
     }
 
     .assignment-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      background: rgba(255, 255, 255, 0.15);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.25);
     }
 
     .card-week {
+      font-family: 'Montserrat', sans-serif;
       font-size: 0.8rem;
-      font-weight: 500;
-      color: #667eea;
+      font-weight: 700;
+      color: #ffd700;
       text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 0.5rem;
+      letter-spacing: 2px;
+      margin-bottom: 0.8rem;
+      display: inline-block;
+      background: rgba(255, 215, 0, 0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
     }
 
     .card-title {
-      font-size: 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
       font-weight: 600;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: #ffffff;
+      line-height: 1.4;
+      letter-spacing: 0.3px;
     }
 
     .card-link {
-      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      color: #87ceeb;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.95rem;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      transition: color 0.2s ease;
+      gap: 0.6rem;
+      transition: all 0.3s ease;
+      letter-spacing: 0.3px;
+      padding: 0.8rem 1.2rem;
+      background: rgba(135, 206, 235, 0.1);
+      border-radius: 12px;
+      border: 1px solid rgba(135, 206, 235, 0.2);
     }
 
     .card-link:hover {
-      color: #667eea;
+      color: #40e0d0;
+      background: rgba(64, 224, 208, 0.15);
+      border-color: rgba(64, 224, 208, 0.3);
+      transform: translateX(4px);
+      box-shadow: 0 4px 15px rgba(64, 224, 208, 0.2);
     }
 
     .card-link::after {
       content: '→';
-      font-size: 1.2rem;
-      transition: transform 0.2s ease;
+      font-size: 1.3rem;
+      font-weight: 700;
+      transition: transform 0.3s ease;
     }
 
     .card-link:hover::after {
-      transform: translateX(3px);
+      transform: translateX(4px);
     }
 
     /* Grade Box */
     .grade-box {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      border-radius: 16px;
-      padding: 1.5rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(15px);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.15);
       height: fit-content;
       position: sticky;
       top: 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     }
 
     .grade-title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
       color: #ffffff;
       text-align: center;
+      letter-spacing: 0.5px;
     }
 
     .grade-display {
       text-align: center;
-      padding: 1rem;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .grade-percentage {
-      font-size: 2rem;
-      font-weight: 700;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
       color: #667eea;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
+      letter-spacing: 1px;
     }
 
     .grade-details {
-      font-size: 0.9rem;
-      opacity: 0.9;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.95rem;
+      color: #b8c5d6;
+      font-weight: 500;
+      letter-spacing: 0.2px;
     }
 
     /* Mobile Optimizations */
@@ -341,7 +393,7 @@
       }
 
       .card-title {
-        font-size: 1rem;
+        font-size: 1.1rem;
       }
 
       .clocks-container {
