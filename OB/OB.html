@@ -168,23 +168,37 @@
     }
 
     .page-layout {
-      display: flex;
+      display: grid;
+      grid-template-columns: 320px 1fr;
       gap: 2rem;
       max-width: 1400px;
       margin: 1rem auto;
       padding: 0 1rem;
+      align-items: start;
+    }
+
+    .left-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: sticky;
+      top: 1rem;
     }
 
     .profile-box {
-      width: 280px;
       background-color: #f9f9f9;
       border: 2px solid #ffd700;
       border-radius: 10px;
       padding: 1.5rem;
       box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-      height: fit-content;
-      max-height: calc(100vh - 180px);
-      overflow-y: auto;
+    }
+
+    .grade-container {
+      background-color: #f9f9f9;
+      border: 2px solid #ffd700;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
     }
 
     .profile-pic {
@@ -216,9 +230,18 @@
     }
 
     .main-content {
-      flex: 1;
-      max-height: calc(100vh - 180px);
-      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .main-content h2 {
+      color: #b48c00;
+      font-size: 1.8rem;
+      font-weight: 400;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid #ffd700;
+      padding-bottom: 0.5rem;
     }
 
     .cards {
@@ -260,7 +283,7 @@
     }
 
     .grade-section {
-      margin-top: 1.5rem;
+      margin: 0;
     }
 
     .grade-box {
@@ -281,7 +304,7 @@
     }
 
     .assignments-container {
-      max-height: 280px;
+      max-height: 300px;
       overflow-y: auto;
       padding-right: 5px;
     }
@@ -351,21 +374,18 @@
       }
 
       .page-layout {
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 1rem;
         padding: 0 0.5rem;
       }
 
-      .profile-box {
-        width: 100%;
-        max-width: none;
-        max-height: none;
+      .left-section {
+        position: static;
         order: -1;
       }
 
-      .main-content {
-        max-height: none;
-        overflow-y: visible;
+      .profile-box, .grade-container {
+        width: 100%;
       }
 
       .cards {
@@ -393,10 +413,6 @@
         max-height: 200px;
       }
 
-      .grade-section {
-        margin-top: 1rem;
-      }
-
       .quiz-card {
         padding: 0.7rem;
         margin-bottom: 0.6rem;
@@ -408,6 +424,11 @@
 
       .quiz-card p {
         font-size: 0.75rem;
+      }
+
+      .main-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
       }
     }
 
@@ -444,17 +465,13 @@
     /* Landscape phone optimization */
     @media (max-width: 768px) and (orientation: landscape) {
       .page-layout {
-        flex-direction: row;
+        grid-template-columns: 280px 1fr;
         height: calc(100vh - 100px);
       }
 
-      .profile-box {
-        width: 250px;
-        max-height: calc(100vh - 120px);
-        overflow-y: auto;
-      }
-
-      .main-content {
+      .left-section {
+        position: sticky;
+        top: 1rem;
         max-height: calc(100vh - 120px);
         overflow-y: auto;
       }
@@ -503,52 +520,59 @@
 
   <div class="page-layout">
 
-    <!-- Left Sidebar: Profile -->
-    <div class="profile-box">
-      <div class="profile-pic" onclick="window.open('https://normanaffleck.github.io/IBM/HI/HI', '_blank')" title="Click to visit profile"></div>
-      <div class="profile-info">
-        <p><strong>Name:</strong> Majidov Nusratulloh</p>
-        <p><strong>ID:</strong> 2417563</p>
-        <p><strong>Faculty:</strong> IBM</p>
-        <p><strong>Subject:</strong> OB</p>
+    <!-- Left Section: Profile and Grades -->
+    <div class="left-section">
+      <!-- Profile Container -->
+      <div class="profile-box">
+        <div class="profile-pic" onclick="window.open('https://normanaffleck.github.io/IBM/HI/HI', '_blank')" title="Click to visit profile"></div>
+        <div class="profile-info">
+          <p><strong>Name:</strong> Majidov Nusratulloh</p>
+          <p><strong>ID:</strong> 2417563</p>
+          <p><strong>Faculty:</strong> IBM</p>
+          <p><strong>Subject:</strong> OB</p>
+        </div>
       </div>
 
-      <div class="grade-section">
-        <div class="grade-box">
-          <h2>📊 Grade Summary</h2>
-          <div id="gradeDisplay">Loading grade...</div>
-        </div>
-
-        <div class="assignments-container">
-          <div class="quiz-card">
-            <h3>📄 Assignment #1</h3>
-            <p>Questions: 10</p>
-            <p>Correct: 10</p>
+      <!-- Grade Container -->
+      <div class="grade-container">
+        <div class="grade-section">
+          <div class="grade-box">
+            <h2>📊 Grade Summary</h2>
+            <div id="gradeDisplay">Loading grade...</div>
           </div>
 
-          <div class="quiz-card">
-            <h3>📄 Assignment #2</h3>
-            <p>Questions: 10</p>
-            <p>Correct: 7</p>
-          </div>
+          <div class="assignments-container">
+            <div class="quiz-card">
+              <h3>📄 Assignment #1</h3>
+              <p>Questions: 10</p>
+              <p>Correct: 10</p>
+            </div>
 
-          <div class="quiz-card">
-            <h3>📄 Assignment #3</h3>
-            <p>Questions: 12</p>
-            <p>Correct: 12</p>
-          </div>
+            <div class="quiz-card">
+              <h3>📄 Assignment #2</h3>
+              <p>Questions: 10</p>
+              <p>Correct: 7</p>
+            </div>
 
-          <div class="quiz-card">
-            <h3>📄 Assignment #4</h3>
-            <p>Questions: 8</p>
-            <p>Correct: 8</p>
+            <div class="quiz-card">
+              <h3>📄 Assignment #3</h3>
+              <p>Questions: 12</p>
+              <p>Correct: 12</p>
+            </div>
+
+            <div class="quiz-card">
+              <h3>📄 Assignment #4</h3>
+              <p>Questions: 8</p>
+              <p>Correct: 8</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Main Content -->
+    <!-- Right Section: Chapter Cards -->
     <div class="main-content">
+      <h2>📚 Course Chapters</h2>
       <div class="cards">
         <div class="card" onclick="location.href='C1.html'">
           <h3>Chapter 1</h3>
