@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mission Briefing — Norman's Journey</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+    }
+
+    /* ===== PAGE 1: INTRODUCTION (SPACE THEME) ===== */
+    #page1 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background: 
+        radial-gradient(ellipse at 20% 30%, rgba(100, 150, 255, 0.3), transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(150, 100, 255, 0.2), transparent 50%),
+        linear-gradient(180deg, #0a1628 0%, #1a2540 50%, #2a3858 100%);
+      transition: opacity 0.6s ease;
+      z-index: 100;
+    }
+
+    #page1.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    #page1.hidden {
+      display: none;
+    }
+
+    /* Animated stars */
+    .stars {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Introduction card */
+    .intro-container {
+      max-width: 700px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 2;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .mission-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    }
+
+    h1 {
+      font-size: clamp(28px, 6vw, 42px);
+      color: #1a2540;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+
+    .student-info {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+      padding: 20px;
+      background: rgba(102, 126, 234, 0.08);
+      border-radius: 16px;
+      border: 1px solid rgba(102, 126, 234, 0.2);
+    }
+
+    .info-item {
+      font-size: 14px;
+      color: #4a5568;
+    }
+
+    .info-item strong {
+      display: block;
+      color: #1a2540;
+      margin-bottom: 4px;
+      font-size: 15px;
+    }
+
+    .intro-text {
+      line-height: 1.8;
+      color: #4a5568;
+      font-size: 16px;
+      margin: 20px 0;
+    }
+
+    .timer-section {
+      margin: 32px 0 24px;
+      text-align: center;
+    }
+
+    .timer-label {
+      font-size: 14px;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .timer-display {
+      font-size: 48px;
+      font-weight: 700;
+      color: #667eea;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 6px;
+      background: rgba(102, 126, 234, 0.15);
+      border-radius: 999px;
+      margin-top: 16px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+      border-radius: 999px;
+      transition: width 0.3s ease;
+      box-shadow: 0 0 12px rgba(102, 126, 234, 0.6);
+    }
+
+    .ready-message {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 16px;
+      color: #667eea;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .ready-message.show {
+      opacity: 1;
+    }
+
+    .btn-start {
+      width: 100%;
+      margin-top: 24px;
+      padding: 16px 32px;
+      border: none;
+      border-radius: 14px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: not-allowed;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: rgba(102, 126, 234, 0.3);
+      color: rgba(255, 255, 255, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-start.enabled {
+      cursor: pointer;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-start.enabled::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn-start.enabled:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-start.enabled:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-start.enabled:active {
+      transform: translateY(0);
+    }
+
+    /* ===== PAGE 2: INCIDENT REPORT (DESERT THEME) ===== */
+    #page2 {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      padding: 40px 20px;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(255, 200, 100, 0.15), transparent 60%),
+        linear-gradient(180deg, #1a1a2e 0%, #2a2438 30%, #3a3040 100%);
+      overflow-y: auto;
+      display: none;
+      z-index: 99;
+    }
+
+    #page2.active {
+      display: block;
+    }
+
+    /* Desert atmosphere */
+    .desert-glow {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 500px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(255, 220, 150, 0.2), transparent 70%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .page2-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    .page2-header {
+      text-align: center;
+      margin-bottom: 60px;
+      color: white;
+    }
+
+    .page2-header h2 {
+      font-size: clamp(32px, 6vw, 48px);
+      margin-bottom: 16px;
+      color: #ffd89b;
+      text-shadow: 0 2px 12px rgba(255, 216, 155, 0.4);
+    }
+
+    .page2-header p {
+      font-size: 18px;
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 50px;
+    }
+
+    .report-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 32px;
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .report-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(255, 216, 155, 0.2);
+    }
+
+    .report-card .label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #ffd89b;
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .report-card h3 {
+      font-size: 24px;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .report-card p {
+      color: rgba(255, 255, 255, 0.75);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .report-card .image-preview {
+      width: 100%;
+      height: 200px;
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 12px;
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 14px;
+      border: 1px dashed rgba(255, 255, 255, 0.2);
+    }
+
+    /* Navigation buttons */
+    .nav-buttons {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 50px;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-back {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #ffd89b 0%, #ff9a76 100%);
+      color: #1a1a2e;
+      box-shadow: 0 8px 24px rgba(255, 154, 118, 0.4);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255, 154, 118, 0.6);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .student-info {
+        grid-template-columns: 1fr;
+      }
+      
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== PAGE 1: INTRODUCTION ===== -->
+  <section id="page1">
+    <div class="stars" id="starField"></div>
+    
+    <div class="intro-container">
+      <div class="mission-badge">
+        <span>🚀</span>
+        <span>Mission Briefing</span>
+      </div>
+
+      <h1>Welcome aboard, Norman!</h1>
+
+      <div class="student-info">
+        <div class="info-item">
+          <strong>Student</strong>
+          Norman
+        </div>
+        <div class="info-item">
+          <strong>Student ID</strong>
+          2417563
+        </div>
+        <div class="info-item">
+          <strong>Subject</strong>
+          Accounting & Data Analysis
+        </div>
+        <div class="info-item">
+          <strong>Professor</strong>
+          Joshua Dean
+        </div>
+      </div>
+
+      <div class="intro-text">
+        <p style="margin-bottom: 16px;">
+          You're about to embark on a space-adventure story project designed to help you truly understand <strong>Accounting and Data Analysis</strong> — without stress. 🌌📊
+        </p>
+        <p style="margin-bottom: 16px;">
+          This journey includes story-based sections with tasks and challenges that gradually build your skills. Think of it as learning step by step while exploring space and solving problems along the way. 🪐🔧
+        </p>
+        <p>
+          There's no rush — just curiosity, practice, and a bit of adventure. Make mistakes, learn from them, and enjoy the journey. 🚀💡
+        </p>
+      </div>
+
+      <div class="timer-section">
+        <div class="timer-label">Mission Briefing Time Remaining</div>
+        <div class="timer-display" id="timerDisplay">20</div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <div class="ready-message" id="readyMessage">
+          ✨ Briefing complete! You may now proceed.
+        </div>
+      </div>
+
+      <button class="btn-start" id="btnStart" disabled>
+        <span>Start Mission</span>
+        <span>🚀</span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== PAGE 2: INCIDENT REPORT ===== -->
+  <section id="page2">
+    <div class="desert-glow"></div>
+    
+    <div class="page2-container">
+      <div class="page2-header">
+        <h2>Incident Report — Anomaly Event</h2>
+        <p>Mission status has changed. Review the situation and prepare for your first task.</p>
+      </div>
+
+      <div class="report-grid">
+        <div class="report-card">
+          <div class="label">1. Context</div>
+          <h3>Clear Understanding</h3>
+          <p>
+            The aircraft was operating under normal conditions, performing routine aerial maneuvers. Visibility was high, systems stable, and no external threats detected.
+          </p>
+          <p style="margin-top: 12px;">
+            This represents the final confirmed state before the anomaly — controlled flight, functional systems, and full mobility.
+          </p>
+          <div class="image-preview">Image: Aircraft in Flight</div>
+        </div>
+
+        <div class="report-card">
+          <div class="label">2. Impact</div>
+          <h3>The Anomaly</h3>
+          <p>
+            Shortly after the anomaly appeared, environmental conditions changed drastically. Gravity intensified without warning, forcing an uncontrolled descent.
+          </p>
+          <p style="margin-top: 12px;">
+            The aftermath: a crash site in a hostile desert environment, illuminated only by moonlight. Isolation, loss of mobility, system failure.
+          </p>
+          <div class="image-preview">Image: Crash Site</div>
+        </div>
+      </div>
+
+      <div class="nav-buttons">
+        <button class="btn btn-back" id="btnBack">
+          <span>←</span>
+          <span>Go Back</span>
+        </button>
+        <button class="btn btn-primary" id="btnTask">
+          <span>Move to Task I</span>
+          <span>→</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Generate stars
+    const starField = document.getElementById('starField');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = Math.random() * 3 + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starField.appendChild(star);
+    }
+
+    // Timer logic
+    let timeRemaining = 20;
+    const timerDisplay = document.getElementById('timerDisplay');
+    const progressFill = document.getElementById('progressFill');
+    const readyMessage = document.getElementById('readyMessage');
+    const btnStart = document.getElementById('btnStart');
+    const page1 = document.getElementById('page1');
+    const page2 = document.getElementById('page2');
+
+    const countdown = setInterval(() => {
+      timeRemaining--;
+      timerDisplay.textContent = timeRemaining;
+      
+      const progress = ((20 - timeRemaining) / 20) * 100;
+      progressFill.style.width = progress + '%';
+
+      if (timeRemaining <= 0) {
+        clearInterval(countdown);
+        readyMessage.classList.add('show');
+        
+        // Enable the Start button instead of auto-navigation
+        btnStart.disabled = false;
+        btnStart.classList.add('enabled');
+      }
+    }, 1000);
+
+    // Start button click handler
+    btnStart.addEventListener('click', () => {
+      if (!btnStart.disabled) {
+        page1.classList.add('fade-out');
+        setTimeout(() => {
+          page1.classList.add('hidden');
+          page2.classList.add('active');
+          page2.scrollTop = 0; // Reset scroll within page2
+        }, 600);
+      }
+    });
+
+    // Navigation buttons
+    document.getElementById('btnBack').addEventListener('click', () => {
+      page2.classList.remove('active');
+      page1.classList.remove('fade-out');
+      page1.classList.remove('hidden');
+      page2.scrollTop = 0; // Reset scroll within page2
+      
+      // Reset timer
+      timeRemaining = 20;
+      timerDisplay.textContent = timeRemaining;
+      progressFill.style.width = '0%';
+      readyMessage.classList.remove('show');
+      btnStart.disabled = true;
+      btnStart.classList.remove('enabled');
+    });
+
+    document.getElementById('btnTask').addEventListener('click', () => {
+      alert('🚀 Moving to Task I...\n\nThis would navigate to your first task page.');
+    });
+  </script>
+
+</body>
+</html>
