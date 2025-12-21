@@ -1,1 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Phase Three — The Trade</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(100, 150, 255, 0.15), transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(150, 100, 255, 0.12), transparent 50%),
+        linear-gradient(180deg, #0a1628 0%, #1a2540 50%, #2a3858 100%);
+    }
+
+    /* Animated stars */
+    .stars {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .star {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      animation: twinkle 3s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Main container */
+    .main-card {
+      max-width: 900px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: clamp(32px, 5vw, 48px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+      position: relative;
+      z-index: 2;
+    }
+
+    .content-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 32px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    /* Alien image section */
+    .alien-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .alien-image {
+      width: 100%;
+      max-width: 250px;
+      height: auto;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+      border: 2px solid rgba(102, 126, 234, 0.2);
+    }
+
+    /* Dialogue section */
+    .dialogue-section {
+      position: relative;
+    }
+
+    .dialogue-box {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
+      border-left: 4px solid #667eea;
+      border-radius: 12px;
+      padding: 24px;
+      position: relative;
+    }
+
+    .dialogue-box::before {
+      content: '"';
+      position: absolute;
+      top: -10px;
+      left: 16px;
+      font-size: 60px;
+      color: #667eea;
+      opacity: 0.3;
+      font-family: Georgia, serif;
+    }
+
+    .dialogue-text {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #2a3858;
+      font-style: italic;
+      position: relative;
+      z-index: 1;
+    }
+
+    .speaker-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #667eea;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .speaker-label::before {
+      content: '◆';
+      font-size: 8px;
+    }
+
+    /* Buttons section */
+    .buttons-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .btn {
+      padding: 16px 32px;
+      border: none;
+      border-radius: 14px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn:hover::before {
+      transform: translateX(100%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+      font-size: 18px;
+      padding: 18px 36px;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .secondary-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .btn-secondary {
+      background: rgba(102, 126, 234, 0.1);
+      color: #667eea;
+      border: 1px solid rgba(102, 126, 234, 0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(102, 126, 234, 0.2);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.2);
+    }
+
+    .btn-secondary:active {
+      transform: translateY(0);
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+      .content-wrapper {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .alien-image {
+        max-width: 200px;
+      }
+
+      .dialogue-text {
+        font-size: 16px;
+      }
+
+      .secondary-buttons {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .main-card {
+        padding: 24px;
+      }
+
+      .btn {
+        padding: 14px 24px;
+        font-size: 15px;
+      }
+
+      .btn-primary {
+        padding: 16px 28px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="stars" id="starField"></div>
+
+  <div class="main-card">
+    <div class="content-wrapper">
+      <!-- Alien Image -->
+      <div class="alien-section">
+        <img src="alien.png" alt="The Alien Trader" class="alien-image" />
+      </div>
+
+      <!-- Dialogue -->
+      <div class="dialogue-section">
+        <div class="speaker-label">The Alien Trader</div>
+        <div class="dialogue-box">
+          <p class="dialogue-text">
+            I trade. I survive. But my records are broken. Time, amounts, meanings — all mixed. Clean them for me. And I will make your ship move again.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="buttons-section">
+      <button class="btn btn-primary" id="btnDownload">
+        <span>📊</span>
+        <span>Get Records</span>
+      </button>
+
+      <div class="secondary-buttons">
+        <a href="previous.html" class="btn btn-secondary">
+          <span>←</span>
+          <span>Go Back</span>
+        </a>
+        <a href="next.html" class="btn btn-secondary">
+          <span>Move to Next</span>
+          <span>→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Generate stars
+    const starField = document.getElementById('starField');
+    for (let i = 0; i < 100; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      star.style.width = Math.random() * 3 + 'px';
+      star.style.height = star.style.width;
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.animationDelay = Math.random() * 3 + 's';
+      starField.appendChild(star);
+    }
+
+    // Generate and download CSV file
+    document.getElementById('btnDownload').addEventListener('click', function() {
+      // CSV data with space-themed transactions
+      const csvContent = `Date,Amount,Description,Account,Payment Method,Vendor/Customer,Notes
+2424-11-03,1250.00,Fuel Cells - Grade A,Supplies,Credit Transfer,Nebula Depot,"Last shipment before anomaly. Vendor seemed nervous."
+2424-11-05,-3400.50,Hull Repair Services,Maintenance,Crypto Token,Station 7 Docks,"Emergency patch after micro-meteor strike. Work quality uncertain."
+2424-11-08,890.00,Oxygen Recyclers x3,Life Support,Digital Coin,Terra Supply Co,"Recyclers functional but origins unknown. No manifest ID."
+2424-11-10,-150.00,Navigation Data Update,Operations,Credit Chip,Stellar Charts Inc,"Coordinates off by 0.003%. May cause drift over time."
+2424-11-12,2100.75,Cargo Delivery Payment,Income,Wire Transfer,Client Unknown,"Payment received but sender masked. Delivery confirmed at coordinates 47.8."
+2424-11-15,-620.00,Food Rations - 30 Day,Provisions,Trade Credit,Outpost Alpha,"Rations taste metallic. Expiration date smudged."
+2424-11-18,340.00,Salvaged Metal Alloy,Income,Barter,Scavenger Guild,"Metal composition unusual. Could be pre-war tech."
+2424-11-20,-1800.00,Engine Coolant Refill,Fuel,Crypto Transfer,Void Fuel Station,"Coolant viscosity lower than standard. Monitor temperature closely."
+2424-11-22,5500.00,Research Data Sale,Income,Anonymous Drop,Unknown Buyer,"Data encrypted. Buyer identity never revealed. Transaction secure."
+2424-11-25,-95.50,Communication Array Fee,Utilities,Auto-Debit,Comms Network,"Signal strength degraded. Fee charged despite poor service."
+2424-11-27,450.00,Emergency Beacon Parts,Equipment,Credit Note,Signal Corp,"Parts genuine but packaging damaged. Installation pending."
+2424-11-28,-2200.00,Medical Supplies Restocking,Health,Digital Wallet,MedStar Logistics,"Supplies include rare sedatives. Vendor license verification needed."
+2424-11-30,780.00,Asteroid Mining Rights,Income,Contract Payment,Mining Guild,"Rights expire in 60 cycles. Asteroid composition promising."
+2424-12-02,-1150.00,Weapon System Calibration,Defense,Secure Transfer,Armory Station,"Calibration delayed twice. Technician clearance level questioned."
+2424-12-04,320.00,Data Core Backup,Operations,Credit Transfer,Archive Nexus,"Backup incomplete. 12% data corruption detected post-transfer."`;
+
+      // Create blob and download
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      
+      link.setAttribute('href', url);
+      link.setAttribute('download', 'alien_trade_records.csv');
+      link.style.visibility = 'hidden';
+      
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  </script>
+
+</body>
+</html>
