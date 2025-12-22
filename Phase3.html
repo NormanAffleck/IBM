@@ -49,9 +49,11 @@
     .main-card {
       max-width: 900px;
       width: 100%;
-      background: rgba(255, 255, 255, 0.95);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 24px;
       padding: clamp(32px, 5vw, 48px);
+      backdrop-filter: blur(10px);
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
       position: relative;
       z-index: 2;
@@ -87,8 +89,8 @@
     }
 
     .dialogue-box {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.08) 0%, rgba(118, 75, 162, 0.08) 100%);
-      border-left: 4px solid #667eea;
+      background: rgba(255, 255, 255, 0.05);
+      border-left: 4px solid #ffd89b;
       border-radius: 12px;
       padding: 24px;
       position: relative;
@@ -100,7 +102,7 @@
       top: -10px;
       left: 16px;
       font-size: 60px;
-      color: #667eea;
+      color: #ffd89b;
       opacity: 0.3;
       font-family: Georgia, serif;
     }
@@ -108,7 +110,7 @@
     .dialogue-text {
       font-size: 18px;
       line-height: 1.8;
-      color: #2a3858;
+      color: rgba(255, 255, 255, 0.85);
       font-style: italic;
       position: relative;
       z-index: 1;
@@ -118,7 +120,7 @@
       font-size: 12px;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      color: #667eea;
+      color: #ffd89b;
       font-weight: 600;
       margin-bottom: 12px;
       display: flex;
@@ -169,16 +171,16 @@
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: white;
-      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+      background: linear-gradient(135deg, #ffd89b 0%, #ff9a76 100%);
+      color: #1a1a2e;
+      box-shadow: 0 8px 24px rgba(255, 154, 118, 0.4);
       font-size: 18px;
       padding: 18px 36px;
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 12px 32px rgba(102, 126, 234, 0.6);
+      box-shadow: 0 12px 32px rgba(255, 154, 118, 0.6);
     }
 
     .btn-primary:active {
@@ -192,15 +194,15 @@
     }
 
     .btn-secondary {
-      background: rgba(102, 126, 234, 0.1);
-      color: #667eea;
-      border: 1px solid rgba(102, 126, 234, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
     }
 
     .btn-secondary:hover {
-      background: rgba(102, 126, 234, 0.2);
+      background: rgba(255, 255, 255, 0.2);
       transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(102, 126, 234, 0.2);
+      box-shadow: 0 6px 16px rgba(255, 255, 255, 0.1);
     }
 
     .btn-secondary:active {
