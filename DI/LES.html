@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Linear Equation Solver</title>
+  <style>
+    /* ── STARRY BACKGROUND (from main site) ── */
+    .starry-background {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: radial-gradient(ellipse at bottom, #0d1421 0%, #1a1a2e 50%, #16213e 100%);
+      overflow: hidden;
+    }
+    .stars {
+      position: absolute;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, transparent),
+        radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+        radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+        radial-gradient(2px 2px at 160px 30px, #ddd, transparent);
+      background-repeat: repeat;
+      background-size: 200px 100px;
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    .stars::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image:
+        radial-gradient(1px 1px at 50px 20px, rgba(255,255,255,0.9), transparent),
+        radial-gradient(1px 1px at 100px 60px, rgba(255,255,255,0.7), transparent),
+        radial-gradient(2px 2px at 150px 10px, #fff, transparent),
+        radial-gradient(1px 1px at 200px 50px, rgba(255,255,255,0.8), transparent);
+      background-repeat: repeat;
+      background-size: 250px 120px;
+      animation: twinkle 3s ease-in-out infinite alternate-reverse;
+    }
+    .shooting-star {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(45deg, #ffffff, transparent);
+      animation: shooting 8s linear infinite;
+      opacity: 0;
+    }
+    .shooting-star:nth-child(1) { top: 10%; left: -10px; width: 100px; animation-delay: 0s; }
+    .shooting-star:nth-child(2) { top: 25%; left: -10px; width: 80px;  animation-delay: 3s; }
+    .shooting-star:nth-child(3) { top: 60%; left: -10px; width: 120px; animation-delay: 6s; }
+    .nebula {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse at 30% 20%, rgba(138,43,226,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(75,0,130,0.08)   0%, transparent 50%),
+        radial-gradient(ellipse at 10% 60%, rgba(186,85,211,0.06) 0%, transparent 50%);
+      animation: nebula-glow 8s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      0%   { opacity: 0.3; transform: scale(1);   }
+      100% { opacity: 1;   transform: scale(1.1); }
+    }
+    @keyframes shooting {
+      0%   { transform: translateX(-100px) translateY(0px);   opacity: 0; }
+      15%  { opacity: 1; }
+      85%  { opacity: 1; }
+      100% { transform: translateX(calc(100vw + 100px)) translateY(-200px); opacity: 0; }
+    }
+    @keyframes nebula-glow {
+      0%   { opacity: 0.4; }
+      100% { opacity: 0.8; }
+    }
+
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: transparent;
+      color: #ffffff;
+      min-height: 100vh;
+      padding-bottom: 60px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background-color: rgba(155, 89, 182, 0.9);
+      padding: 26px 40px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+    header h1 {
+      font-size: 40px;
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+      margin: 0;
+    }
+    header p {
+      color: rgba(255,255,255,0.8);
+      font-size: 16px;
+      margin-top: 6px;
+    }
+
+    /* ── LAYOUT ── */
+    .solver-wrapper {
+      max-width: 820px;
+      margin: 48px auto 0;
+      padding: 0 20px;
+    }
+
+    /* ── TABS ── */
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 28px;
+      background: rgba(18,18,18,0.6);
+      padding: 6px;
+      border-radius: 12px;
+      border: 1px solid rgba(155,89,182,0.3);
+      backdrop-filter: blur(10px);
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 10px 8px;
+      border: none;
+      border-radius: 8px;
+      background: transparent;
+      color: #aaa;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .tab-btn:hover { color: #b86eff; }
+    .tab-btn.active {
+      background: linear-gradient(135deg, #9b59b6 0%, #b86eff 100%);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(155,89,182,0.4);
+    }
+
+    /* ── PANEL ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── GLASS CARD ── */
+    .card {
+      background: linear-gradient(145deg, rgba(30,30,30,0.9) 0%, rgba(37,37,37,0.9) 100%);
+      border: 2px solid #9b59b6;
+      border-radius: 16px;
+      padding: 28px 24px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 0 1px rgba(155,89,182,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(145deg, rgba(155,89,182,0.08) 0%, rgba(184,110,255,0.04) 100%);
+      pointer-events: none;
+      border-radius: 14px;
+    }
+    .card h2 {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #b86eff;
+      margin-bottom: 20px;
+      text-shadow: 0 1px 3px rgba(184,110,255,0.3);
+    }
+
+    /* ── EQUATION INPUTS ── */
+    .eq-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 14px;
+    }
+    .eq-row input[type="number"],
+    .matrix-row input[type="number"] {
+      width: 74px;
+      padding: 10px;
+      background: rgba(18,18,18,0.85);
+      border: 2px solid rgba(155,89,182,0.6);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 15px;
+      text-align: center;
+      outline: none;
+      transition: all 0.3s ease;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .eq-row input[type="number"]:focus,
+    .matrix-row input[type="number"]:focus {
+      border-color: #b86eff;
+      box-shadow: 0 0 12px rgba(184,110,255,0.35);
+      background: rgba(30,18,50,0.9);
+    }
+    .eq-sym {
+      font-size: 20px;
+      color: rgba(255,255,255,0.4);
+      min-width: 14px;
+      text-align: center;
+    }
+    .eq-var {
+      font-size: 17px;
+      font-style: italic;
+      color: #b86eff;
+    }
+
+    .matrix-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .var-small {
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(184,110,255,0.75);
+    }
+
+    /* ── BUTTONS ── */
+    .solve-btn {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #9b59b6 0%, #b86eff 100%);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 8px;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      box-shadow: 0 4px 12px rgba(155,89,182,0.35);
+      letter-spacing: 0.03em;
+    }
+    .solve-btn:hover {
+      background: linear-gradient(135deg, #b86eff 0%, #c084ff 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(155,89,182,0.5);
+    }
+    .solve-btn:active { transform: translateY(0); }
+
+    .reset-btn {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      color: #aaa;
+      border: 1px solid rgba(155,89,182,0.4);
+      border-radius: 8px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: all 0.25s ease;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+    }
+    .reset-btn:hover { background: rgba(155,89,182,0.1); color: #ddd; border-color: #9b59b6; }
+
+    /* ── RESULT BOX ── */
+    .result-box {
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin-top: 4px;
+      margin-bottom: 16px;
+      border: 2px solid;
+      display: none;
+      backdrop-filter: blur(10px);
+    }
+    .result-box.show { display: block; }
+    .result-box.success    { background: rgba(22,60,30,0.85);  border-color: #27a148; color: #6ee89a; }
+    .result-box.infinite   { background: rgba(60,45,10,0.85);  border-color: #b86a00; color: #fac775; }
+    .result-box.no-solution{ background: rgba(60,15,15,0.85);  border-color: #a32d2d; color: #f09595; }
+    .result-box.error      { background: rgba(60,15,15,0.85);  border-color: #a32d2d; color: #f09595; }
+
+    .result-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin-bottom: 10px;
+    }
+    .result-values { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .result-val { font-size: 24px; font-weight: 700; }
+    .result-val span { font-size: 14px; font-weight: 400; opacity: 0.65; margin-right: 5px; }
+
+    /* ── STEPS CARD ── */
+    .steps-card {
+      background: linear-gradient(145deg, rgba(30,30,30,0.9) 0%, rgba(37,37,37,0.9) 100%);
+      border: 2px solid rgba(155,89,182,0.5);
+      border-radius: 16px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .steps-toggle {
+      background: transparent;
+      border: none;
+      font-size: 13px;
+      cursor: pointer;
+      color: #9b59b6;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .steps-toggle:hover { color: #b86eff; }
+    .steps-content { margin-top: 14px; display: none; }
+    .steps-content.open { display: block; }
+
+    .step {
+      padding: 10px 14px;
+      background: rgba(12,12,20,0.7);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      color: #ddd;
+      border-left: 3px solid #9b59b6;
+    }
+    .step-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #9b59b6;
+      margin-bottom: 4px;
+    }
+    .step-eq {
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      color: #e8d5ff;
+    }
+
+    /* ── NUMBER LINE ── */
+    .number-line {
+      margin-top: 14px;
+      padding: 12px 14px;
+      background: rgba(12,12,20,0.7);
+      border-radius: 8px;
+    }
+    .nl-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #9b59b6;
+      margin-bottom: 10px;
+    }
+
+    /* ── INFO BADGE ── */
+    .info-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      background: rgba(155,89,182,0.15);
+      color: #b86eff;
+      border: 1px solid rgba(184,110,255,0.3);
+      margin-bottom: 14px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      background: rgba(13,17,23,0.9);
+      color: #c9d1d9;
+      text-align: center;
+      font-size: 14px;
+      backdrop-filter: blur(10px);
+    }
+
+    @media (max-width: 500px) {
+      header h1 { font-size: 28px; }
+      .eq-row input[type="number"], .matrix-row input[type="number"] { width: 60px; }
+      .tabs { flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="starry-background">
+  <div class="stars"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="shooting-star"></div>
+  <div class="nebula"></div>
+</div>
+
+<header>
+  <h1>Linear Equation Solver</h1>
+  <p>Solve systems of linear equations step by step</p>
+</header>
+
+<div class="solver-wrapper">
+
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('one',this)">1 Variable</button>
+    <button class="tab-btn" onclick="switchTab('two',this)">2 Variables</button>
+    <button class="tab-btn" onclick="switchTab('three',this)">3 Variables</button>
+    <button class="tab-btn" onclick="switchTab('quad',this)">Quadratic</button>
+  </div>
+
+  <!-- 1 VARIABLE -->
+  <div id="panel-one" class="panel active">
+    <div class="card">
+      <h2>Single equation — ax + b = c</h2>
+      <div class="eq-row">
+        <input type="number" id="one-a" value="2" step="any" />
+        <span class="eq-var">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="one-b" value="3" step="any" />
+        <span class="eq-sym">=</span>
+        <input type="number" id="one-c" value="11" step="any" />
+      </div>
+      <button class="solve-btn" onclick="solveOne()">Solve</button>
+      <button class="reset-btn" onclick="resetOne()">Reset</button>
+    </div>
+    <div id="one-result" class="result-box"></div>
+    <div class="steps-card" id="one-steps-card" style="display:none">
+      <button class="steps-toggle" onclick="toggleSteps('one-steps',this)">&#9658; Show steps</button>
+      <div class="steps-content" id="one-steps"></div>
+      <div id="one-nl" class="number-line" style="display:none">
+        <div class="nl-label">Solution on number line</div>
+        <svg id="one-nl-svg" width="100%" height="52"></svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2 VARIABLES -->
+  <div id="panel-two" class="panel">
+    <div class="card">
+      <h2>System of 2 equations</h2>
+      <div class="eq-row">
+        <input type="number" id="t-a1" value="2" step="any" /><span class="eq-var">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="t-b1" value="3" step="any" /><span class="eq-var">y</span>
+        <span class="eq-sym">=</span>
+        <input type="number" id="t-c1" value="7" step="any" />
+      </div>
+      <div class="eq-row">
+        <input type="number" id="t-a2" value="4" step="any" /><span class="eq-var">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="t-b2" value="-1" step="any" /><span class="eq-var">y</span>
+        <span class="eq-sym">=</span>
+        <input type="number" id="t-c2" value="5" step="any" />
+      </div>
+      <div class="info-badge">Use negative coefficients for subtraction</div>
+      <button class="solve-btn" onclick="solveTwo()">Solve</button>
+      <button class="reset-btn" onclick="resetTwo()">Reset</button>
+    </div>
+    <div id="two-result" class="result-box"></div>
+    <div class="steps-card" id="two-steps-card" style="display:none">
+      <button class="steps-toggle" onclick="toggleSteps('two-steps',this)">&#9658; Show steps</button>
+      <div class="steps-content" id="two-steps"></div>
+    </div>
+  </div>
+
+  <!-- 3 VARIABLES -->
+  <div id="panel-three" class="panel">
+    <div class="card">
+      <h2>System of 3 equations</h2>
+      <div class="matrix-row">
+        <input type="number" id="r1c1" value="2" step="any" /><span class="var-small">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r1c2" value="1" step="any" /><span class="var-small">y</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r1c3" value="-1" step="any" /><span class="var-small">z</span>
+        <span class="eq-sym">=</span>
+        <input type="number" id="r1r" value="8" step="any" />
+      </div>
+      <div class="matrix-row">
+        <input type="number" id="r2c1" value="-3" step="any" /><span class="var-small">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r2c2" value="-1" step="any" /><span class="var-small">y</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r2c3" value="2" step="any" /><span class="var-small">z</span>
+        <span class="eq-sym">=</span>
+        <input type="number" id="r2r" value="-11" step="any" />
+      </div>
+      <div class="matrix-row">
+        <input type="number" id="r3c1" value="-2" step="any" /><span class="var-small">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r3c2" value="1" step="any" /><span class="var-small">y</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="r3c3" value="2" step="any" /><span class="var-small">z</span>
+        <span class="eq-sym">=</span>
+        <input type="number" id="r3r" value="-3" step="any" />
+      </div>
+      <button class="solve-btn" onclick="solveThree()">Solve</button>
+      <button class="reset-btn" onclick="resetThree()">Reset</button>
+    </div>
+    <div id="three-result" class="result-box"></div>
+    <div class="steps-card" id="three-steps-card" style="display:none">
+      <button class="steps-toggle" onclick="toggleSteps('three-steps',this)">&#9658; Show steps</button>
+      <div class="steps-content" id="three-steps"></div>
+    </div>
+  </div>
+
+  <!-- QUADRATIC -->
+  <div id="panel-quad" class="panel">
+    <div class="card">
+      <h2>Quadratic — ax&#178; + bx + c = 0</h2>
+      <div class="eq-row">
+        <input type="number" id="q-a" value="1" step="any" /><span class="eq-var">x&#178;</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="q-b" value="-5" step="any" /><span class="eq-var">x</span>
+        <span class="eq-sym">+</span>
+        <input type="number" id="q-c" value="6" step="any" />
+        <span class="eq-sym">= 0</span>
+      </div>
+      <button class="solve-btn" onclick="solveQuad()">Solve</button>
+      <button class="reset-btn" onclick="resetQuad()">Reset</button>
+    </div>
+    <div id="quad-result" class="result-box"></div>
+    <div class="steps-card" id="quad-steps-card" style="display:none">
+      <button class="steps-toggle" onclick="toggleSteps('quad-steps',this)">&#9658; Show steps</button>
+      <div class="steps-content" id="quad-steps"></div>
+    </div>
+  </div>
+
+</div>
+
+<footer>&#169; 2025 Norman Affleck. All rights reserved.</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  function toggleSteps(id, btn) {
+    const el = document.getElementById(id);
+    const open = el.classList.toggle('open');
+    btn.innerHTML = open ? '&#9660; Hide steps' : '&#9658; Show steps';
+  }
+
+  function fmt(n) {
+    if (Math.abs(n) < 1e-10) return '0';
+    const r = parseFloat(n.toFixed(6));
+    return Number.isInteger(r) ? String(r) : r.toString();
+  }
+
+  function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+
+  function frac(n, d) {
+    if (Math.abs(d) < 1e-12) return null;
+    const g = gcd(Math.round(Math.abs(n) * 1e9), Math.round(Math.abs(d) * 1e9));
+    const nn = Math.round(n * 1e9) / g;
+    const dd = Math.round(d * 1e9) / g;
+    if (dd === 1) return String(nn);
+    return dd < 0 ? String(-nn) + '/' + String(-dd) : String(nn) + '/' + String(dd);
+  }
+
+  function showResult(id, type, title, values) {
+    const el = document.getElementById(id);
+    el.className = 'result-box show ' + type;
+    el.innerHTML = '<div class="result-title">' + title + '</div><div class="result-values">' +
+      values.map(v => '<div class="result-val"><span>' + v.label + ' =</span>' + v.val + '</div>').join('') + '</div>';
+  }
+
+  function showMessage(id, type, msg) {
+    const el = document.getElementById(id);
+    el.className = 'result-box show ' + type;
+    el.innerHTML = '<div class="result-title">' + msg + '</div>';
+  }
+
+  function buildStep(label, eq) {
+    return '<div class="step">' + (label ? '<div class="step-label">' + label + '</div>' : '') +
+      '<div class="step-eq">' + eq + '</div></div>';
+  }
+
+  function showSteps(stepsId, html, cardId) {
+    const el = document.getElementById(stepsId);
+    el.innerHTML = html;
+    document.getElementById(cardId).style.display = '';
+    el.classList.remove('open');
+    el.previousElementSibling.innerHTML = '&#9658; Show steps';
+  }
+
+  // 1 VARIABLE
+  function solveOne() {
+    const a = parseFloat(document.getElementById('one-a').value);
+    const b = parseFloat(document.getElementById('one-b').value);
+    const c = parseFloat(document.getElementById('one-c').value);
+    if ([a,b,c].some(isNaN)) { showMessage('one-result','error','Please fill in all coefficients.'); return; }
+    let s = '';
+    s += buildStep('Starting equation', fmt(a) + 'x + ' + fmt(b) + ' = ' + fmt(c));
+    s += buildStep('Subtract ' + fmt(b) + ' from both sides', fmt(a) + 'x = ' + fmt(c-b));
+    if (Math.abs(a) < 1e-12) {
+      if (Math.abs(c-b) < 1e-10) { s += buildStep('Coeff of x is 0','0 = 0 → infinitely many solutions'); showMessage('one-result','infinite','Infinitely many solutions (identity)'); }
+      else { s += buildStep('Coeff of x is 0','0 ≠ 0 → no solution'); showMessage('one-result','no-solution','No solution (contradiction)'); }
+    } else {
+      const val = (c-b)/a, f = frac(c-b,a);
+      s += buildStep('Divide by ' + fmt(a), 'x = ' + fmt(c-b) + ' / ' + fmt(a) + ' = ' + (f || fmt(val)));
+      showResult('one-result','success','Solution found',[{label:'x',val:(f||fmt(val))}]);
+      drawNL(val);
+    }
+    showSteps('one-steps', s, 'one-steps-card');
+  }
+
+  function drawNL(x) {
+    const nl = document.getElementById('one-nl');
+    const svg = document.getElementById('one-nl-svg');
+    nl.style.display = '';
+    const W = nl.clientWidth || 380;
+    const cx = W/2, pad = 36;
+    const spread = Math.max(Math.abs(x)*1.5, 4);
+    const scale = (W - pad*2) / (2*spread);
+    const px = cx + x * scale;
+    svg.setAttribute('viewBox', '0 0 ' + W + ' 52');
+    let inner = '<line x1="' + pad + '" y1="26" x2="' + (W-pad) + '" y2="26" stroke="#9b59b6" stroke-width="1.5"/>';
+    for (let i = -3; i <= 3; i++) {
+      const tx = cx + i*spread/3*scale;
+      inner += '<line x1="' + tx + '" y1="21" x2="' + tx + '" y2="31" stroke="#9b59b6" stroke-width="1"/>';
+      inner += '<text x="' + tx + '" y="46" text-anchor="middle" font-size="10" fill="#9b59b6" font-family="Segoe UI,sans-serif">' + fmt(i*spread/3) + '</text>';
+    }
+    inner += '<circle cx="' + px + '" cy="26" r="6" fill="#b86eff"/>';
+    inner += '<text x="' + px + '" y="14" text-anchor="middle" font-size="11" font-weight="600" fill="#e8d5ff" font-family="Segoe UI,sans-serif">x=' + fmt(x) + '</text>';
+    svg.innerHTML = inner;
+  }
+
+  function resetOne() {
+    [['one-a',2],['one-b',3],['one-c',11]].forEach(function(p){ document.getElementById(p[0]).value=p[1]; });
+    document.getElementById('one-result').className='result-box';
+    document.getElementById('one-steps-card').style.display='none';
+    document.getElementById('one-nl').style.display='none';
+  }
+
+  // 2 VARIABLES
+  function solveTwo() {
+    var a1=+document.getElementById('t-a1').value, b1=+document.getElementById('t-b1').value, c1=+document.getElementById('t-c1').value;
+    var a2=+document.getElementById('t-a2').value, b2=+document.getElementById('t-b2').value, c2=+document.getElementById('t-c2').value;
+    if ([a1,b1,c1,a2,b2,c2].some(isNaN)) { showMessage('two-result','error','Please fill in all coefficients.'); return; }
+    var s = '';
+    s += buildStep('Equation 1', fmt(a1)+'x + '+fmt(b1)+'y = '+fmt(c1));
+    s += buildStep('Equation 2', fmt(a2)+'x + '+fmt(b2)+'y = '+fmt(c2));
+    var det = a1*b2 - a2*b1;
+    s += buildStep('Determinant', fmt(a1)+'·'+fmt(b2)+' − '+fmt(a2)+'·'+fmt(b1)+' = '+fmt(det));
+    if (Math.abs(det) < 1e-12) {
+      var r1=Math.abs(a2)>1e-12?a1/a2:null, r2=Math.abs(b2)>1e-12?b1/b2:null, rC=Math.abs(c2)>1e-12?c1/c2:null;
+      var dep=r1!==null&&r2!==null&&rC!==null&&Math.abs(r1-r2)<1e-9&&Math.abs(r1-rC)<1e-9;
+      s += buildStep('det = 0', dep?'Dependent → infinitely many solutions':'Parallel → no solution');
+      showMessage('two-result', dep?'infinite':'no-solution', dep?'Infinitely many solutions (dependent)':'No solution (parallel lines)');
+    } else {
+      var xN=c1*b2-c2*b1, yN=a1*c2-a2*c1;
+      s += buildStep("Cramer's rule — x", '('+fmt(c1)+'·'+fmt(b2)+' − '+fmt(c2)+'·'+fmt(b1)+') / '+fmt(det));
+      s += buildStep("Cramer's rule — y", '('+fmt(a1)+'·'+fmt(c2)+' − '+fmt(a2)+'·'+fmt(c1)+') / '+fmt(det));
+      var fx=frac(xN,det)||fmt(xN/det), fy=frac(yN,det)||fmt(yN/det);
+      showResult('two-result','success','Unique solution found',[{label:'x',val:fx},{label:'y',val:fy}]);
+    }
+    showSteps('two-steps', s, 'two-steps-card');
+  }
+
+  function resetTwo() {
+    [['t-a1',2],['t-b1',3],['t-c1',7],['t-a2',4],['t-b2',-1],['t-c2',5]].forEach(function(p){ document.getElementById(p[0]).value=p[1]; });
+    document.getElementById('two-result').className='result-box';
+    document.getElementById('two-steps-card').style.display='none';
+  }
+
+  // 3 VARIABLES
+  function solveThree() {
+    var ids=['r1c1','r1c2','r1c3','r1r','r2c1','r2c2','r2c3','r2r','r3c1','r3c2','r3c3','r3r'];
+    var v=ids.map(function(id){ return parseFloat(document.getElementById(id).value); });
+    if (v.some(isNaN)) { showMessage('three-result','error','Please fill in all coefficients.'); return; }
+    var M=[[v[0],v[1],v[2],v[3]],[v[4],v[5],v[6],v[7]],[v[8],v[9],v[10],v[11]]];
+    function rStr(r,i){ return 'R'+(i+1)+': '+fmt(r[0])+'x + '+fmt(r[1])+'y + '+fmt(r[2])+'z = '+fmt(r[3]); }
+    var s=buildStep('Augmented matrix', M.map(rStr).join('<br>'));
+    for (var col=0;col<3;col++){
+      var max=col;
+      for(var row=col+1;row<3;row++) if(Math.abs(M[row][col])>Math.abs(M[max][col])) max=row;
+      if(max!==col){ var tmp=M[col]; M[col]=M[max]; M[max]=tmp; s+=buildStep('Swap R'+(col+1)+' and R'+(max+1),M.map(rStr).join('<br>')); }
+      if(Math.abs(M[col][col])<1e-12) continue;
+      for(var row2=col+1;row2<3;row2++){
+        var f=M[row2][col]/M[col][col];
+        if(Math.abs(f)<1e-12) continue;
+        for(var k=col;k<=3;k++) M[row2][k]-=f*M[col][k];
+        s+=buildStep('R'+(row2+1)+'  = R'+(row2+1)+' − ('+fmt(f)+')·R'+(col+1),M.map(rStr).join('<br>'));
+      }
+    }
+    for(var i=0;i<3;i++){
+      if(M[i][0]===0&&M[i][1]===0&&M[i][2]===0){
+        if(Math.abs(M[i][3])>1e-10){ showMessage('three-result','no-solution','No solution (inconsistent)'); showSteps('three-steps',s,'three-steps-card'); return; }
+        else { showMessage('three-result','infinite','Infinitely many solutions (dependent)'); showSteps('three-steps',s,'three-steps-card'); return; }
+      }
+    }
+    var x=new Array(3).fill(0);
+    for(var row=2;row>=0;row--){ var sum=M[row][3]; for(var k=row+1;k<3;k++) sum-=M[row][k]*x[k]; x[row]=sum/M[row][row]; }
+    s+=buildStep('Back substitution','x = '+fmt(x[0])+', y = '+fmt(x[1])+', z = '+fmt(x[2]));
+    showResult('three-result','success','Unique solution found',[{label:'x',val:fmt(x[0])},{label:'y',val:fmt(x[1])},{label:'z',val:fmt(x[2])}]);
+    showSteps('three-steps',s,'three-steps-card');
+  }
+
+  function resetThree(){
+    var d={r1c1:2,r1c2:1,r1c3:-1,r1r:8,r2c1:-3,r2c2:-1,r2c3:2,r2r:-11,r3c1:-2,r3c2:1,r3c3:2,r3r:-3};
+    Object.keys(d).forEach(function(id){ document.getElementById(id).value=d[id]; });
+    document.getElementById('three-result').className='result-box';
+    document.getElementById('three-steps-card').style.display='none';
+  }
+
+  // QUADRATIC
+  function solveQuad(){
+    var a=+document.getElementById('q-a').value, b=+document.getElementById('q-b').value, c=+document.getElementById('q-c').value;
+    if([a,b,c].some(isNaN)){ showMessage('quad-result','error','Please fill in all coefficients.'); return; }
+    var s=buildStep('Equation',fmt(a)+'x\u00B2 + '+fmt(b)+'x + '+fmt(c)+' = 0');
+    if(Math.abs(a)<1e-12){
+      s+=buildStep('a = 0, reduces to linear',fmt(b)+'x + '+fmt(c)+' = 0');
+      if(Math.abs(b)<1e-12){ showMessage('quad-result',Math.abs(c)<1e-12?'infinite':'no-solution',Math.abs(c)<1e-12?'All real numbers (0=0)':'No solution'); }
+      else{ var xl=-c/b; s+=buildStep('Solve','x = '+fmt(xl)); showResult('quad-result','success','Linear root (a=0)',[{label:'x',val:fmt(xl)}]); }
+      showSteps('quad-steps',s,'quad-steps-card'); return;
+    }
+    var disc=b*b-4*a*c;
+    s+=buildStep('Discriminant \u0394 = b\u00B2 \u2212 4ac',fmt(b)+'\u00B2 \u2212 4\u00B7'+fmt(a)+'\u00B7'+fmt(c)+' = '+fmt(disc));
+    if(disc>1e-12){
+      var sq=Math.sqrt(disc), x1=(-b+sq)/(2*a), x2=(-b-sq)/(2*a);
+      s+=buildStep('Two real roots','x = (\u2212'+fmt(b)+' \u00B1 \u221A'+fmt(disc)+') / (2\u00B7'+fmt(a)+')');
+      s+=buildStep('','x\u2081 = '+fmt(x1)+',  x\u2082 = '+fmt(x2));
+      showResult('quad-result','success','Two real roots',[{label:'x\u2081',val:fmt(x1)},{label:'x\u2082',val:fmt(x2)}]);
+    } else if(Math.abs(disc)<=1e-12){
+      var xr=-b/(2*a);
+      s+=buildStep('\u0394 = 0 \u2192 one repeated root','x = '+fmt(xr));
+      showResult('quad-result','success','One repeated root',[{label:'x',val:fmt(xr)}]);
+    } else {
+      var re=-b/(2*a), im=Math.sqrt(-disc)/(2*a);
+      s+=buildStep('\u0394 < 0 \u2192 complex roots','x = '+fmt(re)+' \u00B1 '+fmt(im)+'i');
+      showResult('quad-result','no-solution','Two complex roots',[{label:'x\u2081',val:fmt(re)+' + '+fmt(im)+'i'},{label:'x\u2082',val:fmt(re)+' \u2212 '+fmt(im)+'i'}]);
+    }
+    showSteps('quad-steps',s,'quad-steps-card');
+  }
+
+  function resetQuad(){
+    [['q-a',1],['q-b',-5],['q-c',6]].forEach(function(p){ document.getElementById(p[0]).value=p[1]; });
+    document.getElementById('quad-result').className='result-box';
+    document.getElementById('quad-steps-card').style.display='none';
+  }
+</script>
+</body>
+</html>
