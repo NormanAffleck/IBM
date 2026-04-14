@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>Digital Literacy</title>
   <style>
-    /* STARRY BACKGROUND */
     .starry-background {
       position: fixed;
       top: 0;
@@ -57,26 +55,9 @@
       opacity: 0;
     }
 
-    .shooting-star:nth-child(1) {
-      top: 10%;
-      left: -10px;
-      width: 100px;
-      animation-delay: 0s;
-    }
-
-    .shooting-star:nth-child(2) {
-      top: 25%;
-      left: -10px;
-      width: 80px;
-      animation-delay: 3s;
-    }
-
-    .shooting-star:nth-child(3) {
-      top: 60%;
-      left: -10px;
-      width: 120px;
-      animation-delay: 6s;
-    }
+    .shooting-star:nth-child(1) { top: 10%; left: -10px; width: 100px; animation-delay: 0s; }
+    .shooting-star:nth-child(2) { top: 25%; left: -10px; width: 80px; animation-delay: 3s; }
+    .shooting-star:nth-child(3) { top: 60%; left: -10px; width: 120px; animation-delay: 6s; }
 
     .nebula {
       position: absolute;
@@ -108,7 +89,6 @@
       100% { opacity: 0.8; }
     }
 
-    /* PASSWORD OVERLAY STYLES */
     #passwordOverlay {
       position: fixed;
       top: 0;
@@ -150,9 +130,7 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
-    .password-input-group {
-      margin-bottom: 25px;
-    }
+    .password-input-group { margin-bottom: 25px; }
 
     .password-input {
       width: 100%;
@@ -193,9 +171,7 @@
       box-shadow: 0 4px 12px rgba(155, 89, 182, 0.4);
     }
 
-    .password-submit:active {
-      transform: translateY(0);
-    }
+    .password-submit:active { transform: translateY(0); }
 
     .error-message {
       color: #e74c3c;
@@ -206,21 +182,11 @@
       font-family: 'Segoe UI', Tahoma, sans-serif;
     }
 
-    .error-message.show {
-      opacity: 1;
-    }
+    .error-message.show { opacity: 1; }
+    .loading { opacity: 0.7; pointer-events: none; }
 
-    .loading {
-      opacity: 0.7;
-      pointer-events: none;
-    }
+    #mainContent { display: none; }
 
-    /* MAIN WEBSITE STYLES (HIDDEN INITIALLY) */
-    #mainContent {
-      display: none;
-    }
-
-    /* MAIN STYLES */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: transparent;
@@ -231,7 +197,6 @@
       min-height: 100vh;
     }
 
-    /* HEADER STRUCTURE - Fixed positioning */
     header {
       background-color: rgba(155, 89, 182, 0.9);
       padding: 30px 40px;
@@ -257,7 +222,6 @@
       text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
     }
 
-    /* PROFILE BOX - Fixed positioning */
     .profile-link {
       position: absolute;
       left: 0;
@@ -304,9 +268,7 @@
       box-shadow: 0 0 8px rgba(184, 110, 255, 0.4);
     }
 
-    .profile-info {
-      text-align: left;
-    }
+    .profile-info { text-align: left; }
 
     .profile-info p {
       margin: 2px 0;
@@ -315,11 +277,8 @@
       transition: color 0.3s ease;
     }
 
-    .profile-box:hover .profile-info p {
-      color: #ffffff;
-    }
+    .profile-box:hover .profile-info p { color: #ffffff; }
 
-    /* GRADE CARD - Fixed positioning */
     #gradeCard {
       position: absolute;
       right: 0;
@@ -364,7 +323,6 @@
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
     }
 
-    /* ENHANCED ASSIGNMENT CARDS */
     .assignment-container {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -380,9 +338,7 @@
       border-radius: 16px;
       padding: 24px 20px;
       transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      box-shadow: 
-        0 8px 25px rgba(0, 0, 0, 0.3),
-        0 0 0 1px rgba(155, 89, 182, 0.2);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(155, 89, 182, 0.2);
       text-decoration: none;
       color: #ffffff;
       display: flex;
@@ -399,26 +355,18 @@
     .assignment-bar::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
+      top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(145deg, rgba(155, 89, 182, 0.1) 0%, rgba(184, 110, 255, 0.05) 100%);
       opacity: 0;
       transition: opacity 0.4s ease;
       border-radius: 14px;
     }
 
-    .assignment-bar:hover::before {
-      opacity: 1;
-    }
+    .assignment-bar:hover::before { opacity: 1; }
 
     .assignment-bar:hover {
       transform: translateY(-8px) scale(1.02);
-      box-shadow: 
-        0 20px 40px rgba(155, 89, 182, 0.3),
-        0 0 0 2px rgba(184, 110, 255, 0.8),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      box-shadow: 0 20px 40px rgba(155, 89, 182, 0.3), 0 0 0 2px rgba(184, 110, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
       border-color: #b86eff;
       background: linear-gradient(145deg, rgba(184, 110, 255, 0.2) 0%, rgba(155, 89, 182, 0.2) 100%);
     }
@@ -480,37 +428,154 @@
       text-shadow: 0 1px 3px rgba(184, 110, 255, 0.3);
     }
 
+    /* ── SOLVER SECTION ── */
+    .solver-section {
+      max-width: 1200px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+
+    .solver-section-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(184, 110, 255, 0.6);
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .solver-card {
+      background: linear-gradient(145deg, rgba(30, 30, 30, 0.9) 0%, rgba(37, 37, 37, 0.9) 100%);
+      border: 2px solid #9b59b6;
+      border-radius: 16px;
+      padding: 28px 32px;
+      transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(155, 89, 182, 0.2);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .solver-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(145deg, rgba(155, 89, 182, 0.1) 0%, rgba(184, 110, 255, 0.05) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 14px;
+    }
+
+    .solver-card:hover::before { opacity: 1; }
+
+    .solver-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(155, 89, 182, 0.3), 0 0 0 2px rgba(184, 110, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      border-color: #b86eff;
+    }
+
+    .solver-icon {
+      width: 72px;
+      height: 72px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(155, 89, 182, 0.3) 0%, rgba(184, 110, 255, 0.15) 100%);
+      border: 1.5px solid rgba(184, 110, 255, 0.4);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .solver-icon svg {
+      width: 36px;
+      height: 36px;
+      opacity: 0.9;
+    }
+
+    .solver-info {
+      flex: 1;
+      z-index: 1;
+      position: relative;
+    }
+
+    .solver-info h3 {
+      margin: 0 0 6px 0;
+      color: #b86eff;
+      font-size: 20px;
+      font-weight: 600;
+      text-shadow: 0 2px 4px rgba(184, 110, 255, 0.3);
+    }
+
+    .solver-info p {
+      margin: 0 0 16px 0;
+      font-size: 14px;
+      color: #aaaaaa;
+      line-height: 1.5;
+    }
+
+    .solver-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .solver-tag {
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: rgba(155, 89, 182, 0.15);
+      color: #b86eff;
+      border: 1px solid rgba(184, 110, 255, 0.3);
+    }
+
+    .solver-cta {
+      z-index: 1;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .solver-button {
+      display: inline-block;
+      padding: 12px 28px;
+      background: linear-gradient(135deg, #9b59b6 0%, #b86eff 100%);
+      color: white;
+      border-radius: 10px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(155, 89, 182, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      white-space: nowrap;
+    }
+
+    .solver-button:hover {
+      background: linear-gradient(135deg, #b86eff 0%, #c084ff 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(155, 89, 182, 0.5);
+    }
+
     @media (max-width: 768px) {
-      .assignment-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
-      }
-      
-      .header-container h1 {
-        font-size: 36px;
-      }
-      
-      .profile-link,
-      #gradeCard {
-        position: static;
-        transform: none;
-        margin: 10px auto;
-      }
-      
-      .header-container {
-        flex-direction: column;
-        gap: 20px;
-      }
+      .assignment-container { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .header-container h1 { font-size: 36px; }
+      .profile-link, #gradeCard { position: static; transform: none; margin: 10px auto; }
+      .header-container { flex-direction: column; gap: 20px; }
+      .solver-card { flex-direction: column; text-align: center; gap: 20px; }
+      .solver-info p { margin-bottom: 12px; }
+      .solver-tags { justify-content: center; }
     }
 
     @media (max-width: 480px) {
-      .assignment-container {
-        grid-template-columns: 1fr;
-      }
-      
-      .header-container h1 {
-        font-size: 28px;
-      }
+      .assignment-container { grid-template-columns: 1fr; }
+      .header-container h1 { font-size: 28px; }
     }
 
     footer {
@@ -525,7 +590,6 @@
 </head>
 <body>
 
-<!-- Starry Background -->
 <div class="starry-background">
   <div class="stars"></div>
   <div class="shooting-star"></div>
@@ -534,34 +598,21 @@
   <div class="nebula"></div>
 </div>
 
-<!-- Password Overlay -->
 <div id="passwordOverlay">
   <div class="password-container">
     <h2>🔒 Access Required</h2>
     <p>Please enter the password to access the website</p>
     <form id="passwordForm">
       <div class="password-input-group">
-        <input 
-          type="password" 
-          id="passwordInput" 
-          class="password-input" 
-          placeholder="Enter password..."
-          autocomplete="off"
-        >
+        <input type="password" id="passwordInput" class="password-input" placeholder="Enter password..." autocomplete="off">
       </div>
-      <button type="submit" class="password-submit" id="submitBtn">
-        Access Website
-      </button>
-      <div class="error-message" id="errorMessage">
-        Incorrect password. Please try again.
-      </div>
+      <button type="submit" class="password-submit" id="submitBtn">Access Website</button>
+      <div class="error-message" id="errorMessage">Incorrect password. Please try again.</div>
     </form>
   </div>
 </div>
 
-<!-- Main Website Content (Hidden Initially) -->
 <div id="mainContent">
-  <!-- Header with Profile + Title + Grade Card -->
   <header>
     <div class="header-container">
       <a href="https://normanaffleck.github.io/IBM/FT/FT" target="_blank" class="profile-link">
@@ -578,7 +629,6 @@
       
       <h1>Digital<br>Literacy</h1>
       
-      <!-- Grade Card -->
       <div id="gradeCard">
         <h3>Calculated Grade</h3>
         <h1 id="finalGrade">Loading...</h1>
@@ -587,10 +637,8 @@
     </div>
   </header>
 
-  <!-- Intro Text -->
   <p class="intro-text">Explore my assignments below – click to view each one!</p>
 
-  <!-- Assignments Grid -->
   <div class="assignment-container">
     <div class="assignment-bar">
       <h3>Week 2: Identity Check</h3>
@@ -667,18 +715,45 @@
     </div>
   </div>
 
-  <!-- Footer -->
-  <footer>
-    © 2025 Norman Affleck. All rights reserved.
-  </footer>
+  <!-- ── LINEAR EQUATION SOLVER CARD ── -->
+  <div class="solver-section">
+    <p class="solver-section-label">Tools &amp; Utilities</p>
+    <div class="solver-card">
+      <div class="solver-icon">
+        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <text x="4" y="15" font-family="'Segoe UI', sans-serif" font-size="13" font-style="italic" fill="#b86eff" font-weight="700">ax</text>
+          <text x="18" y="15" font-family="'Segoe UI', sans-serif" font-size="11" fill="rgba(184,110,255,0.6)">+b</text>
+          <line x1="4" y1="20" x2="32" y2="20" stroke="rgba(184,110,255,0.4)" stroke-width="1.5"/>
+          <text x="4" y="32" font-family="'Segoe UI', sans-serif" font-size="11" fill="rgba(184,110,255,0.6)">=</text>
+          <text x="12" y="32" font-family="'Segoe UI', sans-serif" font-size="13" font-style="italic" fill="#b86eff" font-weight="700">x</text>
+        </svg>
+      </div>
+
+      <div class="solver-info">
+        <h3>Linear Equation Solver</h3>
+        <p>Solve linear and quadratic equations step by step — supports 1, 2 &amp; 3 variable systems with full working shown.</p>
+        <div class="solver-tags">
+          <span class="solver-tag">1 Variable</span>
+          <span class="solver-tag">2 Variables</span>
+          <span class="solver-tag">3 Variables</span>
+          <span class="solver-tag">Quadratic</span>
+          <span class="solver-tag">Step-by-step</span>
+        </div>
+      </div>
+
+      <div class="solver-cta">
+        <a class="solver-button" href="LEC.html">Open Solver →</a>
+      </div>
+    </div>
+  </div>
+
+  <footer>© 2025 Norman Affleck. All rights reserved.</footer>
 </div>
 
-<!-- Scripts -->
 <script>
-  // Password verification system
   class PasswordManager {
     constructor() {
-      this.scriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec'; // Replace with your actual script URL
+      this.scriptUrl = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
       this.init();
     }
 
@@ -700,7 +775,6 @@
         }
       });
 
-      // Focus input on load
       input.focus();
     }
 
@@ -710,16 +784,12 @@
         return;
       }
 
-      // Show loading state
       submitBtn.textContent = 'Verifying...';
       submitBtn.classList.add('loading');
       errorMsg.classList.remove('show');
 
       try {
-        // For demonstration, we'll use client-side verification
-        // In production, replace this with actual Google Apps Script call
         const isValid = await this.checkPassword(password);
-        
         if (isValid) {
           this.grantAccess();
         } else {
@@ -735,39 +805,21 @@
     }
 
     async checkPassword(password) {
-      // Simulate API call delay
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // For security, in production you should call your Google Apps Script:
-      // const response = await fetch(this.scriptUrl, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ password: password })
-      // });
-      // const result = await response.json();
-      // return result.valid;
-
-      // Temporary client-side check (replace with server-side)
       return password === 'Vectorfall';
     }
 
     showError(errorElement, message) {
       errorElement.textContent = message;
       errorElement.classList.add('show');
-      
-      // Shake animation
       const container = document.querySelector('.password-container');
       container.style.animation = 'shake 0.5s ease-in-out';
-      setTimeout(() => {
-        container.style.animation = '';
-      }, 500);
+      setTimeout(() => { container.style.animation = ''; }, 500);
     }
 
     grantAccess() {
       const overlay = document.getElementById('passwordOverlay');
       const mainContent = document.getElementById('mainContent');
-      
-      // Fade out overlay
       overlay.style.opacity = '0';
       setTimeout(() => {
         overlay.style.display = 'none';
@@ -777,7 +829,6 @@
     }
 
     loadGrades() {
-      // Load grades after successful authentication
       fetch("https://script.google.com/macros/s/AKfycbyCpHjXkaLlCQyqwQ69b1CfeNA2OLOuI-2hCP-J5yFnGPj-yA1BgPoLn1NTDjCMoSuW/exec")
         .then(response => response.json())
         .then(data => {
@@ -791,7 +842,6 @@
     }
   }
 
-  // Add shake animation
   const style = document.createElement('style');
   style.textContent = `
     @keyframes shake {
@@ -802,10 +852,7 @@
   `;
   document.head.appendChild(style);
 
-  // Initialize password manager
-  window.addEventListener('load', () => {
-    new PasswordManager();
-  });
+  window.addEventListener('load', () => { new PasswordManager(); });
 </script>
 
 </body>
