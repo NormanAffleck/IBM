@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>4-Day Study Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper: #FAF7F0;
+    --ink: #1F2421;
+    --ink-soft: #5B5A52;
+    --navy: #2B4257;
+    --amber: #B9852E;
+    --sage: #5C7A61;
+    --line: #DFD9C8;
+    --card: #FFFFFF;
+    --done-bg: #F1EEE3;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #17181A;
+      --ink: #EDEAE0;
+      --ink-soft: #A9A69B;
+      --navy: #7FA3C4;
+      --amber: #E3AC5C;
+      --sage: #86B08C;
+      --line: #34342F;
+      --card: #202220;
+      --done-bg: #262822;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #17181A;
+    --ink: #EDEAE0;
+    --ink-soft: #A9A69B;
+    --navy: #7FA3C4;
+    --amber: #E3AC5C;
+    --sage: #86B08C;
+    --line: #34342F;
+    --card: #202220;
+    --done-bg: #262822;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 28px 20px 60px; }
+
+  header.top { margin-bottom: 22px; }
+  .eyebrow-row { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-size: clamp(26px, 6vw, 34px);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .sub { color: var(--ink-soft); font-size: 14px; margin: 0; line-height: 1.5; max-width: 46ch; }
+
+  .overall {
+    margin-top: 18px;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .overall .num { font-family: 'Fraunces', serif; font-size: 22px; font-weight: 600; min-width: 52px; }
+  .bar-track { flex: 1; height: 8px; background: var(--line); border-radius: 99px; overflow: hidden; }
+  .bar-fill { height: 100%; background: var(--amber); border-radius: 99px; transition: width .35s ease; width: 0%; }
+  .overall .label { font-size: 12px; color: var(--ink-soft); white-space: nowrap; }
+
+  nav.days {
+    display: flex;
+    gap: 6px;
+    margin: 22px 0 16px;
+    border-bottom: 1px solid var(--line);
+  }
+  nav.days button {
+    flex: 1;
+    background: none;
+    border: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 10px 4px 12px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: color .2s ease, border-color .2s ease;
+  }
+  nav.days button.active { color: var(--ink); border-color: var(--amber); }
+  nav.days button .daynum { font-family: 'Fraunces', serif; font-size: 16px; display: block; }
+  nav.days button .daypct { font-size: 11px; font-weight: 400; color: var(--ink-soft); }
+
+  .day-panel { display: none; }
+  .day-panel.active { display: block; }
+
+  .day-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 14px;
+  }
+  .day-meta .est { font-size: 13px; color: var(--ink-soft); }
+
+  table.tasks {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  table.tasks thead th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  table.tasks thead th:last-child, table.tasks thead th:nth-child(3) { text-align: right; }
+  table.tasks tbody tr { border-bottom: 1px solid var(--line); transition: background .2s ease; }
+  table.tasks tbody tr:last-child { border-bottom: none; }
+  table.tasks tbody tr.done { background: var(--done-bg); }
+  table.tasks td { padding: 12px; font-size: 14px; vertical-align: top; }
+  td.subject { width: 30%; font-weight: 600; }
+  td.subject .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 99px;
+    color: #fff;
+  }
+  td.task { color: var(--ink); }
+  tr.done td.task { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--line); }
+  td.time { text-align: right; color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
+  td.check { width: 40px; text-align: right; }
+  input[type="checkbox"] {
+    appearance: none;
+    width: 20px; height: 20px;
+    border: 1.5px solid var(--ink-soft);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    vertical-align: middle;
+  }
+  input[type="checkbox"]:checked {
+    background: var(--sage);
+    border-color: var(--sage);
+  }
+  input[type="checkbox"]:checked::after {
+    content: "";
+    position: absolute;
+    left: 6px; top: 2px;
+    width: 5px; height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+  }
+
+  .note {
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+    padding: 12px 14px;
+    border-left: 2px solid var(--amber);
+  }
+  .reset {
+    margin-top: 26px;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    font-size: 12px;
+    padding: 7px 12px;
+    border-radius: 7px;
+    cursor: pointer;
+  }
+  .reset:hover { border-color: var(--ink-soft); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow-row">
+      <h1>4-Day Study Plan</h1>
+    </div>
+    <p class="sub">Korean daily, Finance front-loaded while your focus is freshest, Franchising as the pressure valve, book spread in 20-page sessions.</p>
+    <div class="overall">
+      <div class="num" id="overallPct">0%</div>
+      <div class="bar-track"><div class="bar-fill" id="overallBar"></div></div>
+      <div class="label" id="overallLabel">0 / 0 done</div>
+    </div>
+  </header>
+
+  <nav class="days" id="dayNav"></nav>
+
+  <div id="panels"></div>
+
+  <button class="reset" id="resetBtn">Reset all progress</button>
+</div>
+
+<script>
+const COLORS = {
+  Korean: '#2B4257', Economics: '#5C7A61', Finance: '#B9852E',
+  Franchising: '#8F6B5C', Book: '#7A5C8F'
+};
+
+const DATA = [
+  { day: 1, est: '~7.4 hr', tasks: [
+    ['Korean','30 cards — 15 new, 15 review','30 min'],
+    ['Economics','Theme 1 — read, summarize, self-test','80 min'],
+    ['Finance','Theme 1','45 min'],
+    ['Finance','Theme 2','45 min'],
+    ['Finance','Theme 3','45 min'],
+    ['Franchising','Theme 1','30 min'],
+    ['Franchising','Theme 2','30 min'],
+    ['Book','Session 1 — pp 1–20','35 min'],
+    ['Book','Session 2 — pp 21–40','35 min'],
+    ['Book','Session 3 — pp 41–60','35 min'],
+    ['Book','Session 4 — pp 61–80','35 min'],
+  ]},
+  { day: 2, est: '~6.9 hr', tasks: [
+    ['Korean','30 cards — 15 new, 15 review','30 min'],
+    ['Economics','Theme 2 — read, summarize, self-test','80 min'],
+    ['Finance','Theme 4','45 min'],
+    ['Finance','Theme 5','45 min'],
+    ['Finance','Theme 6','45 min'],
+    ['Franchising','Theme 3','30 min'],
+    ['Book','Session 5 — pp 81–100','35 min'],
+    ['Book','Session 6 — pp 101–120','35 min'],
+    ['Book','Session 7 — pp 121–140','35 min'],
+    ['Book','Session 8 — pp 141–160','35 min'],
+  ]},
+  { day: 3, est: '~6.7 hr', tasks: [
+    ['Korean','30 cards — 15 new, 15 review','30 min'],
+    ['Economics','Theme 3 — read, summarize, self-test','80 min'],
+    ['Finance','Theme 7','45 min'],
+    ['Finance','Theme 8','45 min'],
+    ['Franchising','Theme 4','30 min'],
+    ['Franchising','Theme 5','30 min'],
+    ['Book','Session 9 — pp 161–180','35 min'],
+    ['Book','Session 10 — pp 181–200','35 min'],
+    ['Book','Session 11 — pp 201–220','35 min'],
+    ['Book','Session 12 — pp 221–240','35 min'],
+    ['Finance','Recall review — Themes 1–8, no notes','20 min'],
+  ]},
+  { day: 4, est: '~5.6 hr', tasks: [
+    ['Korean','30 cards — 15 new, 15 review','30 min'],
+    ['Economics','Theme 4 — read, summarize, self-test','80 min'],
+    ['Finance','Theme 9','45 min'],
+    ['Finance','Theme 10','45 min'],
+    ['Franchising','Theme 6','30 min'],
+    ['Book','Session 13 — pp 241–260','35 min'],
+    ['Book','Session 14 — pp 261–280','35 min'],
+    ['Book','Session 15 — pp 281–300','35 min'],
+  ]},
+];
+
+const nav = document.getElementById('dayNav');
+const panels = document.getElementById('panels');
+
+DATA.forEach((d, i) => {
+  const btn = document.createElement('button');
+  btn.className = 'day-tab' + (i === 0 ? ' active' : '');
+  btn.dataset.day = d.day;
+  btn.innerHTML = `<span class="daynum">Day ${d.day}</span><span class="daypct" data-daypct="${d.day}">0%</span>`;
+  btn.onclick = () => showDay(d.day);
+  nav.appendChild(btn);
+
+  const panel = document.createElement('div');
+  panel.className = 'day-panel' + (i === 0 ? ' active' : '');
+  panel.dataset.day = d.day;
+
+  const rows = d.tasks.map((t, ti) => {
+    const id = `d${d.day}-${ti}`;
+    return `<tr data-id="${id}">
+      <td class="subject"><span class="tag" style="background:${COLORS[t[0]]}">${t[0]}</span></td>
+      <td class="task">${t[1]}</td>
+      <td class="time">${t[2]}</td>
+      <td class="check"><input type="checkbox" data-id="${id}"></td>
+    </tr>`;
+  }).join('');
+
+  panel.innerHTML = `
+    <div class="day-meta">
+      <strong>Day ${d.day}</strong>
+      <span class="est">Estimated ${d.est}</span>
+    </div>
+    <table class="tasks">
+      <thead><tr><th>Subject</th><th>Task</th><th>Time</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${d.day === 1 ? '<p class="note">Do Finance before Economics if you can — give your hardest subject the freshest block, not the second one.</p>' : ''}
+    ${d.day === 3 ? '<p class="note">The recall review isn&#39;t rereading. Ask yourself "can I explain this without looking?" — that&#39;s where retention happens.</p>' : ''}
+    ${d.day === 4 ? '<p class="note">Lighter day on purpose. Finish strong instead of grinding to the end.</p>' : ''}
+  `;
+  panels.appendChild(panel);
+});
+
+function showDay(day) {
+  document.querySelectorAll('.day-tab').forEach(b => b.classList.toggle('active', +b.dataset.day === day));
+  document.querySelectorAll('.day-panel').forEach(p => p.classList.toggle('active', +p.dataset.day === day));
+}
+
+function loadState() {
+  try {
+    return JSON.parse(localStorage.getItem('study-tracker-state') || '{}');
+  } catch (e) { return {}; }
+}
+function saveState(state) {
+  try { localStorage.setItem('study-tracker-state', JSON.stringify(state)); } catch (e) {}
+}
+
+let state = loadState();
+
+function applyState() {
+  document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.checked = !!state[cb.dataset.id];
+    cb.closest('tr').classList.toggle('done', cb.checked);
+  });
+  updateProgress();
+}
+
+function updateProgress() {
+  let totalAll = 0, doneAll = 0;
+  DATA.forEach(d => {
+    const total = d.tasks.length;
+    const done = d.tasks.filter((_, ti) => state[`d${d.day}-${ti}`]).length;
+    totalAll += total; doneAll += done;
+    const pct = total ? Math.round(done / total * 100) : 0;
+    const tab = document.querySelector(`[data-daypct="${d.day}"]`);
+    if (tab) tab.textContent = pct + '%';
+  });
+  const overallPct = totalAll ? Math.round(doneAll / totalAll * 100) : 0;
+  document.getElementById('overallPct').textContent = overallPct + '%';
+  document.getElementById('overallBar').style.width = overallPct + '%';
+  document.getElementById('overallLabel').textContent = `${doneAll} / ${totalAll} done`;
+}
+
+document.addEventListener('change', e => {
+  if (e.target.matches('input[type="checkbox"]')) {
+    state[e.target.dataset.id] = e.target.checked;
+    e.target.closest('tr').classList.toggle('done', e.target.checked);
+    saveState(state);
+    updateProgress();
+  }
+});
+
+document.getElementById('resetBtn').onclick = () => {
+  if (confirm('Reset all checked progress?')) {
+    state = {};
+    saveState(state);
+    applyState();
+  }
+};
+
+applyState();
+</script>
+</body>
+</html>
