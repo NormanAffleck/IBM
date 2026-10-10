@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Marketing Principles — Nusratulloh Majidov</title>
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#FFFFFF;--ink:#111111;--accent:#F5D400;--line:#E5E5E5;--muted:#5c5c5c;
+--f:"Inter Tight","Helvetica Neue",Helvetica,Arial,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--f);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.rule{border:0;border-top:1px solid var(--ink);margin:0}
+.small{font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+/* 1 program */
+.prog{display:flex;align-items:center;gap:12px;padding:22px 0;font-weight:500}
+.dot{width:10px;height:10px;background:var(--accent);border:1px solid var(--ink);border-radius:50%}
+/* 2 subject */
+h1.title{font-weight:800;font-size:clamp(48px,12.5vw,176px);line-height:.88;letter-spacing:-.05em;margin:clamp(40px,8vw,96px) 0 clamp(40px,7vw,88px)}
+h1.title span{display:block}
+/* 3 profile */
+.profile{display:grid;grid-template-columns:1.2fr 1fr 1fr;border:1px solid var(--ink)}
+.profile>div{padding:24px;border-left:1px solid var(--ink)}
+.profile>div:first-child{border-left:0;background:var(--accent)}
+.profile dt{font-size:12px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px}
+.profile dd{margin:0;font-size:clamp(20px,2.6vw,30px);font-weight:700;letter-spacing:-.02em}
+/* 4 cube */
+section{padding:clamp(64px,10vw,128px) 0 0}
+.sh{display:flex;justify-content:space-between;align-items:baseline;gap:16px;border-top:1px solid var(--ink);padding-top:14px;margin-bottom:28px}
+.sh h2{margin:0;font-size:clamp(24px,3.4vw,40px);letter-spacing:-.03em;font-weight:700}
+.stage{position:relative;border:1px solid var(--line);height:clamp(320px,52vw,540px);background:
+linear-gradient(var(--line) 1px,transparent 1px) 0 0/100% 40px,#fff;overflow:hidden}
+.stage canvas{display:block;width:100%;height:100%;cursor:grab;touch-action:none}
+.stage canvas:active{cursor:grabbing}
+.cap{position:absolute;right:14px;top:14px;background:var(--accent);border:1px solid var(--ink);padding:10px 16px;font-weight:700;font-size:20px;letter-spacing:-.02em;line-height:1.2}
+.hint{position:absolute;left:14px;bottom:12px;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);pointer-events:none}
+.ctrls{display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--ink);border-top:0}
+.ctrls button{flex:1 1 140px;color:var(--ink);font:500 13px var(--f);letter-spacing:.1em;text-transform:uppercase;padding:16px;background:#fff;border:0;border-left:1px solid var(--ink);cursor:pointer;transition:background .2s}
+.ctrls button:first-child{border-left:0}
+.ctrls button:hover{background:var(--line)}
+.ctrls button[aria-pressed=true]{background:var(--accent)}
+.attrs{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-left:1px solid var(--line)}
+.attrs li{border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.attrs button{all:unset;box-sizing:border-box;display:flex;gap:14px;align-items:baseline;width:100%;padding:20px;cursor:pointer;font-weight:500;font-size:17px;transition:background .25s}
+.attrs button:focus-visible{outline:3px solid var(--accent);outline-offset:-3px}
+.attrs b{font-size:12px;letter-spacing:.1em;font-weight:700}
+.attrs button:hover{background:#fafafa}
+.attrs button.on{background:var(--accent)}
+.fb{display:none;place-items:center;height:100%;perspective:800px}
+.nogl .fb{display:grid}
+.css-cube{width:130px;height:130px;position:relative;transform-style:preserve-3d;animation:spin 14s linear infinite}
+.css-cube i{position:absolute;inset:0;border:2px solid var(--ink);background:#fff;display:grid;place-items:center;font:700 14px var(--f);text-align:center;font-style:normal}
+.css-cube i:nth-child(even){background:var(--accent)}
+.css-cube i:nth-child(1){transform:translateZ(65px)}.css-cube i:nth-child(2){transform:rotateY(90deg) translateZ(65px)}
+.css-cube i:nth-child(3){transform:rotateY(180deg) translateZ(65px)}.css-cube i:nth-child(4){transform:rotateY(-90deg) translateZ(65px)}
+.css-cube i:nth-child(5){transform:rotateX(90deg) translateZ(65px)}.css-cube i:nth-child(6){transform:rotateX(-90deg) translateZ(65px)}
+@keyframes spin{to{transform:rotateX(360deg) rotateY(360deg)}}
+/* 5 archive */
+.grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--ink);border-left:1px solid var(--ink)}
+.card{display:flex;flex-direction:column;justify-content:space-between;min-height:230px;padding:22px;border-right:1px solid var(--ink);border-bottom:1px solid var(--ink);text-decoration:none;transition:background .25s}
+.card .n{font-size:13px;font-weight:700;letter-spacing:.1em}
+.card h3{margin:40px 0 18px;font-size:clamp(20px,2.2vw,26px);line-height:1.1;letter-spacing:-.025em;font-weight:700}
+.card .go{font-size:12px;letter-spacing:.14em;text-transform:uppercase;border-bottom:2px solid transparent;align-self:flex-start}
+.card:hover,.card:focus-visible{background:var(--accent)}
+.card:hover .go{border-color:var(--ink)}
+/* 6 footer */
+footer{margin-top:clamp(72px,10vw,140px);padding:22px 0 28px;border-top:1px solid var(--line);font-size:10px;letter-spacing:.12em;color:var(--muted)}
+/* chapter */
+.ch-top{display:flex;justify-content:space-between;align-items:center;padding:22px 0;font-weight:500}
+.back{text-decoration:none;border-bottom:2px solid var(--accent);padding-bottom:2px}
+.ch h1{font-size:clamp(40px,8vw,104px);line-height:.95;letter-spacing:-.04em;font-weight:800;margin:clamp(32px,6vw,72px) 0 12px;max-width:14ch}
+.meta{color:var(--muted);margin:0 0 clamp(36px,6vw,64px)}
+.ch h2{font-size:14px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 14px;border-top:1px solid var(--ink);padding-top:14px}
+.ph{border:2px dashed var(--ink);padding:clamp(24px,5vw,56px);min-height:260px;background:repeating-linear-gradient(135deg,#fff 0 14px,#fbfbfb 14px 28px)}
+.tag{display:inline-block;background:var(--accent);padding:3px 10px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.media{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:clamp(40px,6vw,64px)}
+.media .ph{min-height:180px;padding:20px;display:flex;flex-direction:column;justify-content:space-between}
+.pn{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(40px,6vw,64px);border-top:1px solid var(--ink);padding-top:18px}
+.pn a{font-weight:500}
+@media(max-width:860px){.grid,.attrs{grid-template-columns:repeat(2,1fr)}.media{grid-template-columns:1fr}.profile{grid-template-columns:1fr 1fr}.profile>div:first-child{grid-column:1/-1;border-bottom:1px solid var(--ink)}.profile>div:nth-child(2){border-left:0}}
+@media(max-width:520px){.grid,.attrs{grid-template-columns:1fr}.card{min-height:170px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}.css-cube{animation:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="home">
+  <div class="wrap">
+    <header>
+      <div class="prog small"><span class="dot" aria-hidden="true"></span>Dong-A University · IBM</div>
+      <hr class="rule">
+      <h1 class="title"><span>Marketing</span><span>Principles</span></h1>
+    </header>
+
+    <main>
+      <section aria-labelledby="pf" style="padding-top:0">
+        <h2 id="pf" class="sr" style="position:absolute;left:-9999px">Profile</h2>
+        <dl class="profile">
+          <div><dt>Name</dt><dd>Nusratulloh Majidov</dd></div>
+          <div><dt>Student ID</dt><dd>2417563</dd></div>
+          <div><dt>Grade</dt><dd>Junior (3) IBM</dd></div>
+        </dl>
+      </section>
+
+      <section aria-labelledby="cb">
+        <div class="sh"><h2 id="cb">Product anatomy</h2><span class="small" id="face-label">Face 01</span></div>
+        <div class="stage" id="stage">
+          <canvas id="cv" tabindex="0" role="img" aria-label="Interactive 3D cube. Drag or use arrow keys to rotate."></canvas>
+          <div class="fb" aria-hidden="true"><div class="css-cube"><i>01<br>Packaging</i><i>02<br>Shape &amp; Design</i><i>03<br>Color &amp; Branding</i><i>04<br>Materials &amp; Quality</i><i>05<br>Labeling &amp; Information</i><i>06<br>Sustainability</i></div></div>
+          <div class="cap" id="cap" aria-live="polite" hidden></div>
+          <span class="hint" id="hint">Drag to rotate · Click a side</span>
+        </div>
+        <div class="ctrls">
+          <button id="b-auto" aria-pressed="false">Auto-spin: off</button>
+          <button id="b-roll">Roll</button>
+          <button id="b-reset">Reset view</button>
+        </div>
+      </section>
+
+      <section aria-labelledby="ar" id="archive">
+        <div class="sh"><h2 id="ar">Learning archive</h2><span class="small">9 chapters</span></div>
+        <div class="grid" id="grid"></div>
+      </section>
+    </main>
+  </div>
+</div>
+
+<div id="chapter" hidden><div class="wrap ch" id="chbody"></div></div>
+
+<div class="wrap"><footer>© 2026 NUSRATULLOH MAJIDOV. ALL RIGHTS RESERVED.</footer></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const CH=["Marketing Fundamentals","Understanding the Marketplace","Strategic Marketing Planning","Consumer Behavior","Segmentation & Targeting","Branding & Positioning","Product & Innovation Strategy","Pricing & Promotion","Advanced Marketing Strategy"];
+const AT=["Packaging","Shape & Design","Color & Branding","Materials & Quality","Labeling & Information","Sustainability"];
+const pad=n=>String(n).padStart(2,"0");
+const $=id=>document.getElementById(id);
+
+/* ---------- components ---------- */
+$("grid").innerHTML=CH.map((t,i)=>`<a class="card" href="#/chapter/${i+1}" aria-label="Chapter ${pad(i+1)}: ${t}"><span class="n">${pad(i+1)}</span><h3>${t.replace("&","&amp;")}</h3><span class="go">Open chapter</span></a>`).join("");
+
+function chapterView(n){
+  const t=CH[n-1].replace("&","&amp;");
+  const prev=n>1?`<a href="#/chapter/${n-1}">Previous: ${pad(n-1)} ${CH[n-2].replace("&","&amp;")}</a>`:"<span></span>";
+  const next=n<9?`<a href="#/chapter/${n+1}">Next: ${pad(n+1)} ${CH[n].replace("&","&amp;")}</a>`:"<span></span>";
+  return `<div class="ch-top"><a class="back" href="#/">Back to home</a><span class="small">Chapter ${pad(n)} / 09</span></div><hr class="rule">
+  <h1 tabindex="-1" id="chh">${t}</h1>
+  <p class="meta">Marketing Principles · Nusratulloh Majidov · 2417563</p>
+  <h2>Assignment content</h2>
+  <div class="ph" style="margin-bottom:40px"><span class="tag">Placeholder</span><p style="max-width:52ch">Assignment content for Chapter ${pad(n)} has not been added yet. Written work, summaries and analysis will appear here once provided.</p></div>
+  <h2>Images, diagrams &amp; files</h2>
+  <div class="media">
+    <div class="ph"><span class="tag">Placeholder</span><span>Image slot</span></div>
+    <div class="ph"><span class="tag">Placeholder</span><span>Diagram slot</span></div>
+    <div class="ph"><span class="tag">Placeholder</span><span>File / download slot</span></div>
+  </div>
+  <nav class="pn" aria-label="Chapter navigation">${prev}${next}</nav>`;
+}
+
+/* ---------- 3D cube ---------- */
+let cube=null;
+function initCube(){
+  const cv=$("cv"),stage=$("stage");
+  let renderer;
+  try{
+    if(!window.THREE)throw 0;
+    renderer=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});
+  }catch(e){stage.classList.add("nogl");cv.hidden=true;$("hint").hidden=true;
+    $("b-auto").hidden=$("b-roll").hidden=$("b-reset").hidden=true;
+    return}
+  renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+  const scene=new THREE.Scene(),cam=new THREE.PerspectiveCamera(35,1,.1,50);cam.position.set(0,0,9);
+  scene.add(new THREE.AmbientLight(0xffffff,.75));
+  const k=new THREE.DirectionalLight(0xffffff,.8);k.position.set(3,5,6);scene.add(k);
+  const f=new THREE.DirectionalLight(0xfff3b0,.3);f.position.set(-5,-2,3);scene.add(f);
+
+  const mats=[0,1,2,3,4,5].map(i=>{
+    const c=document.createElement("canvas");c.width=c.height=256;const x=c.getContext("2d");
+    const y=i%2===1;x.fillStyle=y?"#F5D400":"#FFFFFF";x.fillRect(0,0,256,256);
+    x.strokeStyle="#111";x.lineWidth=3;x.strokeRect(28,28,200,200);
+    x.beginPath();x.moveTo(28,28);x.lineTo(70,70);x.moveTo(228,28);x.lineTo(186,70);x.moveTo(28,228);x.lineTo(70,186);x.moveTo(228,228);x.lineTo(186,186);x.lineWidth=1.5;x.stroke();
+    x.fillStyle="#111";x.textAlign="center";x.textBaseline="middle";x.font="700 64px 'Helvetica Neue',Arial,sans-serif";x.fillText(pad(i+1),128,92);
+    x.font="600 21px 'Helvetica Neue',Arial,sans-serif";let ln=[],cur="";AT[i].split(" ").forEach(w=>{const t=cur?cur+" "+w:w;if(x.measureText(t).width>170&&cur){ln.push(cur);cur=w}else cur=t});ln.push(cur);
+    ln.forEach((l,j)=>x.fillText(l,128,152+j*26-(ln.length-1)*0));
+    const t=new THREE.CanvasTexture(c);t.anisotropy=4;
+    return new THREE.MeshStandardMaterial({map:t,roughness:.55,metalness:0});
+  });
+  const g=new THREE.Group();scene.add(g);
+  const geo=new THREE.BoxGeometry(2.4,2.4,2.4);
+  const mesh=new THREE.Mesh(geo,mats);g.add(mesh);
+  g.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo),new THREE.LineBasicMaterial({color:0x111111})));
+  const wire=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(3.1,3.1,3.1)),new THREE.LineBasicMaterial({color:0xF5D400,transparent:true,opacity:.85}));
+  g.add(wire);
+
+  const normals=[[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]].map(a=>new THREE.Vector3(...a));
+  const home=new THREE.Quaternion().setFromEuler(new THREE.Euler(.5,-.7,0));
+  g.quaternion.copy(home);
+  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let auto=!reduce,drag=false,sx=0,sy=0,lx=0,ly=0,vx=0,vy=0,anim=null,run=false,active=-1;
+  const X=new THREE.Vector3(1,0,0),Y=new THREE.Vector3(0,1,0),ez=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+  function rot(dx,dy){const a=new THREE.Quaternion().setFromAxisAngle(Y,dx),b=new THREE.Quaternion().setFromAxisAngle(X,dy);g.quaternion.premultiply(a).premultiply(b)}
+  function animateTo(q,spin,dur){anim={t0:performance.now(),dur:reduce?1:dur,from:g.quaternion.clone(),to:q.clone(),spin}}
+  function faceQ(i){return new THREE.Quaternion().setFromUnitVectors(normals[i],new THREE.Vector3(0,0,1))}
+  function setAuto(v){auto=v;const b=$("b-auto");b.setAttribute("aria-pressed",v);b.textContent="Auto-spin: "+(v?"on":"off")}
+  setAuto(auto);
+
+  cv.addEventListener("pointerdown",e=>{drag=true;anim=null;sx=lx=e.clientX;sy=ly=e.clientY;vx=vy=0;cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener("pointermove",e=>{if(!drag)return;vx=(e.clientX-lx)*.009;vy=(e.clientY-ly)*.009;lx=e.clientX;ly=e.clientY;rot(vx,vy)});
+  cv.addEventListener("pointercancel",()=>{drag=false});
+  cv.addEventListener("pointerup",e=>{drag=false;if(Math.hypot(e.clientX-sx,e.clientY-sy)>6)return;
+    const r=cv.getBoundingClientRect(),ndc=new THREE.Vector2((e.clientX-r.left)/r.width*2-1,-((e.clientY-r.top)/r.height)*2+1);
+    const rc=new THREE.Raycaster();rc.setFromCamera(ndc,cam);const h=rc.intersectObject(mesh)[0];
+    if(h){const i=h.face.materialIndex;setAuto(false);vx=vy=0;animateTo(faceQ(i),0,800);showCap(i)}});
+  cv.addEventListener("keydown",e=>{const m={ArrowLeft:[-.2,0],ArrowRight:[.2,0],ArrowUp:[0,-.2],ArrowDown:[0,.2]}[e.key];if(m){e.preventDefault();anim=null;rot(m[0],m[1])}});
+  $("b-auto").onclick=()=>setAuto(!auto);
+  $("b-reset").onclick=()=>{vx=vy=0;animateTo(home,0,900)};
+  $("b-roll").onclick=()=>{let i;do{i=Math.floor(Math.random()*6)}while(i===active);vx=vy=0;animateTo(faceQ(i),1,1300)};
+
+  function size(){const w=stage.clientWidth,h=stage.clientHeight;renderer.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
+  new ResizeObserver(size).observe(stage);size();
+
+  function frame(now){
+    if(!run)return;requestAnimationFrame(frame);
+    if(anim){let t=Math.min((now-anim.t0)/anim.dur,1),e=ez(t);
+      const q=anim.from.clone().slerp(anim.to,e);
+      if(anim.spin)q.premultiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(1,1,0).normalize(),Math.PI*2*e));
+      g.quaternion.copy(q);if(t>=1)anim=null;
+    }else if(!drag){
+      if(Math.abs(vx)+Math.abs(vy)>.0004){rot(vx,vy);vx*=.94;vy*=.94}
+      else if(auto)rot(.006,.0018);
+    }
+    wire.rotation.y=now*.0002;
+    let best=0,bz=-9;normals.forEach((n,i)=>{const z=n.clone().applyQuaternion(g.quaternion).z;if(z>bz){bz=z;best=i}});
+    if(best!==active)setActive(best);
+    renderer.render(scene,cam);
+  }
+  cube={start(){if(!run){run=true;size();requestAnimationFrame(frame)}},stop(){run=false}};
+}
+function showCap(i){const c=$("cap");c.hidden=false;c.innerHTML=`<span class="small">${pad(i+1)}</span><br>${AT[i].replace("&","&amp;")}`}
+function setActive(i){
+  active=i;$("face-label").textContent="Face "+pad(i+1)+" · "+AT[i];
+}
+let active=-1;
+initCube();
+
+/* ---------- router ---------- */
+let fromChapter=false;
+function route(){
+  const m=location.hash.match(/^#\/chapter\/([1-9])$/);
+  if(m){
+    const n=+m[1];$("home").hidden=true;$("chapter").hidden=false;$("chbody").innerHTML=chapterView(n);
+    document.title=`${CH[n-1]} — Marketing Principles`;if(cube)cube.stop();
+    fromChapter=true;window.scrollTo(0,0);$("chh").focus({preventScroll:true});
+  }else{
+    $("chapter").hidden=true;$("home").hidden=false;document.title="Marketing Principles — Nusratulloh Majidov";
+    if(cube)cube.start();
+    if(fromChapter){$("archive").scrollIntoView({behavior:"instant"})}else window.scrollTo(0,0);
+    fromChapter=false;
+  }
+}
+addEventListener("hashchange",route);route();
+document.addEventListener("visibilitychange",()=>{if(cube){document.hidden||$("home").hidden?cube.stop():cube.start()}});
+</script>
+</body>
+</html>
